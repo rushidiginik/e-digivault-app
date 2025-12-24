@@ -75,13 +75,15 @@ class AuthController extends GetxController {
         final userRole = UserRole.fromApiString(verifyOtpData!.role);
 
         if (userRole != null) {
-         
           _navigateToDashboard(userRole);
           debugPrint("Success: ${response.message}");
           return true;
         } else {
           debugPrint("Invalid role received from API: ${verifyOtpData!.role}");
-          AppToast.error("Invalid user_state_head role", gravity: ToastGravity.TOP);
+          AppToast.error(
+            "Invalid user_state_head role",
+            gravity: ToastGravity.TOP,
+          );
           return false;
         }
       } else {
@@ -103,7 +105,7 @@ class AuthController extends GetxController {
     print("Role Checking Login:$role");
     switch (role) {
       case UserRole.businessDevelopment:
-        router.go('/home_page_bd_screen');
+        router.go('/bd_dashboard_screen');
         break;
       case UserRole.stateHead:
         // Get.offAllNamed(NavigatorConst.stateHeadDashboard);
