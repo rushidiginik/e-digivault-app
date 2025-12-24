@@ -1,6 +1,7 @@
 import 'package:e_digivault_org_app/core/constants/app_common_text.dart';
 import 'package:e_digivault_org_app/core/constants/image_const.dart';
 import 'package:e_digivault_org_app/core/constants/theme.dart';
+import 'package:e_digivault_org_app/routes/app_routes.dart';
 import 'package:e_digivault_org_app/widgets/button_widget.dart';
 import 'package:e_digivault_org_app/widgets/common_app_bar_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -173,6 +174,7 @@ class _LeadScreenState extends State<LeadScreen> {
                         //   context,
                         //   NavigatorConst.addLeadScreen,
                         // );
+                        router.go('/add_leads_screen_bd');
                       },
                       title: 'add new lead',
                       icons: Icons.add,

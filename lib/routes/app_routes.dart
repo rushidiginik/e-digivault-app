@@ -26,10 +26,28 @@ final GoRouter router = GoRouter(
       builder: (context, state) => OnboardingScreen(),
     ),
     GoRoute(path: '/login_screen', builder: (context, state) => LoginScreen()),
+
+    // BD Role:....
     GoRoute(
       path: '/bd_dashboard_screen',
       builder: (context, state) => DashboardBDScreen(),
     ),
+
+    GoRoute(
+      path: '/add_leads_screen_bd',
+      builder: (context, state) => DashboardBDScreen(),
+    ),
+
+    GoRoute(
+      path: '/add_leads_screen_bd',
+      builder: (context, state) => DashboardBDScreen(),
+    ),
+    GoRoute(
+      path: '/view_leads_screen',
+      builder: (context, state) => DashboardBDScreen(),
+    ),
+
+    //........
     GoRoute(
       path: '/home_page_mra_screen',
       builder: (context, state) => MraDashboardScreen(),
