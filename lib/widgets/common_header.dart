@@ -3,6 +3,8 @@ import 'package:e_digivault_org_app/core/constants/image_const.dart';
 import 'package:e_digivault_org_app/core/constants/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sizer/sizer.dart';
 
 class CommonHeader extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -28,7 +30,7 @@ class CommonHeader extends StatelessWidget implements PreferredSizeWidget {
         children: [
           if (showBack)
             GestureDetector(
-              onTap: onBack ?? () => Navigator.pop(context),
+              onTap: onBack ?? () => context.pop(),
               child: const Icon(
                 Icons.arrow_back_ios,
                 color: Colors.black,

@@ -1,6 +1,7 @@
 import 'package:e_digivault_org_app/core/constants/app_common_text.dart';
 import 'package:e_digivault_org_app/core/constants/image_const.dart';
 import 'package:e_digivault_org_app/core/constants/theme.dart';
+import 'package:e_digivault_org_app/routes/app_routes.dart';
 import 'package:e_digivault_org_app/widgets/button_widget.dart';
 import 'package:e_digivault_org_app/widgets/common_app_bar_widget.dart';
 import 'package:e_digivault_org_app/widgets/common_header.dart';
@@ -40,15 +41,15 @@ class _HomePageBDScreenState extends State<HomePageBDScreen> {
       "client_name": "Babu Shetty",
       "date": "05 Apr 2025",
       "document": "Proposal",
-      "bgColor": AppStyles.lightOrangeFF,
-      "textColor": AppStyles.orangeF5,
+      "bgColor": AppStyles.orange18.withOpacity(0.1),
+      "textColor": AppStyles.orange18,
     },
     {
       "client_name": "Varun Reddy",
       "date": "05 Apr 2025",
       "document": "Proposal",
-      "bgColor": AppStyles.lightOrangeFF,
-      "textColor": AppStyles.orangeF5,
+      "bgColor": AppStyles.orange18.withOpacity(0.1),
+      "textColor": AppStyles.orange18,
     },
     {
       "client_name": "Renukha Pai",
@@ -88,125 +89,6 @@ class _HomePageBDScreenState extends State<HomePageBDScreen> {
       ),
     );
   }
-
-  // Widget _taskCardSection() {
-  //   return Card(
-  //     elevation: 4,
-
-  //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-  //     color: AppStyles.whiteColor,
-  //     child: Padding(
-  //       padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16),
-  //       child: Stack(
-  //         children: [
-  //           Positioned(
-  //             left: 240,
-  //             top: 43,
-  //             child: Column(
-  //               crossAxisAlignment: CrossAxisAlignment.center,
-  //               mainAxisAlignment: MainAxisAlignment.center,
-  //               children: [
-  //                 textRegular(
-  //                   text: "Total",
-  //                   fontSize: 14,
-  //                   fontWeight: FontWeight.w600,
-  //                 ),
-  //                 textRegular(
-  //                   text: "420",
-  //                   fontSize: 14,
-  //                   fontColor: AppStyles.pinkF2,
-  //                   fontWeight: FontWeight.w500,
-  //                 ),
-  //               ],
-  //             ),
-  //           ),
-  //           Column(
-  //             crossAxisAlignment: CrossAxisAlignment.start,
-  //             children: [
-  //               /// Header Row
-  //               Row(
-  //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //                 children: [
-  //                   textRegular(
-  //                     text: "Task",
-  //                     fontSize: 16,
-  //                     fontWeight: FontWeight.w500,
-  //                   ),
-  //                   // Column(
-  //                   //   crossAxisAlignment: CrossAxisAlignment.center,
-  //                   //   mainAxisAlignment: MainAxisAlignment.center,
-  //                   //   children: [
-  //                   //     textRegular(text: "Total", fontSize: 14, fontWeight: FontWeight.w600),
-  //                   //     textRegular(text: "420", fontSize: 16, fontColor: AppStyles.pinkF2, fontWeight: FontWeight.w500),
-  //                   //   ],
-  //                   // ),
-  //                 ],
-  //               ),
-
-  //               SizedBox(height: 1.h),
-
-  //               /// Task labels
-  //               Column(
-  //                 crossAxisAlignment: CrossAxisAlignment.start,
-  //                 children: [
-  //                   _taskItem(
-  //                     color: AppStyles.green00,
-  //                     label: "Estimated",
-  //                     value: "200",
-  //                   ),
-  //                   SizedBox(height: 1.h),
-  //                   _taskItem(
-  //                     color: AppStyles.blueCE,
-  //                     label: "Proposal",
-  //                     value: "100",
-  //                   ),
-  //                   SizedBox(height: 1.h),
-  //                   _taskItem(
-  //                     color: AppStyles.redA5,
-  //                     label: "Invoice",
-  //                     value: "120",
-  //                   ),
-  //                 ],
-  //               ),
-
-  //               SizedBox(height: 1.5.h),
-  //               Row(
-  //                 children: [
-  //                   Expanded(
-  //                     flex: 100,
-  //                     child: _progressSegment(
-  //                       backgroundColor: AppStyles.greenDO,
-  //                       fillPercent: 0.77,
-  //                       fillColor: AppStyles.green00,
-  //                     ),
-  //                   ),
-  //                   SizedBox(width: 2.w),
-  //                   Expanded(
-  //                     flex: 100,
-  //                     child: _progressSegment(
-  //                       backgroundColor: AppStyles.blueFF,
-  //                       fillPercent: 0.77,
-  //                       fillColor: AppStyles.blueCE,
-  //                     ),
-  //                   ),
-  //                   SizedBox(width: 2.w),
-  //                   Expanded(
-  //                     flex: 100,
-  //                     child: _progressSegment(
-  //                       backgroundColor: AppStyles.redC8,
-  //                       fillPercent: 0.77,
-  //                       fillColor: AppStyles.red4C,
-  //                     ),
-  //                   ),
-  //                 ],
-  //               ),
-  //             ],
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
 
   Widget _taskCardSection() {
     return Container(
@@ -403,75 +285,6 @@ class _HomePageBDScreenState extends State<HomePageBDScreen> {
     );
   }
 
-  // Widget _salesInsightsSection() {
-  //   return Card(
-  //     elevation: 5,
-  //     color: AppStyles.whiteColor,
-  //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-  //     child: Padding(
-  //       padding: const EdgeInsets.only(
-  //         right: 16,
-  //         left: 16,
-  //         top: 10,
-  //         bottom: 10,
-  //       ),
-  //       child: Column(
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         mainAxisSize: MainAxisSize.min,
-  //         children: [
-  //           textMedium(
-  //             text: "Client Overview",
-  //             fontSize: 16,
-  //             fontColor: AppStyles.textBlack15,
-  //           ),
-  //           SizedBox(height: 16),
-  //           Row(
-  //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //             children: [
-  //               Expanded(
-  //                 child: _insightItem(
-  //                   percent: 0.75,
-  //                   value: "12",
-  //                   label: "GAP",
-  //                   progressColor: AppStyles.orangeF5,
-  //                   backgroundColor: AppStyles.lightOrangeF5,
-  //                 ),
-  //               ),
-  //               Expanded(
-  //                 child: _insightItem(
-  //                   percent: 0.55,
-  //                   value: "12",
-  //                   label: "GAP",
-  //                   progressColor: AppStyles.blue21,
-  //                   backgroundColor: AppStyles.blue22,
-  //                 ),
-  //               ),
-  //               Expanded(
-  //                 child: _insightItem(
-  //                   percent: 0.25,
-  //                   value: "22",
-  //                   label: "GAP Appproved",
-  //                   progressColor: AppStyles.green2E,
-  //                   backgroundColor: AppStyles.lightGreenBC,
-  //                 ),
-  //               ),
-  //               Expanded(
-  //                 child: _insightItem(
-  //                   percent: 0.25,
-  //                   value: "62",
-  //                   label: "GAP Pending",
-  //                   progressColor: AppStyles.redFD,
-  //                   backgroundColor: AppStyles.redA4,
-  //                 ),
-  //               ),
-  //             ],
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
-
   Widget _salesInsightsSection() {
     return Container(
       decoration: BoxDecoration(
@@ -571,33 +384,30 @@ class _HomePageBDScreenState extends State<HomePageBDScreen> {
           children: [
             _dashIconConst(
               onTap: () {
-                // Navigator.pushNamed(context, NavigatorConst.brochureScreen);
+                router.push('/bd_brochure_screen');
               },
-              title: "brochure",
+              title: "Brochure",
               image: ImageConst.brochureIconPNG,
             ),
             _dashIconConst(
               onTap: () {
-                //  Navigator.pushNamed(context, NavigatorConst.rateChartScreen);
+                router.push('/bd_ratechart_screen');
               },
-              title: "rate chart",
+              title: "Rate Chart",
               image: ImageConst.chartIconPNG,
             ),
             _dashIconConst(
               onTap: () {
-                // Navigator.pushNamed(
-                //   context,
-                //   NavigatorConst.serviceDocumentScreen,
-                // );
+                router.push('/bd_servicedocuments_screen');
               },
-              title: "service documents",
+              title: "Service Documents",
               image: ImageConst.copyIconPNG,
             ),
             _dashIconConst(
               onTap: () {
                 // Navigator.pushNamed(context, NavigatorConst.videoPlayerScreen);
               },
-              title: "video promo",
+              title: "Video Promo",
               image: ImageConst.cinemaIconPNG,
             ),
           ],

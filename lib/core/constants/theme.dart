@@ -58,6 +58,7 @@ class AppStyles {
 
   static const orangeF5 = Color(0xFFF57F17);
   static const orange19 = Color(0xFFFF6919);
+  static const orange18 = Color(0xFFEF6C00);
 
   static const lightBlueDD = Color(0xFFDDE1EA);
   static const lightBlueEC = Color(0xFFECFEFF);
