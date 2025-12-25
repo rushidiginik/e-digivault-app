@@ -3,7 +3,9 @@ import 'package:e_digivault_org_app/core/constants/image_const.dart';
 import 'package:e_digivault_org_app/core/constants/theme.dart';
 import 'package:e_digivault_org_app/widgets/button_widget.dart';
 import 'package:e_digivault_org_app/widgets/common_app_bar_widget.dart';
+import 'package:e_digivault_org_app/widgets/common_header.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 import 'package:sizer/sizer.dart';
@@ -69,13 +71,14 @@ class _HomePageBDScreenState extends State<HomePageBDScreen> {
     size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: AppStyles.whiteColor,
-      appBar: CommonAppBarWidget(title: 'Dashboard', isBack: false),
+      appBar: CommonHeader(title: 'Dashboard', showBack: false),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16),
+          padding: const EdgeInsets.only(left: 16, right: 16, top: 10),
           child: Column(
             children: [
               _salesInsightsSection(),
+              SizedBox(height: 16),
               _taskCardSection(),
               _iconSection(),
               _recentActivitySection(),
@@ -86,14 +89,147 @@ class _HomePageBDScreenState extends State<HomePageBDScreen> {
     );
   }
 
-  Widget _taskCardSection() {
-    return Card(
-      elevation: 4,
+  // Widget _taskCardSection() {
+  //   return Card(
+  //     elevation: 4,
 
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      color: AppStyles.whiteColor,
+  //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+  //     color: AppStyles.whiteColor,
+  //     child: Padding(
+  //       padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16),
+  //       child: Stack(
+  //         children: [
+  //           Positioned(
+  //             left: 240,
+  //             top: 43,
+  //             child: Column(
+  //               crossAxisAlignment: CrossAxisAlignment.center,
+  //               mainAxisAlignment: MainAxisAlignment.center,
+  //               children: [
+  //                 textRegular(
+  //                   text: "Total",
+  //                   fontSize: 14,
+  //                   fontWeight: FontWeight.w600,
+  //                 ),
+  //                 textRegular(
+  //                   text: "420",
+  //                   fontSize: 14,
+  //                   fontColor: AppStyles.pinkF2,
+  //                   fontWeight: FontWeight.w500,
+  //                 ),
+  //               ],
+  //             ),
+  //           ),
+  //           Column(
+  //             crossAxisAlignment: CrossAxisAlignment.start,
+  //             children: [
+  //               /// Header Row
+  //               Row(
+  //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                 children: [
+  //                   textRegular(
+  //                     text: "Task",
+  //                     fontSize: 16,
+  //                     fontWeight: FontWeight.w500,
+  //                   ),
+  //                   // Column(
+  //                   //   crossAxisAlignment: CrossAxisAlignment.center,
+  //                   //   mainAxisAlignment: MainAxisAlignment.center,
+  //                   //   children: [
+  //                   //     textRegular(text: "Total", fontSize: 14, fontWeight: FontWeight.w600),
+  //                   //     textRegular(text: "420", fontSize: 16, fontColor: AppStyles.pinkF2, fontWeight: FontWeight.w500),
+  //                   //   ],
+  //                   // ),
+  //                 ],
+  //               ),
+
+  //               SizedBox(height: 1.h),
+
+  //               /// Task labels
+  //               Column(
+  //                 crossAxisAlignment: CrossAxisAlignment.start,
+  //                 children: [
+  //                   _taskItem(
+  //                     color: AppStyles.green00,
+  //                     label: "Estimated",
+  //                     value: "200",
+  //                   ),
+  //                   SizedBox(height: 1.h),
+  //                   _taskItem(
+  //                     color: AppStyles.blueCE,
+  //                     label: "Proposal",
+  //                     value: "100",
+  //                   ),
+  //                   SizedBox(height: 1.h),
+  //                   _taskItem(
+  //                     color: AppStyles.redA5,
+  //                     label: "Invoice",
+  //                     value: "120",
+  //                   ),
+  //                 ],
+  //               ),
+
+  //               SizedBox(height: 1.5.h),
+  //               Row(
+  //                 children: [
+  //                   Expanded(
+  //                     flex: 100,
+  //                     child: _progressSegment(
+  //                       backgroundColor: AppStyles.greenDO,
+  //                       fillPercent: 0.77,
+  //                       fillColor: AppStyles.green00,
+  //                     ),
+  //                   ),
+  //                   SizedBox(width: 2.w),
+  //                   Expanded(
+  //                     flex: 100,
+  //                     child: _progressSegment(
+  //                       backgroundColor: AppStyles.blueFF,
+  //                       fillPercent: 0.77,
+  //                       fillColor: AppStyles.blueCE,
+  //                     ),
+  //                   ),
+  //                   SizedBox(width: 2.w),
+  //                   Expanded(
+  //                     flex: 100,
+  //                     child: _progressSegment(
+  //                       backgroundColor: AppStyles.redC8,
+  //                       fillPercent: 0.77,
+  //                       fillColor: AppStyles.red4C,
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //             ],
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+
+  Widget _taskCardSection() {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppStyles.whiteColor,
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.30),
+            offset: const Offset(0, 2),
+            blurRadius: 3,
+            spreadRadius: 0,
+          ),
+          BoxShadow(
+            color: Colors.black.withOpacity(0.15),
+            offset: const Offset(0, 6),
+            blurRadius: 10,
+            spreadRadius: 4,
+          ),
+        ],
+      ),
       child: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16),
         child: Stack(
           children: [
             Positioned(
@@ -110,7 +246,7 @@ class _HomePageBDScreenState extends State<HomePageBDScreen> {
                   ),
                   textRegular(
                     text: "420",
-                    fontSize: 16,
+                    fontSize: 14,
                     fontColor: AppStyles.pinkF2,
                     fontWeight: FontWeight.w500,
                   ),
@@ -127,16 +263,8 @@ class _HomePageBDScreenState extends State<HomePageBDScreen> {
                     textRegular(
                       text: "Task",
                       fontSize: 16,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w500,
                     ),
-                    // Column(
-                    //   crossAxisAlignment: CrossAxisAlignment.center,
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   children: [
-                    //     textRegular(text: "Total", fontSize: 14, fontWeight: FontWeight.w600),
-                    //     textRegular(text: "420", fontSize: 16, fontColor: AppStyles.pinkF2, fontWeight: FontWeight.w500),
-                    //   ],
-                    // ),
                   ],
                 ),
 
@@ -147,19 +275,19 @@ class _HomePageBDScreenState extends State<HomePageBDScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _taskItem(
-                      color: AppStyles.green2E,
+                      color: AppStyles.green00,
                       label: "Estimated",
                       value: "200",
                     ),
                     SizedBox(height: 1.h),
                     _taskItem(
-                      color: AppStyles.orangeF5,
+                      color: AppStyles.blueCE,
                       label: "Proposal",
                       value: "100",
                     ),
                     SizedBox(height: 1.h),
                     _taskItem(
-                      color: AppStyles.redFD,
+                      color: AppStyles.redA5,
                       label: "Invoice",
                       value: "120",
                     ),
@@ -172,7 +300,7 @@ class _HomePageBDScreenState extends State<HomePageBDScreen> {
                     Expanded(
                       flex: 100,
                       child: _progressSegment(
-                        backgroundColor: AppStyles.lightGreen9f,
+                        backgroundColor: AppStyles.greenDO,
                         fillPercent: 0.77,
                         fillColor: AppStyles.green00,
                       ),
@@ -213,16 +341,26 @@ class _HomePageBDScreenState extends State<HomePageBDScreen> {
     return Row(
       children: [
         Container(
-          width: 8,
-          height: 8,
+          width: 9,
+          height: 9,
           decoration: BoxDecoration(color: color, shape: BoxShape.circle),
         ),
-        const SizedBox(width: 8),
+        const SizedBox(width: 10),
         Expanded(
-          child: textRegular(
-            text: "$label - $value",
-            fontSize: 14,
-            fontColor: Colors.black87,
+          child: Row(
+            children: [
+              textRegular(
+                text: "$label - ",
+                fontSize: 14,
+                fontColor: AppStyles.grey,
+                fontWeight: FontWeight.w300,
+              ),
+              textRegular(
+                text: "$value",
+                fontSize: 14,
+                fontColor: AppStyles.textBlack,
+              ),
+            ],
           ),
         ),
       ],
@@ -265,24 +403,112 @@ class _HomePageBDScreenState extends State<HomePageBDScreen> {
     );
   }
 
+  // Widget _salesInsightsSection() {
+  //   return Card(
+  //     elevation: 5,
+  //     color: AppStyles.whiteColor,
+  //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+  //     child: Padding(
+  //       padding: const EdgeInsets.only(
+  //         right: 16,
+  //         left: 16,
+  //         top: 10,
+  //         bottom: 10,
+  //       ),
+  //       child: Column(
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         mainAxisSize: MainAxisSize.min,
+  //         children: [
+  //           textMedium(
+  //             text: "Client Overview",
+  //             fontSize: 16,
+  //             fontColor: AppStyles.textBlack15,
+  //           ),
+  //           SizedBox(height: 16),
+  //           Row(
+  //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //             children: [
+  //               Expanded(
+  //                 child: _insightItem(
+  //                   percent: 0.75,
+  //                   value: "12",
+  //                   label: "GAP",
+  //                   progressColor: AppStyles.orangeF5,
+  //                   backgroundColor: AppStyles.lightOrangeF5,
+  //                 ),
+  //               ),
+  //               Expanded(
+  //                 child: _insightItem(
+  //                   percent: 0.55,
+  //                   value: "12",
+  //                   label: "GAP",
+  //                   progressColor: AppStyles.blue21,
+  //                   backgroundColor: AppStyles.blue22,
+  //                 ),
+  //               ),
+  //               Expanded(
+  //                 child: _insightItem(
+  //                   percent: 0.25,
+  //                   value: "22",
+  //                   label: "GAP Appproved",
+  //                   progressColor: AppStyles.green2E,
+  //                   backgroundColor: AppStyles.lightGreenBC,
+  //                 ),
+  //               ),
+  //               Expanded(
+  //                 child: _insightItem(
+  //                   percent: 0.25,
+  //                   value: "62",
+  //                   label: "GAP Pending",
+  //                   progressColor: AppStyles.redFD,
+  //                   backgroundColor: AppStyles.redA4,
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+
   Widget _salesInsightsSection() {
-    return Card(
-      elevation: 5,
-      color: AppStyles.whiteColor,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+    return Container(
+      decoration: BoxDecoration(
+        color: AppStyles.whiteColor,
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.30),
+            offset: const Offset(0, 2),
+            blurRadius: 3,
+            spreadRadius: 0,
+          ),
+          BoxShadow(
+            color: Colors.black.withOpacity(0.15),
+            offset: const Offset(0, 6),
+            blurRadius: 10,
+            spreadRadius: 4,
+          ),
+        ],
+      ),
       child: Padding(
         padding: const EdgeInsets.only(
-          right: 12,
-          left: 12,
-          top: 12,
-          bottom: 12,
+          right: 16,
+          left: 16,
+          top: 10,
+          bottom: 10,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            textMedium(text: "Client Overview", fontSize: 16),
-            SizedBox(height: 1.h),
+            textMedium(
+              text: "Client Overview",
+              fontSize: 16,
+              fontColor: AppStyles.textBlack15,
+            ),
+            const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -300,8 +526,8 @@ class _HomePageBDScreenState extends State<HomePageBDScreen> {
                     percent: 0.55,
                     value: "12",
                     label: "GAP",
-                    progressColor: AppStyles.blue2F,
-                    backgroundColor: AppStyles.lightBlueDD,
+                    progressColor: AppStyles.blue21,
+                    backgroundColor: AppStyles.blue22,
                   ),
                 ),
                 Expanded(
@@ -334,7 +560,7 @@ class _HomePageBDScreenState extends State<HomePageBDScreen> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0),
+          padding: const EdgeInsets.only(top: 16.0, bottom: 16),
           child: Divider(
             color: AppStyles.textBlack.withOpacity(0.1),
             height: 5,
@@ -377,7 +603,7 @@ class _HomePageBDScreenState extends State<HomePageBDScreen> {
           ],
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 10.0, bottom: 14),
+          padding: const EdgeInsets.only(top: 0.0, bottom: 16),
           child: Divider(
             color: AppStyles.textBlack.withOpacity(0.1),
             height: 5,
@@ -387,8 +613,9 @@ class _HomePageBDScreenState extends State<HomePageBDScreen> {
           onTap: () {
             //Navigator.pushNamed(context, NavigatorConst.liveTrackingScreen);
           },
+
           title: "Live Tracking",
-          width: size.width * 0.55,
+          width: size.width * 0.59,
         ),
       ],
     );
@@ -397,13 +624,18 @@ class _HomePageBDScreenState extends State<HomePageBDScreen> {
   Widget _recentActivitySection() {
     return Column(
       children: [
-        SizedBox(height: 18),
+        SizedBox(height: 16),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Icon(Icons.access_time_rounded, color: AppStyles.primaryColor),
+            SvgPicture.asset(
+              ImageConst.recentClockSvg, // or any icon you want
+              height: 24,
+              width: 24,
+              color: AppStyles.primaryColor, // optional
+            ),
             SizedBox(width: 8),
-            textSemiBold(text: "recent_activity_list", fontSize: 16),
+            textSemiBold(text: "Recent Activity List", fontSize: 16),
           ],
         ),
         SizedBox(height: 12),
@@ -411,15 +643,15 @@ class _HomePageBDScreenState extends State<HomePageBDScreen> {
           scrollDirection: Axis.horizontal,
           child: DataTable(
             headingRowColor: WidgetStateProperty.all(AppStyles.lightBlueEB),
-            headingRowHeight: 40,
+            headingRowHeight: 35,
             border: TableBorder.all(
               color: AppStyles.greyDE, // horizontal + vertical lines
               width: 1,
             ),
             columns: [
-              DataColumn(label: textMedium(text: "client_name", fontSize: 12)),
-              DataColumn(label: textMedium(text: "date", fontSize: 12)),
-              DataColumn(label: textMedium(text: "document", fontSize: 12)),
+              DataColumn(label: textMedium(text: "Client Name", fontSize: 12)),
+              DataColumn(label: textMedium(text: "Date", fontSize: 12)),
+              DataColumn(label: textMedium(text: "Document", fontSize: 12)),
             ],
             rows: myData.map((row) {
               return _buildRow(
@@ -467,15 +699,15 @@ class _HomePageBDScreenState extends State<HomePageBDScreen> {
               ),
             ),
             SizedBox(width: 1.w),
-            textSemiBold(text: value, fontSize: 14),
+            textRegular(text: value, fontSize: 12),
           ],
         ),
         SizedBox(height: 1.h),
         SizedBox(
-          height: 34,
+          height: 40,
           child: textRegular(
             text: label,
-            fontSize: 12,
+            fontSize: 14,
             textAlign: TextAlign.center,
             fontColor: progressColor,
           ),
@@ -498,11 +730,11 @@ class _HomePageBDScreenState extends State<HomePageBDScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset(image, height: 6.h, width: 10.w),
-            SizedBox(height: 6),
+            Image.asset(image, height: 40, width: 40),
+            SizedBox(height: 7),
             textRegular(
               text: title,
-              fontSize: 12,
+              fontSize: 11,
               textAlign: TextAlign.center,
               maxLines: 2,
               textOverflow: TextOverflow.ellipsis,
@@ -522,16 +754,18 @@ class _HomePageBDScreenState extends State<HomePageBDScreen> {
   ) {
     return DataRow(
       cells: [
-        DataCell(textRegular(text: name, fontSize: 12)),
+        DataCell(
+          textRegular(text: name, fontSize: 12, fontColor: AppStyles.textBlack),
+        ),
         DataCell(
           textRegular(text: date, fontSize: 12, fontColor: AppStyles.grey66),
         ),
         DataCell(
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
             decoration: BoxDecoration(
               color: bg,
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(30),
             ),
             child: textSemiBold(
               text: document,

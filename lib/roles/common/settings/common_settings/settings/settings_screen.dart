@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:e_digivault_org_app/core/constants/app_common_text.dart' show textSemiBold, textMedium;
+import 'package:e_digivault_org_app/core/constants/app_common_text.dart'
+    show textSemiBold, textMedium;
 import 'package:e_digivault_org_app/core/constants/theme.dart';
 import 'package:e_digivault_org_app/roles/common/login/controller/login_controller.dart';
 import 'package:e_digivault_org_app/roles/common/settings/common_settings/settings/controller/settings_controller.dart';
@@ -55,7 +56,6 @@ class _SettingScreenState extends State<SettingScreen> {
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
     return Scaffold(
-      bottomNavigationBar: DashboardScreenMra(),
       backgroundColor: AppStyles.whiteColor,
 
       body: SingleChildScrollView(
@@ -64,7 +64,12 @@ class _SettingScreenState extends State<SettingScreen> {
             Stack(
               alignment: Alignment.center,
               children: [
-                Image.asset("", fit: BoxFit.fill, height: size.height * 0.30, width: size.width),
+                Image.asset(
+                  "",
+                  fit: BoxFit.fill,
+                  height: size.height * 0.30,
+                  width: size.width,
+                ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -72,12 +77,21 @@ class _SettingScreenState extends State<SettingScreen> {
                     CircleAvatar(
                       radius: 50,
                       backgroundColor: Colors.grey.shade300,
-                      backgroundImage: profileImageUrl != null && profileImageUrl!.isNotEmpty ? CachedNetworkImageProvider(profileImageUrl!) : null,
-                      child: profileImageUrl == null || profileImageUrl!.isEmpty ? const Icon(Icons.person, size: 32) : null,
+                      backgroundImage:
+                          profileImageUrl != null && profileImageUrl!.isNotEmpty
+                          ? CachedNetworkImageProvider(profileImageUrl!)
+                          : null,
+                      child: profileImageUrl == null || profileImageUrl!.isEmpty
+                          ? const Icon(Icons.person, size: 32)
+                          : null,
                     ),
                     const SizedBox(height: 30),
 
-                    textSemiBold(text: userName.isEmpty ? "Guest" : userName, fontSize: 20, fontColor: AppStyles.whiteColor),
+                    textSemiBold(
+                      text: userName.isEmpty ? "Guest" : userName,
+                      fontSize: 20,
+                      fontColor: AppStyles.whiteColor,
+                    ),
                   ],
                 ),
               ],
@@ -165,7 +179,10 @@ class _SettingScreenState extends State<SettingScreen> {
                 onTap: () => Navigator.pop(context),
                 child: Container(
                   padding: EdgeInsets.all(4),
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: AppStyles.blueCC),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: AppStyles.blueCC,
+                  ),
                   child: const Icon(Icons.close, color: AppStyles.primaryColor),
                 ),
               ),
@@ -176,7 +193,11 @@ class _SettingScreenState extends State<SettingScreen> {
             // Title
             const Text(
               'Log Out',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppStyles.black1A),
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: AppStyles.black1A,
+              ),
             ),
 
             const SizedBox(height: 8),
@@ -196,7 +217,9 @@ class _SettingScreenState extends State<SettingScreen> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppStyles.primaryColor,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(6),
+                  ),
                   padding: const EdgeInsets.symmetric(vertical: 10),
                 ),
                 onPressed: () async {
@@ -226,7 +249,11 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 
-  Widget _listConst({required VoidCallback onTap, required IconData icons, required String title}) {
+  Widget _listConst({
+    required VoidCallback onTap,
+    required IconData icons,
+    required String title,
+  }) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -242,8 +269,17 @@ class _SettingScreenState extends State<SettingScreen> {
                     Container(
                       height: 40,
                       width: 40,
-                      decoration: BoxDecoration(shape: BoxShape.circle, color: AppStyles.primaryColor.withOpacity(0.15)),
-                      child: Center(child: Icon(icons, color: AppStyles.primaryColor, size: 20)),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppStyles.primaryColor.withOpacity(0.15),
+                      ),
+                      child: Center(
+                        child: Icon(
+                          icons,
+                          color: AppStyles.primaryColor,
+                          size: 20,
+                        ),
+                      ),
                     ),
                     SizedBox(width: 12),
                     textMedium(text: title, fontSize: 16),

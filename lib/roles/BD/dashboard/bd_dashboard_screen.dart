@@ -1,10 +1,13 @@
 import 'package:e_digivault_org_app/core/constants/app_common_text.dart';
 import 'package:e_digivault_org_app/core/constants/theme.dart';
+import 'package:e_digivault_org_app/core/constants/image_const.dart';
 import 'package:e_digivault_org_app/roles/BD/Client/client_screen_bd.dart';
 import 'package:e_digivault_org_app/roles/BD/HomePageBD/home_page_screen_bd.dart';
 import 'package:e_digivault_org_app/roles/BD/Lead/lead_screen_bd.dart';
-import 'package:e_digivault_org_app/roles/common/settings/common_settings/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../common/settings/common_settings/settings/settings_screen.dart';
 
 class DashboardBDScreen extends StatefulWidget {
   const DashboardBDScreen({super.key});
@@ -18,11 +21,13 @@ class _DashboardBDScreenState extends State<DashboardBDScreen> {
   int _selectedIndex = 0;
 
   final List<String> _titles = ["home", "client", "lead", "Setting"];
-  final List<IconData> _icons = [
-    Icons.home_outlined,
-    Icons.person_outline,
-    Icons.person_add_alt,
-    Icons.settings,
+
+  // SVG icons similar to CD dashboard
+  final List<Widget> _navIcons = [
+    SvgPicture.asset(ImageConst.homeicon, height: 24, width: 24),
+    SvgPicture.asset(ImageConst.clienticon, height: 24, width: 24),
+    SvgPicture.asset(ImageConst.leadsicon, height: 24, width: 24),
+    SvgPicture.asset(ImageConst.settingsicon, height: 24, width: 24),
   ];
 
   // Add screens for all navigation items
@@ -51,10 +56,10 @@ class _DashboardBDScreenState extends State<DashboardBDScreen> {
           child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+              padding: const EdgeInsets.symmetric(vertical: 12),
               decoration: BoxDecoration(
                 color: AppStyles.lightBlueEB,
-                borderRadius: BorderRadius.circular(40),
+                borderRadius: BorderRadius.circular(80),
                 border: Border.all(color: AppStyles.greyDE),
                 boxShadow: [
                   BoxShadow(
@@ -68,30 +73,29 @@ class _DashboardBDScreenState extends State<DashboardBDScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: List.generate(_titles.length, (index) {
                   bool isSelected = _selectedIndex == index;
-                  return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _selectedIndex = index;
-                      });
-                    },
-                    child: Container(
-                      width: size.width / 5.5, // Adjusted for 5 items
-                      color: AppStyles.transparent,
+                  return Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _selectedIndex = index;
+                        });
+                      },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Icon(
-                            _icons[index],
-                            color: isSelected
-                                ? AppStyles.primaryColor
-                                : AppStyles.textBlack,
-                            size: 24,
+                          ColorFiltered(
+                            colorFilter: ColorFilter.mode(
+                              isSelected
+                                  ? AppStyles.primaryColor
+                                  : AppStyles.textBlack,
+                              BlendMode.srcIn,
+                            ),
+                            child: _navIcons[index],
                           ),
-                          const SizedBox(height: 5),
+                          const SizedBox(height: 4),
                           textMedium(
                             text: _titles[index],
-                            fontSize: 11,
+                            fontSize: 12,
                             fontColor: isSelected
                                 ? AppStyles.primaryColor
                                 : AppStyles.textBlack,
