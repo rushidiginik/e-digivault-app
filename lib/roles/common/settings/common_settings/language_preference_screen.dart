@@ -1,9 +1,7 @@
-
 import 'package:e_digivault_org_app/core/constants/theme.dart';
 import 'package:e_digivault_org_app/widgets/common_app_bar_widget.dart';
 import 'package:e_digivault_org_app/widgets/common_drop_down_widget.dart';
 import 'package:flutter/material.dart';
-
 
 class LanguagePreferenceScreen extends StatefulWidget {
   const LanguagePreferenceScreen({super.key});
@@ -22,7 +20,7 @@ class _LanguagePreferenceScreenState extends State<LanguagePreferenceScreen> {
     size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: AppStyles.whiteColor,
-      appBar: CommonAppBarWidget(title: "language_preference"),
+      appBar: CommonAppBarWidget(title: "Language_Preference"),
       body: SafeArea(child: _languageSelectionSection()),
     );
   }
@@ -31,7 +29,7 @@ class _LanguagePreferenceScreenState extends State<LanguagePreferenceScreen> {
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: CommonDropdown(
-        label: "choose_your_language",
+        label: "Choose Your Language",
         selectedItem: selectedLanguages == "" ? "English" : selectedLanguages,
         items: ["English", "Hindi", "Kannada"],
         hintText: "choose_your_language",

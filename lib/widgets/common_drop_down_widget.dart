@@ -1,11 +1,10 @@
-
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:e_digivault_org_app/core/constants/app_common_text.dart';
 import 'package:e_digivault_org_app/core/constants/app_text_styles.dart';
 import 'package:e_digivault_org_app/core/constants/theme.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_utils/src/extensions/internacionalization.dart';
-
+import 'package:dropdown_search/dropdown_search.dart';
+import 'package:sizer/sizer.dart';
 
 class CommonDropdown<T> extends StatelessWidget {
   final String label;
@@ -13,8 +12,12 @@ class CommonDropdown<T> extends StatelessWidget {
   final List<T> items;
   final String hintText;
   final ValueChanged<T?> onChanged;
-  final String Function(T)? itemAsString;
   final bool isSuffix;
+  final String Function(T)? itemAsString;
+
+  // ADD
+  final bool hasError;
+  final String? errorText;
 
   const CommonDropdown({
     Key? key,
@@ -25,69 +28,59 @@ class CommonDropdown<T> extends StatelessWidget {
     this.selectedItem,
     this.itemAsString,
     this.isSuffix = false,
+
+    // ADD
+    this.hasError = false,
+    this.errorText,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 10.0),
+      padding: EdgeInsets.only(top: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           /// Label
           Padding(
-            padding: const EdgeInsets.only(left: 8.0, bottom: 4),
-            child: textRegular(text: label, fontSize: 16),
+            padding: const EdgeInsets.only(bottom: 4),
+            child: textRegular(text: label.tr(), fontSize: 16),
           ),
 
-          /// Dropdown Container - matching TextFormField styling
+          /// Dropdown container
           Container(
-            height: 48,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: AppStyles.greyDE),
+              borderRadius: BorderRadius.circular(12),
+
+              // RED BORDER ON ERROR
+              border: Border.all(
+                color: hasError ? AppStyles.redColor3F : AppStyles.greyDE,
+              ),
             ),
             child: DropdownSearch<T>(
               selectedItem: selectedItem,
               items: (filter, _) => items,
               itemAsString: itemAsString,
 
-              /// Show dropdown icon on the right
               suffixProps: DropdownSuffixProps(
                 clearButtonProps: ClearButtonProps(isVisible: false),
-                dropdownButtonProps: DropdownButtonProps(
-                  isVisible: isSuffix,
-                  iconClosed: Icon(
-                    Icons.keyboard_arrow_down,
-                    color: AppStyles.textBlack,
-                    size: 24,
-                  ),
-                ),
+                dropdownButtonProps: DropdownButtonProps(isVisible: isSuffix),
               ),
 
-              /// Remove default decoration underline
               decoratorProps: DropDownDecoratorProps(
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  contentPadding: const EdgeInsets.only(
-                    left: 8,
-                    top: 10,
-                    bottom: 6,
-                  ),
+                  contentPadding: const EdgeInsets.all(14),
                   hintText: hintText,
-                  hintStyle: AppFontStyle.mediumTextStyle(
-                    14,
-                    fontColor: AppStyles.textBlack.withOpacity(0.3),
-                  ),
                 ),
-                textAlignVertical: TextAlignVertical.center,
               ),
 
-              /// Popup customization
               popupProps: PopupProps.menu(
                 showSearchBox: true,
                 fit: FlexFit.loose,
                 constraints: const BoxConstraints(maxHeight: 300),
+
+                //  Popup container style (WHITE)
                 menuProps: const MenuProps(
                   borderRadius: BorderRadius.all(Radius.circular(12)),
                   backgroundColor: Colors.white,
@@ -95,21 +88,23 @@ class CommonDropdown<T> extends StatelessWidget {
                   shadowColor: Colors.black26,
                 ),
 
-                /// Search field style
+                //  Search field style
                 searchFieldProps: TextFieldProps(
                   style: AppFontStyle.semiBoldTextStyle(
                     16,
                     fontColor: AppStyles.textBlack,
                   ),
                   decoration: InputDecoration(
-                    hintText: "search",
+                    filled: true,
+                    fillColor: Colors.white,
+                    hintText: "Search...",
                     contentPadding: const EdgeInsets.symmetric(
                       horizontal: 12,
                       vertical: 8,
                     ),
                     hintStyle: AppFontStyle.mediumTextStyle(
                       14,
-                      fontColor: AppStyles.textBlack.withOpacity(0.3),
+                      fontColor: AppStyles.textBlack.withValues(alpha: 0.3),
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -117,10 +112,19 @@ class CommonDropdown<T> extends StatelessWidget {
                   ),
                 ),
               ),
-
               onChanged: onChanged,
             ),
           ),
+
+          // ERROR TEXT
+          if (hasError && errorText != null)
+            Padding(
+              padding: const EdgeInsets.only(left: 6, top: 4),
+              child: Text(
+                errorText!,
+                style: const TextStyle(color: Colors.red, fontSize: 12),
+              ),
+            ),
         ],
       ),
     );

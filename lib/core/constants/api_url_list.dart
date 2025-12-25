@@ -1,7 +1,5 @@
 import 'package:e_digivault_org_app/core/constants/app_constant.dart';
 
-
-
 class ApiUrlList {
   static const String userRegister =
       "${AppConstants.baseUrl}user_state_head/registerUser";
@@ -18,7 +16,7 @@ class ApiUrlList {
       "${AppConstants.baseUrl}settings/getSettingByUser";
 
   static const String updateSettings =
-      "${AppConstants.baseUrl}settings/updateSettingById";
+      "${AppConstants.baseUrl}settings/updateSettingById/";
 
   ///////////////////////////   CP Apis..///////////////////////////////////////////////////////////////////////
   static const String cpPersonalDetails =
@@ -66,7 +64,7 @@ class ApiUrlList {
 
   static const String uploadCDVideoRecord =
       "${AppConstants.baseUrl}employees/channelDelivery/uploadCDVideoRecord";
-   
+
   static const String initSettings =
       "${AppConstants.baseUrl}settings/createSetting";
 

@@ -405,7 +405,7 @@ class _HomePageBDScreenState extends State<HomePageBDScreen> {
             ),
             _dashIconConst(
               onTap: () {
-                // Navigator.pushNamed(context, NavigatorConst.videoPlayerScreen);
+                router.push('/bd_videopromo_screen');
               },
               title: "Video Promo",
               image: ImageConst.cinemaIconPNG,
@@ -421,7 +421,7 @@ class _HomePageBDScreenState extends State<HomePageBDScreen> {
         ),
         ButtonWidget(
           onTap: () {
-            //Navigator.pushNamed(context, NavigatorConst.liveTrackingScreen);
+            router.push('/bd_livetracking_screen');
           },
 
           title: "Live Tracking",

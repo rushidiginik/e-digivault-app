@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
-
+import 'package:go_router/go_router.dart';
 
 class UserManualScreen extends StatefulWidget {
   const UserManualScreen({super.key});
@@ -39,7 +39,7 @@ class _UserManualScreenState extends State<UserManualScreen> {
           const SizedBox(height: 20),
           // Title
           textBold(
-            text: "user_manual",
+            text: "User_Manual",
             fontSize: 22,
             fontColor: AppStyles.black1A,
           ),
@@ -48,7 +48,7 @@ class _UserManualScreenState extends State<UserManualScreen> {
 
           // Subtitle
           textRegular(
-            text: "please_choose_preferred_manual",
+            text: "Please_Choose_Preferred_Manual",
             fontSize: 16,
             fontColor: AppStyles.blue20,
           ),
@@ -66,10 +66,10 @@ class _UserManualScreenState extends State<UserManualScreen> {
                 icon: Icons.description,
                 text: "Company  Profile ",
                 onTap: () {
-                  // Get.toNamed(
-                  //   NavigatorConst.userManualDocScreen,
-                  //   arguments: {"isFromDoc": true},
-                  // );
+                  context.pushNamed(
+                    'userManualDoc',
+                    extra: true, // ✅ Document mode
+                  );
                 },
               ),
 
@@ -82,10 +82,10 @@ class _UserManualScreenState extends State<UserManualScreen> {
                 icon: Icons.videocam,
                 text: "video",
                 onTap: () {
-                  // Get.toNamed(
-                  //   NavigatorConst.userManualDocScreen,
-                  //   arguments: {"isFromDoc": false},
-                  // );
+                  context.pushNamed(
+                    'userManualDoc',
+                    extra: false, // ✅ Video mode
+                  );
                 },
               ),
             ],

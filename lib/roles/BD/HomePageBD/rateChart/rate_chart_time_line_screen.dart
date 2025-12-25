@@ -15,6 +15,57 @@ class _RateChartTimeLineScreenState extends State<RateChartTimeLineScreen> {
   late Size size;
   final TextEditingController controller = TextEditingController();
 
+  final List<Map<String, String>> timelineData = [
+    {
+      "title": "Online Application",
+      "description": "Description",
+      "amount": "₹10,000",
+      "duration": "2 Days",
+    },
+    {
+      "title": "BBMP ARO Office",
+      "description": "Description",
+      "amount": "₹5,000",
+      "duration": "3 Days",
+    },
+    {
+      "title": "RI",
+      "description": "Description",
+      "amount": "₹5,000",
+      "duration": "3 Days",
+    },
+    {
+      "title": "Case Workia",
+      "description": "Description",
+      "amount": "₹5,000",
+      "duration": "",
+    },
+    {
+      "title": "Manager Accessor",
+      "description": "Description",
+      "amount": "₹10,000",
+      "duration": "2 Days",
+    },
+    {
+      "title": "ARO",
+      "description": "Description",
+      "amount": "₹5,000",
+      "duration": "3 Days",
+    },
+    {
+      "title": "RO Manager",
+      "description": "Description",
+      "amount": "₹5,000",
+      "duration": "",
+    },
+    {
+      "title": "BBMP E-Katha",
+      "description": "Description",
+      "amount": "₹5,000",
+      "duration": "",
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
@@ -24,74 +75,19 @@ class _RateChartTimeLineScreenState extends State<RateChartTimeLineScreen> {
         backgroundColor: AppStyles.whiteColor,
         appBar: CommonHeader(title: "Rate Chart", showBack: true),
         body: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: AppStyles.whiteColor,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: AppStyles.greyDE,
-                  blurRadius: 4,
-                  spreadRadius: 1,
-                ),
-              ],
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ListView(
-                children: [
-                  _timelineStep(
-                    title: "Online Application",
-                    description: "Description",
-                    amount: "₹10,000",
-                    duration: "2 Days",
-                  ),
-                  _timelineStep(
-                    title: "BBMP ARO Office",
-                    description: "Description",
-                    amount: "₹5,000",
-                    duration: "3 Days",
-                  ),
-                  _timelineStep(
-                    title: "RI",
-                    description: "Description",
-                    amount: "₹5,000",
-                    duration: "",
-                  ),
-                  _timelineStep(
-                    title: "Case Workia",
-                    description: "Description",
-                    amount: "₹5,000",
-                    duration: "",
-                  ),
-                  _timelineStep(
-                    title: "Manager Accessor",
-                    description: "Description",
-                    amount: "₹10,000",
-                    duration: "2 Days",
-                  ),
-                  _timelineStep(
-                    title: "ARO",
-                    description: "Description",
-                    amount: "₹5,000",
-                    duration: "3 Days",
-                  ),
-                  _timelineStep(
-                    title: "RO Manager",
-                    description: "Description",
-                    amount: "₹5,000",
-                    duration: "",
-                  ),
-                  _timelineStep(
-                    title: "BBMP E-Katha",
-                    description: "Description",
-                    amount: "₹5,000",
-                    duration: "",
-                  ),
-                ],
-              ),
-            ),
+          padding: const EdgeInsets.only(left: 41, right: 41, top: 25),
+          child: ListView.builder(
+            padding: EdgeInsets.only(top: 10),
+            itemCount: timelineData.length,
+            itemBuilder: (context, index) {
+              return _timelineStep(
+                title: timelineData[index]["title"]!,
+                description: timelineData[index]["description"]!,
+                amount: timelineData[index]["amount"]!,
+                duration: timelineData[index]["duration"]!,
+                isLast: index == timelineData.length - 1,
+              );
+            },
           ),
         ),
       ),
@@ -103,96 +99,119 @@ class _RateChartTimeLineScreenState extends State<RateChartTimeLineScreen> {
     required String description,
     required String amount,
     required String duration,
+    required bool isLast,
   }) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Timeline Indicator
-        Column(
-          children: [
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                color: AppStyles.whiteColor,
-                shape: BoxShape.circle,
-                border: Border.all(color: AppStyles.primaryColor, width: 2),
-              ),
-              padding: EdgeInsets.all(10),
-              child: Container(
-                height: 16,
-                width: 16,
-                decoration: BoxDecoration(
-                  color: AppStyles.primaryColor,
-                  shape: BoxShape.circle,
-                ),
-              ),
-            ),
-            Container(
-              width: 2,
-              height: size.height * 0.20,
-              color: AppStyles.primaryColor,
-            ),
-          ],
-        ),
-
-        // Timeline Content
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: size.width * 0.50,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 6,
-                ),
-                decoration: BoxDecoration(
-                  border: Border(
-                    top: BorderSide(color: AppStyles.primaryColor, width: 2),
-                    bottom: BorderSide(color: AppStyles.primaryColor, width: 2),
-                    right: BorderSide(color: AppStyles.primaryColor, width: 2),
+    return IntrinsicHeight(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Timeline Indicator Column
+          SizedBox(
+            width: 50,
+            child: Column(
+              children: [
+                // Circle indicator
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: AppStyles.whiteColor,
+                    shape: BoxShape.circle,
+                    border: Border.all(color: AppStyles.primaryColor, width: 2),
                   ),
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(20),
-                    bottomRight: Radius.circular(20),
+                  child: Center(
+                    child: Container(
+                      height: 16,
+                      width: 16,
+                      decoration: BoxDecoration(
+                        color: AppStyles.primaryColor,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
                   ),
                 ),
-                child: textSemiBold(text: title, fontSize: 16),
-              ),
-              _containerSection(text: description),
-              Padding(
-                padding: EdgeInsets.only(left: size.width * 0.45),
-                child: _containerSection(
-                  text: amount,
-                  width: size.width * 0.25,
-                ),
-              ),
-              if (duration.isNotEmpty) _containerSection(text: duration),
-              const SizedBox(height: 20),
-            ],
+                // Connector line - expands to fill remaining space
+                if (!isLast)
+                  Expanded(
+                    child: Container(width: 3, color: AppStyles.primaryColor),
+                  ),
+              ],
+            ),
           ),
-        ),
-      ],
+
+          // Timeline Content - positioned to overlap with circle
+          Expanded(
+            child: Transform.translate(
+              offset: const Offset(
+                -5,
+                -3,
+              ), // Move left to attach to circle center
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Title container
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 10,
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppStyles.whiteColor,
+                      border: Border.all(
+                        color: AppStyles.primaryColor,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: textSemiBold(
+                      text: title,
+                      fontSize: 16,
+                      fontColor: AppStyles.textBlack,
+                    ),
+                  ),
+                  const SizedBox(height: 23),
+
+                  // Description box
+                  _infoBox(text: description, width: size.width * 0.45),
+                  const SizedBox(height: 6),
+
+                  // Amount box - aligned to right
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: _infoBox(text: amount, width: size.width * 0.30),
+                  ),
+
+                  // Duration box - only if not empty
+                  if (duration.isNotEmpty) ...[
+                    const SizedBox(height: 6),
+                    _infoBox(text: duration, width: size.width * 0.35),
+                  ],
+
+                  // Bottom spacing
+                  SizedBox(height: isLast ? 20 : 16),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
-  Widget _containerSection({required String text, double? width}) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 16.0),
-      child: Container(
-        width: width ?? size.width * 0.45,
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-        decoration: BoxDecoration(
-          border: Border.all(color: AppStyles.primaryColor, width: 2),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Center(
-          child: textSemiBold(
-            text: text,
-            fontSize: 14,
-            fontColor: AppStyles.primaryColor,
-          ),
+  Widget _infoBox({required String text, double? width}) {
+    return Container(
+      width: width,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        color: AppStyles.whiteColor,
+        border: Border.all(color: AppStyles.primaryColor, width: 2),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Center(
+        child: textSemiBold(
+          text: text,
+          fontSize: 12,
+          fontColor: AppStyles.primaryColor,
         ),
       ),
     );

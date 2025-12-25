@@ -1,15 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:e_digivault_org_app/core/constants/app_common_text.dart'
-    show textSemiBold, textMedium;
+import 'package:e_digivault_org_app/core/constants/app_common_text.dart';
+import 'package:e_digivault_org_app/core/constants/image_const.dart';
 import 'package:e_digivault_org_app/core/constants/theme.dart';
 import 'package:e_digivault_org_app/roles/common/login/controller/login_controller.dart';
 import 'package:e_digivault_org_app/roles/common/settings/common_settings/settings/controller/settings_controller.dart';
 import 'package:e_digivault_org_app/utils/alert_utils.dart';
 import 'package:e_digivault_org_app/utils/app_storage.dart';
-import 'package:e_digivault_org_app/widgets/bottom_navigation_bar_mra.dart';
 import 'package:e_digivault_org_app/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -57,7 +57,6 @@ class _SettingScreenState extends State<SettingScreen> {
     size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: AppStyles.whiteColor,
-
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -65,7 +64,7 @@ class _SettingScreenState extends State<SettingScreen> {
               alignment: Alignment.center,
               children: [
                 Image.asset(
-                  "",
+                  ImageConst.settingBgPNG,
                   fit: BoxFit.fill,
                   height: size.height * 0.30,
                   width: size.width,
@@ -73,7 +72,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(height: 40),
+                    const SizedBox(height: 40),
                     CircleAvatar(
                       radius: 50,
                       backgroundColor: Colors.grey.shade300,
@@ -86,7 +85,6 @@ class _SettingScreenState extends State<SettingScreen> {
                           : null,
                     ),
                     const SizedBox(height: 30),
-
                     textSemiBold(
                       text: userName.isEmpty ? "Guest" : userName,
                       fontSize: 20,
@@ -96,7 +94,6 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
               ],
             ),
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12.0),
               child: Column(
@@ -104,56 +101,56 @@ class _SettingScreenState extends State<SettingScreen> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child: textSemiBold(text: "settings", fontSize: 18),
+                    child: textSemiBold(text: "Settings", fontSize: 18),
                   ),
                   _listConst(
                     onTap: () {
-                      // Get.toNamed(NavigatorConst.notificationSettingScreen);
+                      context.push('/notification_setting_screen');
                     },
                     icons: Icons.notifications_outlined,
-                    title: "notifications",
+                    title: "Notifications",
                   ),
                   _listConst(
                     onTap: () {
-                      // Get.toNamed(NavigatorConst.languagePreferenceScreen);
+                      context.push('/language_preference_screen');
                     },
                     icons: Icons.translate,
-                    title: "Language preference",
+                    title: "Language Preference",
                   ),
                   _listConst(
                     onTap: () {
-                      // Get.toNamed(NavigatorConst.privacySettingScreen);
+                      context.push('/privacy_setting_screen');
                     },
                     icons: Icons.vpn_key_outlined,
-                    title: "privacy setting",
+                    title: "Privacy Setting",
                   ),
                   _listConst(
                     onTap: () {
-                      // Get.toNamed(NavigatorConst.contactSupportScreen);
+                      context.push('/contact_support_screen');
                     },
                     icons: Icons.headset_mic_outlined,
-                    title: "contact support",
+                    title: "Contact Support",
                   ),
                   _listConst(
                     onTap: () {
-                      // Get.toNamed(NavigatorConst.faqHelpScreen);
+                      context.push('/faq_help_screen');
                     },
                     icons: Icons.help_outline,
-                    title: "faq help",
+                    title: "FAQ & Help",
                   ),
                   _listConst(
                     onTap: () {
-                      // Get.toNamed(NavigatorConst.userManualScreen);
+                      context.push('/user_manual_screen');
                     },
                     icons: Icons.phone_iphone,
-                    title: "user manual",
+                    title: "User Manual",
                   ),
                   _listConst(
                     onTap: () {
                       showLogoutDialog(context);
                     },
                     icons: Icons.logout,
-                    title: "Log out",
+                    title: "Log Out",
                   ),
                 ],
               ),
@@ -178,7 +175,7 @@ class _SettingScreenState extends State<SettingScreen> {
               child: GestureDetector(
                 onTap: () => Navigator.pop(context),
                 child: Container(
-                  padding: EdgeInsets.all(4),
+                  padding: const EdgeInsets.all(4),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     color: AppStyles.blueCC,
@@ -187,9 +184,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
               ),
             ),
-
             const SizedBox(height: 10),
-
             // Title
             const Text(
               'Log Out',
@@ -199,18 +194,14 @@ class _SettingScreenState extends State<SettingScreen> {
                 color: AppStyles.black1A,
               ),
             ),
-
             const SizedBox(height: 8),
-
             // Message
             const Text(
               'Are you sure you want to Log Out?',
               style: TextStyle(fontSize: 14, color: Colors.black54),
               textAlign: TextAlign.center,
             ),
-
             const SizedBox(height: 20),
-
             // OK Button
             SizedBox(
               width: double.infinity,
@@ -229,16 +220,14 @@ class _SettingScreenState extends State<SettingScreen> {
 
                   await AppStorage.clearAll();
 
-                  // Navigator.pushNamedAndRemoveUntil(
-                  //   // ignore: use_build_context_synchronously
-                  //   context,
-                  //   NavigatorConst.loginScreen,
-                  //   (route) => false,
-                  // );
+                  // Navigate to login and remove all previous routes
+                  if (context.mounted) {
+                    context.go('/login_screen');
+                  }
                 },
                 child: Obx(
                   () => settingsController.isLogoutLoading.value
-                      ? CircularLoader(color: AppStyles.whiteColor)
+                      ? const CircularLoader(color: AppStyles.whiteColor)
                       : const Text('OK', style: TextStyle(color: Colors.white)),
                 ),
               ),
@@ -281,11 +270,11 @@ class _SettingScreenState extends State<SettingScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 12),
+                    const SizedBox(width: 12),
                     textMedium(text: title, fontSize: 16),
                   ],
                 ),
-                Icon(Icons.arrow_forward_ios_rounded, size: 16),
+                const Icon(Icons.arrow_forward_ios_rounded, size: 16),
               ],
             ),
             Divider(height: 16, color: AppStyles.textBlack.withOpacity(0.07)),

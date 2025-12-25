@@ -55,35 +55,46 @@ class AuthController extends GetxController {
       isVerifyOtpLoading.value = true;
       update();
 
-      final response = await _service.verifyOtp(phone, otp);
+      final VerifyOtpModel response = await _service.verifyOtp(phone, otp);
       verifyOtpData = response;
+
       debugPrint("Verify OTP Response: $response");
 
-      if (response.success == true) {
-        verifyOtpData = response;
-        await AppStorage.setAuthToken(verifyOtpData!.accessToken!);
-        await AppStorage.setRefreshToken(verifyOtpData!.refreshToken!);
-        await AppStorage.setUserId(verifyOtpData!.userId!);
-        await AppStorage.setPhoneNumber(verifyOtpData!.phone!);
+      if (response.success && response.data != null) {
+        final data = response.data!;
+        final employee = data.employee;
 
-        debugPrint("access token ${verifyOtpData!.accessToken}");
-        debugPrint("refresh token ${verifyOtpData!.refreshToken}");
-        debugPrint("userId ${verifyOtpData!.userId}");
-        debugPrint("API role: ${verifyOtpData!.role}");
+        // ✅ Store tokens
+        await AppStorage.setAuthToken(data.accessToken);
+        await AppStorage.setRefreshToken(data.refreshToken);
+
+        // ✅ Store user info
+        await AppStorage.setUserId(employee.id);
+        await AppStorage.setPhoneNumber(employee.phone);
+        await AppStorage.setRole(employee.role);
+        await AppStorage.setUserName(employee.name);
+
+        // ✅ Store profile image ONLY if exists
+        // if (employee.profileImage != null &&
+        //     employee.profileImage!.isNotEmpty) {
+        //   await AppStorage.setProfileImage(employee.profileImage!);
+        // }
+
+        debugPrint("access token ${data.accessToken}");
+        debugPrint("refresh token ${data.refreshToken}");
+        debugPrint("userId ${employee.id}");
+        debugPrint("API role: ${employee.role}");
 
         // Convert API role string to UserRole enum
-        final userRole = UserRole.fromApiString(verifyOtpData!.role);
+        final userRole = UserRole.fromApiString(employee.role);
 
         if (userRole != null) {
           _navigateToDashboard(userRole);
           debugPrint("Success: ${response.message}");
           return true;
         } else {
-          debugPrint("Invalid role received from API: ${verifyOtpData!.role}");
-          AppToast.error(
-            "Invalid user_state_head role",
-            gravity: ToastGravity.TOP,
-          );
+          debugPrint("Invalid role received from API: ${employee.role}");
+          AppToast.error("Invalid user role", gravity: ToastGravity.TOP);
           return false;
         }
       } else {
@@ -127,6 +138,88 @@ class AuthController extends GetxController {
       case UserRole.accountant:
         // Get.offAllNamed(NavigatorConst.accountsDashboard);
         break;
+    }
+  }
+
+  // Registration OTP Method - calls same service with role
+  Future<void> registerSendOtp(String phone, String role) async {
+    try {
+      isOtpResend.value = true;
+      update();
+
+      final LoginResponseModel response = await _service.sendOtp(
+        phone,
+        role: role,
+      );
+      loginResponseModel = response;
+
+      if (response.success && response.data != null) {
+        debugPrint("Registration OTP Success: ${response.message}");
+
+        final otp = response.data!.otp;
+        if (otp.isNotEmpty) {
+          AppToast.info("OTP: $otp");
+        }
+      } else {
+        debugPrint("Registration OTP error: ${response.message}");
+        AppToast.error(response.message);
+      }
+    } catch (e, stack) {
+      debugPrintStack(stackTrace: stack);
+      AppToast.error("An unexpected error occurred");
+    } finally {
+      isOtpResend.value = false;
+      update();
+    }
+  }
+
+  Future<bool> registerVerifyOtp(String phone, String otp, String role) async {
+    try {
+      debugPrint(
+        "Verifying Registration OTP for phone: $phone, role: $role with OTP: $otp",
+      );
+      isVerifyOtpLoading.value = true;
+      update();
+
+      final VerifyOtpModel response = await _service.verifyOtp(phone, otp);
+      verifyOtpData = response;
+
+      debugPrint("Register Verify OTP Response: $response");
+
+      if (response.success && response.data != null) {
+        final data = response.data!;
+        final employee = data.employee;
+
+        // ✅ Store tokens
+        await AppStorage.setAuthToken(data.accessToken);
+        await AppStorage.setRefreshToken(data.refreshToken);
+
+        // ✅ Store user info
+        await AppStorage.setUserId(employee.id);
+        await AppStorage.setPhoneNumber(employee.phone);
+        await AppStorage.setRole(employee.role);
+        await AppStorage.setUserName(employee.name);
+
+        debugPrint("Registration access token: ${data.accessToken}");
+        debugPrint("Registration refresh token: ${data.refreshToken}");
+        debugPrint("Registration userId: ${employee.id}");
+        debugPrint("Registration API role: ${employee.role}");
+
+        debugPrint("Registration Success: ${response.message}");
+        return true;
+      } else {
+        debugPrint("Registration OTP error: ${response.message}");
+        AppToast.error(response.message, gravity: ToastGravity.TOP);
+        return false;
+      }
+    } catch (e, stack) {
+      debugPrintStack(stackTrace: stack);
+      debugPrint("Registration OTP exception details: $e");
+      AppToast.error("An unexpected error occurred", gravity: ToastGravity.TOP);
+      return false;
+    } finally {
+      isVerifyOtpLoading.value = false;
+      update();
     }
   }
 }

@@ -1,4 +1,3 @@
-
 import 'package:e_digivault_org_app/core/constants/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +11,8 @@ class CircularLoader extends StatefulWidget {
   State<CircularLoader> createState() => _CircularLoaderState();
 }
 
-class _CircularLoaderState extends State<CircularLoader> with SingleTickerProviderStateMixin {
+class _CircularLoaderState extends State<CircularLoader>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
 
   @override
@@ -34,9 +34,14 @@ class _CircularLoaderState extends State<CircularLoader> with SingleTickerProvid
   Widget build(BuildContext context) {
     return Center(
       child: SizedBox(
-        width: 36.w,
-        height: 36.w,
-        child: RotationTransition(turns: _controller, child: CustomPaint(painter: _ArcPainter(color: widget.color ?? AppStyles.primaryColor))),
+        width: 36,
+        height: 36,
+        child: RotationTransition(
+          turns: _controller,
+          child: CustomPaint(
+            painter: _ArcPainter(color: widget.color ?? AppStyles.primaryColor),
+          ),
+        ),
       ),
     );
   }
@@ -51,12 +56,13 @@ class _ArcPainter extends CustomPainter {
     final strokeWidth = 4.0;
     final rect = Offset.zero & size;
 
-    final paint =
-        Paint()
-          ..style = PaintingStyle.stroke
-          ..strokeWidth = strokeWidth
-          ..strokeCap = StrokeCap.round
-          ..shader = SweepGradient(colors: [color, color.withOpacity(0.2)]).createShader(rect);
+    final paint = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = strokeWidth
+      ..strokeCap = StrokeCap.round
+      ..shader = SweepGradient(
+        colors: [color, color.withOpacity(0.2)],
+      ).createShader(rect);
 
     // draw partial arc (like modern loaders)
     canvas.drawArc(

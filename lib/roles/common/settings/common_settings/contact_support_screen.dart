@@ -1,4 +1,3 @@
-
 import 'package:e_digivault_org_app/core/constants/app_common_text.dart';
 import 'package:e_digivault_org_app/core/constants/theme.dart';
 import 'package:e_digivault_org_app/widgets/common_app_bar_widget.dart';
@@ -22,7 +21,7 @@ class _ContactSupportScreenState extends State<ContactSupportScreen> {
     size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: AppStyles.whiteColor,
-      appBar: CommonAppBarWidget(title: "contact_support"),
+      appBar: CommonAppBarWidget(title: "Contact_Support"),
       body: SafeArea(child: _contactSupportSection()),
     );
   }

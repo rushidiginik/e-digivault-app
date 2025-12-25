@@ -1,15 +1,26 @@
 import 'package:e_digivault_org_app/roles/BD/Dashboard/bd_dashboard_screen.dart';
+import 'package:e_digivault_org_app/roles/BD/HomePageBD/liveTracking/live_tracking_screen_bd.dart';
 import 'package:e_digivault_org_app/roles/BD/HomePageBD/serviceDocuments/service_doc_screen_bd.dart';
+import 'package:e_digivault_org_app/roles/BD/HomePageBD/videoPromo/video_promo_screen_bd.dart';
 import 'package:e_digivault_org_app/roles/MRA/dashboard/mra_dashboard_screen.dart';
 import 'package:e_digivault_org_app/roles/common/login/login_screen.dart';
 import 'package:e_digivault_org_app/roles/common/onboarding/onboarding_screen.dart';
+import 'package:e_digivault_org_app/roles/common/settings/common_settings/contact_support_screen.dart';
+import 'package:e_digivault_org_app/roles/common/settings/common_settings/faq_help_screen.dart';
+import 'package:e_digivault_org_app/roles/common/settings/common_settings/language_preference_screen.dart';
+import 'package:e_digivault_org_app/roles/common/settings/common_settings/notification_setting_screen.dart';
+import 'package:e_digivault_org_app/roles/common/settings/common_settings/privacy_setting_screen.dart';
 import 'package:e_digivault_org_app/roles/common/settings/common_settings/settings/settings_screen.dart';
+import 'package:e_digivault_org_app/roles/common/settings/common_settings/user_manual/user_manual_doc_screen.dart';
+import 'package:e_digivault_org_app/roles/common/settings/common_settings/user_manual/user_manual_screen.dart';
 import 'package:e_digivault_org_app/roles/common/splash/splash_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import '../roles/BD/HomePageBD/brochure/brochure_screen_bd.dart';
+import '../roles/BD/HomePageBD/liveTracking/live_tracking_actions_screen.dart';
 import '../roles/BD/HomePageBD/rateChart/rate_chart_screen_bd.dart';
 import '../roles/BD/HomePageBD/rateChart/rate_chart_time_line_screen.dart';
+import '../roles/BD/HomePageBD/serviceDocuments/document_list_screen_bd.dart';
 import '../roles/BD/HomePageBD/serviceDocuments/sub_service_screen_bd.dart';
 
 final GoRouter router = GoRouter(
@@ -69,10 +80,40 @@ final GoRouter router = GoRouter(
       },
     ),
 
-    //  GoRoute(
-    //     path: '/bd_videopromo_screen',
-    //     builder: (context, state) => DashboardBDScreen(),
-    //   ),
+    GoRoute(
+      path: '/bd_document_list',
+      name: 'bdDocumentList',
+      builder: (context, state) {
+        final data = state.extra as Map<String, String>;
+
+        return DocumentListScreen(
+          mainServiceName: data['mainServiceName']!,
+          subServiceName: data['subServiceName']!,
+          subServiceId: data['subServiceId']!,
+        );
+      },
+    ),
+    GoRoute(
+      path: '/bd_videopromo_screen',
+      builder: (context, state) => VideoPlayerScreen(),
+    ),
+
+    GoRoute(
+      path: '/bd_livetracking_screen',
+      builder: (context, state) => LiveTrackingScreen(),
+    ),
+
+    GoRoute(
+      path: '/bd_livetracking_actions_screen',
+      name: 'bdLiveTrackingActions',
+      builder: (context, state) {
+        final data = state.extra as Map<String, String>;
+        return LiveTrackingActionsScreen(
+          title: data['title']!,
+          status: data['status']!,
+        );
+      },
+    ),
     GoRoute(
       path: '/add_leads_screen_bd',
       builder: (context, state) => DashboardBDScreen(),
@@ -95,6 +136,41 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/settings_screen',
       builder: (context, state) => SettingScreen(),
+    ),
+
+    // Settings Sub-screens
+    GoRoute(
+      path: '/notification_setting_screen',
+      builder: (context, state) => NotificationSettingScreen(),
+    ),
+    GoRoute(
+      path: '/language_preference_screen',
+      builder: (context, state) => LanguagePreferenceScreen(),
+    ),
+    GoRoute(
+      path: '/privacy_setting_screen',
+      builder: (context, state) => PrivacySettingScreen(),
+    ),
+    GoRoute(
+      path: '/contact_support_screen',
+      builder: (context, state) => ContactSupportScreen(),
+    ),
+    GoRoute(
+      path: '/faq_help_screen',
+      builder: (context, state) => FaqHelpScreen(),
+    ),
+    GoRoute(
+      path: '/user_manual_screen',
+      builder: (context, state) => UserManualScreen(),
+    ),
+
+    GoRoute(
+      path: '/user_manual_doc',
+      name: 'userManualDoc',
+      builder: (context, state) {
+        final isFromDoc = state.extra as bool? ?? true;
+        return UserManualDocScreen(isFromDoc: isFromDoc);
+      },
     ),
   ],
 );
