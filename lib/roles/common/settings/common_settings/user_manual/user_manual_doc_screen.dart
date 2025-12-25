@@ -7,7 +7,6 @@ import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
-
 class UserManualDocScreen extends StatefulWidget {
   final bool isFromDoc;
 
@@ -52,12 +51,11 @@ class _UserManualDocScreenState extends State<UserManualDocScreen> {
   }
 
   void _initializeVideo(String url) {
-    _controller =
-        VideoPlayerController.networkUrl(Uri.parse(url))
-          ..initialize().then((_) {
-            setState(() {}); // ✅ Refresh UI when ready
-          })
-          ..setLooping(true);
+    _controller = VideoPlayerController.networkUrl(Uri.parse(url))
+      ..initialize().then((_) {
+        setState(() {}); // ✅ Refresh UI when ready
+      })
+      ..setLooping(true);
   }
 
   void _togglePlayPause() {
@@ -88,19 +86,17 @@ class _UserManualDocScreenState extends State<UserManualDocScreen> {
     return Scaffold(
       backgroundColor: AppStyles.whiteColor,
       appBar: CommonAppBarWidget(
-        title: "user_manual",
+        title: "User_Manual",
         //actionWidget: [HeaderAction(), SizedBox(width: 8)],
       ),
       body: Obx(
-        () =>
-            userManualController.isLoading.value
-                ? const CircularLoader()
-                : SafeArea(
-                  child:
-                      widget.isFromDoc
-                          ? _userManualDocSection()
-                          : _userVideoSection(),
-                ),
+        () => userManualController.isLoading.value
+            ? const CircularLoader()
+            : SafeArea(
+                child: widget.isFromDoc
+                    ? _userManualDocSection()
+                    : _userVideoSection(),
+              ),
       ),
     );
   }
@@ -112,8 +108,8 @@ class _UserManualDocScreenState extends State<UserManualDocScreen> {
           child: PDF().cachedFromUrl(
             userManualController.documentText,
             placeholder: (progress) => Center(child: Text("$progress%")),
-            errorWidget:
-                (error) => Center(child: Text("Error loading PDF\n$error")),
+            errorWidget: (error) =>
+                Center(child: Text("Error loading PDF\n$error")),
           ),
         ),
       ],
@@ -127,36 +123,35 @@ class _UserManualDocScreenState extends State<UserManualDocScreen> {
     }
 
     return Center(
-      child:
-          _controller!.value.isInitialized
-              ? AspectRatio(
-                aspectRatio: _controller!.value.aspectRatio,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    VideoPlayer(_controller!),
-                    Positioned(
-                      bottom: 20,
-                      left: 0,
-                      right: 0,
-                      child: VideoProgressIndicator(
-                        _controller!,
-                        allowScrubbing: true,
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                      ),
+      child: _controller!.value.isInitialized
+          ? AspectRatio(
+              aspectRatio: _controller!.value.aspectRatio,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  VideoPlayer(_controller!),
+                  Positioned(
+                    bottom: 20,
+                    left: 0,
+                    right: 0,
+                    child: VideoProgressIndicator(
+                      _controller!,
+                      allowScrubbing: true,
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
                     ),
-                    IconButton(
-                      icon: Icon(
-                        isPlaying ? Icons.pause_circle : Icons.play_circle,
-                        color: AppStyles.whiteColor,
-                        size: 60,
-                      ),
-                      onPressed: _togglePlayPause,
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      isPlaying ? Icons.pause_circle : Icons.play_circle,
+                      color: AppStyles.whiteColor,
+                      size: 60,
                     ),
-                  ],
-                ),
-              )
-              : const CircularLoader(),
+                    onPressed: _togglePlayPause,
+                  ),
+                ],
+              ),
+            )
+          : const CircularLoader(),
     );
   }
 

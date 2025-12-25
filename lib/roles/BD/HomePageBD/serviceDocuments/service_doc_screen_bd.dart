@@ -48,14 +48,14 @@ class _ServiceDocumentsScreenState extends State<ServiceDocumentsScreen> {
       appBar: CommonHeader(title: 'ServiceDocs', showBack: true),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+          padding: EdgeInsets.symmetric(horizontal: 11, vertical: 7),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Header Container
               Container(
                 width: double.infinity,
-                padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
                 decoration: BoxDecoration(
                   color: AppStyles.whiteColor,
                   borderRadius: BorderRadius.circular(8),
@@ -76,12 +76,13 @@ class _ServiceDocumentsScreenState extends State<ServiceDocumentsScreen> {
               Expanded(
                 child: GridView.builder(
                   physics: const BouncingScrollPhysics(),
-                  padding: EdgeInsets.only(bottom: 20),
+                  padding: EdgeInsets.only(bottom: 20, right: 16, left: 16),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
                     mainAxisSpacing: 14,
-                    crossAxisSpacing: 14,
-                    childAspectRatio: 0.95,
+                    crossAxisSpacing: 12,
+                    //childAspectRatio: 0.95,
+                    mainAxisExtent: 80,
                   ),
                   itemCount: mainServices.length,
                   itemBuilder: (context, index) {
@@ -117,7 +118,7 @@ class _ServiceDocumentsScreenState extends State<ServiceDocumentsScreen> {
         padding: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
         decoration: BoxDecoration(
           color: AppStyles.primaryColor,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(8),
         ),
         child: Center(
           child: textMedium(

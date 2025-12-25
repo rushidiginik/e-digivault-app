@@ -2,12 +2,10 @@ import 'package:e_digivault_org_app/core/constants/app_common_text.dart';
 import 'package:e_digivault_org_app/core/constants/theme.dart';
 import 'package:e_digivault_org_app/roles/common/settings/common_settings/settings/controller/settings_controller.dart';
 import 'package:e_digivault_org_app/widgets/common_app_bar_widget.dart';
-import 'package:e_digivault_org_app/widgets/common_search_bar_widget.dart';
+import 'package:e_digivault_org_app/widgets/common_serachBar_withController.dart';
 import 'package:e_digivault_org_app/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-
 
 class FaqHelpScreen extends StatefulWidget {
   const FaqHelpScreen({super.key});
@@ -33,10 +31,9 @@ class _FaqHelpScreenState extends State<FaqHelpScreen> {
     settingsController.getFaqList().then((_) {
       if (settingsController.faqResponse != null) {
         /// Convert API → Map format UI expects
-        faqList =
-            settingsController.faqResponse!.data.map((faq) {
-              return {"question": faq.title, "answer": faq.description};
-            }).toList();
+        faqList = settingsController.faqResponse!.data.map((faq) {
+          return {"question": faq.title, "answer": faq.description};
+        }).toList();
 
         filteredFaqList = List<Map<String, String>>.from(faqList);
 
@@ -65,12 +62,11 @@ class _FaqHelpScreenState extends State<FaqHelpScreen> {
     }
 
     setState(() {
-      filteredFaqList =
-          faqList.where((faq) {
-            final question = faq["question"]!.toLowerCase();
-            final answer = faq["answer"]!.toLowerCase();
-            return question.contains(q) || answer.contains(q);
-          }).toList();
+      filteredFaqList = faqList.where((faq) {
+        final question = faq["question"]!.toLowerCase();
+        final answer = faq["answer"]!.toLowerCase();
+        return question.contains(q) || answer.contains(q);
+      }).toList();
     });
   }
 
@@ -78,29 +74,28 @@ class _FaqHelpScreenState extends State<FaqHelpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppStyles.whiteColor,
-      appBar: CommonAppBarWidget(title: "faq_help"),
+      appBar: CommonAppBarWidget(title: "Faq_Help"),
       body: Obx(
-        () =>
-            settingsController.isFaqLoading.value
-                ? CircularLoader()
-                : SafeArea(
-                  child: SingleChildScrollView(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CommonSearchBar(),
-                        const SizedBox(height: 12),
+        () => settingsController.isFaqLoading.value
+            ? CircularLoader()
+            : SafeArea(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CommonSearchBar(controller: controller),
+                      const SizedBox(height: 12),
 
-                        // FAQ list rendering
-                        ...filteredFaqList.map(
-                          (faq) =>
-                              _buildFAQItem(faq["question"]!, faq["answer"]!),
-                        ),
-                      ],
-                    ),
+                      // FAQ list rendering
+                      ...filteredFaqList.map(
+                        (faq) =>
+                            _buildFAQItem(faq["question"]!, faq["answer"]!),
+                      ),
+                    ],
                   ),
                 ),
+              ),
       ),
     );
   }

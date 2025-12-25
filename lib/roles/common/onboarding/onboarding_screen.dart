@@ -1,6 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:e_digivault_org_app/core/constants/app_common_text.dart';
 import 'package:e_digivault_org_app/core/constants/theme.dart';
+import 'package:e_digivault_org_app/utils/app_storage.dart';
 import 'package:e_digivault_org_app/widgets/common_app_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,17 +21,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final List<OnboardingModel> onboardingData = [
     OnboardingModel(
       title: "Upload with Confidence",
-      description: '''“Moderators can securely upload documents with detailed metadata.”''',
+      description:
+          '''“Moderators can securely upload documents with detailed metadata.”''',
       image: "assets/images/pngs/onboarding_1.png",
     ),
     OnboardingModel(
       title: "Safe and Secure",
-      description: '''“In-Charge roles review, verify, or reject documents—transparently.”''',
+      description:
+          '''“In-Charge roles review, verify, or reject documents—transparently.”''',
       image: "assets/images/pngs/onboarding_2.png",
     ),
     OnboardingModel(
       title: "Track Your Work",
-      description: '''“Clients can check statuses, view, download, and share verified documents anytime.”''',
+      description:
+          '''“Clients can check statuses, view, download, and share verified documents anytime.”''',
       image: "assets/images/pngs/onboarding_3.png",
     ),
   ];
@@ -40,7 +44,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
     ///
     SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(systemNavigationBarColor: Colors.transparent, systemNavigationBarIconBrightness: Brightness.dark),
+      const SystemUiOverlayStyle(
+        systemNavigationBarColor: Colors.transparent,
+        systemNavigationBarIconBrightness: Brightness.dark,
+      ),
     );
   }
 
@@ -56,17 +63,33 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
         pressBack: () {
           if (_currentPage > 0) {
-            _controller.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
+            _controller.previousPage(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeIn,
+            );
           }
         },
         actionWidget: [
           GestureDetector(
-            onTap: () {},
+            onTap: () async {
+              await AppStorage.setHasSeenOnboarding(true);
+              context.go('/login_screen');
+            },
             child: Container(
-              decoration: BoxDecoration(color: AppStyles.primaryColor.withOpacity(0.15), borderRadius: BorderRadius.circular(20)),
+              decoration: BoxDecoration(
+                color: AppStyles.primaryColor.withOpacity(0.15),
+                borderRadius: BorderRadius.circular(20),
+              ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
-                child: textMedium(text: "skip", fontSize: 14, fontColor: AppStyles.primaryColor),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 8.0,
+                  horizontal: 20,
+                ),
+                child: textMedium(
+                  text: "Skip",
+                  fontSize: 14,
+                  fontColor: AppStyles.primaryColor,
+                ),
               ),
             ),
           ),
@@ -105,11 +128,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       GestureDetector(
-                        onTap: () {
+                        onTap: () async {
                           if (_currentPage == onboardingData.length - 1) {
+                            await AppStorage.setHasSeenOnboarding(true);
                             context.go('/login_screen');
                           } else {
-                            _controller.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
+                            _controller.nextPage(
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.easeIn,
+                            );
                           }
                         },
                         child: Stack(
@@ -126,8 +153,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                     ? 0.65
                                     : 1, // controls progress
                                 strokeWidth: 4,
-                                backgroundColor: AppStyles.textBlack.withOpacity(0.10),
-                                valueColor: const AlwaysStoppedAnimation<Color>(AppStyles.primaryColor),
+                                backgroundColor: AppStyles.textBlack
+                                    .withOpacity(0.10),
+                                valueColor: const AlwaysStoppedAnimation<Color>(
+                                  AppStyles.primaryColor,
+                                ),
                               ),
                             ),
 
@@ -135,14 +165,23 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             DottedBorder(
                               color: Colors.transparent,
                               strokeWidth: 2, // thickness
-                              borderType: BorderType.RRect, // RRect = rounded rectangle / Circle
-                              radius: const Radius.circular(50), // makes it rounded
+                              borderType: BorderType
+                                  .RRect, // RRect = rounded rectangle / Circle
+                              radius: const Radius.circular(
+                                50,
+                              ), // makes it rounded
                               dashPattern: const [6, 3], // [dash, space]
                               child: Container(
                                 width: 40,
                                 height: 40,
-                                decoration: BoxDecoration(shape: BoxShape.circle),
-                                child: Icon(Icons.arrow_forward_ios_rounded, color: AppStyles.primaryColor, size: 18),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(
+                                  Icons.arrow_forward_ios_rounded,
+                                  color: AppStyles.primaryColor,
+                                  size: 18,
+                                ),
                               ),
                             ),
                           ],
@@ -160,7 +199,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             height: 8,
                             width: _currentPage == index ? 20 : 8,
                             decoration: BoxDecoration(
-                              color: _currentPage == index ? AppStyles.primaryColor : AppStyles.primaryColor.withOpacity(0.30),
+                              color: _currentPage == index
+                                  ? AppStyles.primaryColor
+                                  : AppStyles.primaryColor.withOpacity(0.30),
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
@@ -190,11 +231,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             },
           ),
         ),
-        textSemiBold(text: model.title, fontSize: 24, fontColor: AppStyles.primaryColor),
+        textSemiBold(
+          text: model.title,
+          fontSize: 24,
+          fontColor: AppStyles.primaryColor,
+        ),
 
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: textRegular(text: model.description, fontSize: 18, textAlign: TextAlign.center),
+          child: textRegular(
+            text: model.description,
+            fontSize: 18,
+            textAlign: TextAlign.center,
+          ),
         ),
       ],
     );
@@ -207,5 +256,9 @@ class OnboardingModel {
   final String description;
   final String image;
 
-  OnboardingModel({required this.title, required this.description, required this.image});
+  OnboardingModel({
+    required this.title,
+    required this.description,
+    required this.image,
+  });
 }

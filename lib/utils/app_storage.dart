@@ -10,14 +10,14 @@ class AppStorage {
   static const _phoneNumber = "";
   static const _role = "";
   static const _channelPartnerId = "channelPartnerId";
-  static const _channelDeliveryId = "channelDeliveryId"; // Add this
+  static const _channelDeliveryId = "channelDeliveryId";
   static const _brochureCpId = "brochureCpId";
   static const _promoVideoId = "promoVideoId";
-  static const userName = "userName";
-  static const profileImage = "profileImage";
 
+  static const _hasSeenOnboarding = "hasSeenOnboarding";
 
-  // Add this
+  static const _userName = "userName";
+  static const _profileImage = "profileImage";
 
   /// Call this once in main() before runApp()
   static Future<void> init() async {
@@ -52,7 +52,14 @@ class AppStorage {
   static Future<void> setPromoVideoId(String promoVideoId) async =>
       _prefs.setString(_promoVideoId, promoVideoId);
 
-  // Add this
+  static Future<void> setHasSeenOnboarding(bool value) async =>
+      _prefs.setBool(_hasSeenOnboarding, value);
+
+  static Future<void> setUserName(String name) async =>
+      _prefs.setString(_userName, name);
+
+  static Future<void> setProfileImage(String imageUrl) async =>
+      _prefs.setString(_profileImage, imageUrl);
 
   /// Get tokens
   static String? get authToken => _prefs.getString(_accessToken);
@@ -69,9 +76,16 @@ class AppStorage {
 
   static String? get channelDeliveryId => _prefs.getString(_channelDeliveryId);
 
+  static bool get hasSeenOnboarding =>
+      _prefs.getBool(_hasSeenOnboarding) ?? false;
+
   static String? get brochureCpId =>
       _prefs.getString(_brochureCpId); // Add this
   static String? get promoVideoId => _prefs.getString(_promoVideoId);
+
+  static String? get userName => _prefs.getString(_userName);
+
+  static String? get profileImage => _prefs.getString(_profileImage);
 
   /// Delete tokens
   static Future<void> deleteAuthToken() async => _prefs.remove(_accessToken);
@@ -90,6 +104,11 @@ class AppStorage {
 
   static Future<void> deletePromoVideoId() async =>
       _prefs.remove(_promoVideoId);
+
+  static Future<void> deleteUserName() async => _prefs.remove(_userName);
+
+  static Future<void> deleteProfileImage() async =>
+      _prefs.remove(_profileImage);
 
   // Add this
 

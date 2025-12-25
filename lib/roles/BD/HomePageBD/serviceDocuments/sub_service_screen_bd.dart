@@ -2,6 +2,7 @@ import 'package:e_digivault_org_app/core/constants/app_common_text.dart';
 import 'package:e_digivault_org_app/core/constants/theme.dart';
 import 'package:e_digivault_org_app/widgets/common_header.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SubServiceScreen extends StatefulWidget {
   final String mainServiceName;
@@ -104,14 +105,14 @@ class _SubServiceScreenState extends State<SubServiceScreen> {
       appBar: CommonHeader(title: 'ServiceDocs', showBack: true),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+          padding: EdgeInsets.symmetric(horizontal: 11, vertical: 8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Header Container
               Container(
                 width: double.infinity,
-                padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
                 decoration: BoxDecoration(
                   color: AppStyles.whiteColor,
                   borderRadius: BorderRadius.circular(8),
@@ -186,7 +187,7 @@ class _SubServiceScreenState extends State<SubServiceScreen> {
         return Expanded(
           flex: 1,
           child: Padding(
-            padding: EdgeInsets.only(right: index != items.length - 1 ? 14 : 0),
+            padding: EdgeInsets.only(right: index != items.length - 1 ? 12 : 0),
             child: _subServiceCard(
               subServiceName: items[index]["name"]!,
               subServiceId: items[index]["id"]!,
@@ -212,7 +213,17 @@ class _SubServiceScreenState extends State<SubServiceScreen> {
 
         // Add navigation to next screen here
         // For example: navigate to document requirements screen
+
+        context.push(
+          '/bd_document_list',
+          extra: {
+            'mainServiceName': widget.mainServiceName,
+            'subServiceName': subServiceName,
+            'subServiceId': subServiceId,
+          },
+        );
       },
+
       child: Container(
         height: 80,
         padding: EdgeInsets.symmetric(

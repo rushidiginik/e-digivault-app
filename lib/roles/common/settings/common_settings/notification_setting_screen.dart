@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-
 class NotificationSettingScreen extends StatefulWidget {
   const NotificationSettingScreen({super.key});
 
@@ -56,7 +55,7 @@ class _NotificationSettingScreenState extends State<NotificationSettingScreen> {
 
     return Scaffold(
       backgroundColor: AppStyles.whiteColor,
-      appBar: CommonAppBarWidget(title: "notifications"),
+      appBar: CommonAppBarWidget(title: "Notifications"),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 10),
