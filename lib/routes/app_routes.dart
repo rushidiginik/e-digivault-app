@@ -3,6 +3,7 @@ import 'package:e_digivault_org_app/roles/BD/HomePageBD/liveTracking/live_tracki
 import 'package:e_digivault_org_app/roles/BD/HomePageBD/serviceDocuments/service_doc_screen_bd.dart';
 import 'package:e_digivault_org_app/roles/BD/HomePageBD/videoPromo/video_promo_screen_bd.dart';
 import 'package:e_digivault_org_app/roles/MRA/dashboard/mra_dashboard_screen.dart';
+import 'package:e_digivault_org_app/roles/MRA/lead/lead_detail_mra/lead_detail_screen.dart';
 import 'package:e_digivault_org_app/roles/common/login/login_screen.dart';
 import 'package:e_digivault_org_app/roles/common/onboarding/onboarding_screen.dart';
 import 'package:e_digivault_org_app/roles/common/settings/common_settings/contact_support_screen.dart';

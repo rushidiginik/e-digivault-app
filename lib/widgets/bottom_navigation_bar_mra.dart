@@ -2,14 +2,14 @@ import 'package:e_digivault_org_app/core/constants/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class DashboardScreenMra extends StatefulWidget {
-  const DashboardScreenMra({super.key});
+class BottomNavigationBarMra extends StatefulWidget {
+  const BottomNavigationBarMra({super.key});
 
   @override
-  State<DashboardScreenMra> createState() => _DashboardScreenMraState();
+  State<BottomNavigationBarMra> createState() => _DashboardScreenMraState();
 }
 
-class _DashboardScreenMraState extends State<DashboardScreenMra> {
+class _DashboardScreenMraState extends State<BottomNavigationBarMra> {
   int _selectedIndex = 0;
 
   final List<String> _titles = ["home", "client", "lead", "payments", "settings"];
@@ -25,7 +25,7 @@ class _DashboardScreenMraState extends State<DashboardScreenMra> {
         // context.go('/mra/client');
         break;
       case 2:
-        // context.go('/mra/lead');
+        context.go('/lead_detail_screen_mra');
         break;
       case 3:
         // context.go('/mra/payments');

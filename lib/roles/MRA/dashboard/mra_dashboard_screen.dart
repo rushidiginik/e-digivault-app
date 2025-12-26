@@ -4,6 +4,8 @@ import 'package:e_digivault_org_app/widgets/bottom_navigation_bar_mra.dart';
 import 'package:e_digivault_org_app/widgets/common_app_bar_widget.dart';
 
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class MraDashboardScreen extends StatefulWidget {
   const MraDashboardScreen({super.key});
@@ -31,7 +33,7 @@ class _HomePageScreenState extends State<MraDashboardScreen> {
     return Scaffold(
       backgroundColor: AppStyles.whiteColor,
       appBar: CommonAppBarWidget(title: "dashboard", isBack: false),
-      bottomNavigationBar: DashboardScreenMra(),
+      bottomNavigationBar: BottomNavigationBarMra(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(12.0),
@@ -52,14 +54,14 @@ class _HomePageScreenState extends State<MraDashboardScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            textMedium(text: "Clients Sales Insights", fontSize: 18),
+            textMedium(text: "Clients Documents", fontSize: 14),
             const SizedBox(height: 12),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _insightItem(percent: 0.75, value: "56/140", label: "completed", progressColor: AppStyles.green2E, backgroundColor: AppStyles.lightGreenBC),
-                _insightItem(percent: 0.55, value: "24/140", label: "pending", progressColor: AppStyles.orangeF5, backgroundColor: AppStyles.lightOrangeF5),
-                _insightItem(percent: 0.25, value: "16/140", label: "rejected", progressColor: AppStyles.redColorC6, backgroundColor: AppStyles.lightRedED),
+                _insightItem(percent: 0.75, value: "56/140", label: "Completed", progressColor: AppStyles.green2E, backgroundColor: AppStyles.lightGreenBC),
+                _insightItem(percent: 0.55, value: "24/140", label: "Pending", progressColor: AppStyles.orangeF5, backgroundColor: AppStyles.lightOrangeF5),
+                _insightItem(percent: 0.25, value: "16/140", label: "Rejected", progressColor: AppStyles.redColorC6, backgroundColor: AppStyles.lightRedED),
               ],
             ),
           ],
@@ -79,14 +81,14 @@ class _HomePageScreenState extends State<MraDashboardScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            textMedium(text: "Clients Sales Insights", fontSize: 18),
+            textMedium(text: "Estimation", fontSize: 14),
             const SizedBox(height: 12),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _estimateConst(percent: 0.75, value: "56/140", label: "verified", progressColor: AppStyles.green2E, backgroundColor: AppStyles.lightGreenBC),
-                _estimateConst(percent: 0.55, value: "24/140", label: "pending", progressColor: AppStyles.orangeF5, backgroundColor: AppStyles.lightOrangeF5),
-                _estimateConst(percent: 0.25, value: "16/140", label: "rejected", progressColor: AppStyles.redColorC6, backgroundColor: AppStyles.lightRedED),
+                _estimateConst(percent: 0.75, value: "56/140", label: "Verified", progressColor: AppStyles.green2E, backgroundColor: AppStyles.lightGreenBC),
+                _estimateConst(percent: 0.55, value: "24/140", label: "Pending", progressColor: AppStyles.orangeF5, backgroundColor: AppStyles.lightOrangeF5),
+                _estimateConst(percent: 0.25, value: "16/140", label: "Rejected", progressColor: AppStyles.redColorC6, backgroundColor: AppStyles.lightRedED),
               ],
             ),
           ],
@@ -104,7 +106,7 @@ class _HomePageScreenState extends State<MraDashboardScreen> {
           children: [
             Icon(Icons.access_time_rounded, color: AppStyles.primaryColor),
             SizedBox(width: 8),
-            textSemiBold(text: "recent_activity_list", fontSize: 16),
+            textSemiBold(text: "Recent activity list", fontSize: 16),
           ],
         ),
         SizedBox(height: 12),
@@ -113,14 +115,11 @@ class _HomePageScreenState extends State<MraDashboardScreen> {
           child: DataTable(
             headingRowColor: WidgetStateProperty.all(AppStyles.lightBlueEB),
             headingRowHeight: 40,
-            border: TableBorder.all(
-              color: AppStyles.greyDE, // horizontal + vertical lines
-              width: 1,
-            ),
+            border: TableBorder.all(color: AppStyles.greyDE, width: 1),
             columns: [
-              DataColumn(label: textMedium(text: "document_title", fontSize: 12)),
-              DataColumn(label: textMedium(text: "date", fontSize: 12)),
-              DataColumn(label: textMedium(text: "status_badge", fontSize: 12)),
+              DataColumn(label: textMedium(text: "Document title", fontSize: 12)),
+              DataColumn(label: textMedium(text: "Date", fontSize: 12)),
+              DataColumn(label: textMedium(text: "Status badge", fontSize: 12)),
             ],
             rows: myData.map((row) {
               return _buildRow(row["client_name"], row["date"], row["document"], row["bgColor"], row["textColor"]);
@@ -134,15 +133,15 @@ class _HomePageScreenState extends State<MraDashboardScreen> {
   Widget _insightItem({required double percent, required String value, required String label, required Color progressColor, required Color backgroundColor}) {
     return Column(
       children: [
-        // CircularPercentIndicator(
-        //   radius: 35.0,
-        //   lineWidth: 12.0,
-        //   percent: percent,
-        //   backgroundColor: backgroundColor,
-        //   progressColor: progressColor,
-        //   circularStrokeCap: CircularStrokeCap.round,
-        //   center: const SizedBox.shrink(),
-        // ),
+        CircularPercentIndicator(
+          radius: 35.0,
+          lineWidth: 12.0,
+          percent: percent,
+          backgroundColor: backgroundColor,
+          progressColor: progressColor,
+          circularStrokeCap: CircularStrokeCap.round,
+          center: const SizedBox.shrink(),
+        ),
         const SizedBox(height: 10),
         textSemiBold(text: value, fontSize: 14),
         textRegular(text: label, fontSize: 12),
@@ -158,17 +157,17 @@ class _HomePageScreenState extends State<MraDashboardScreen> {
         children: [
           SizedBox(
             width: size.width * 0.15,
-            child: textRegular(text: label, fontSize: 14),
+            child: textRegular(text: label, fontSize: 14, textAlign: TextAlign.center),
           ),
-          // LinearPercentIndicator(
-          //   width: size.width * 0.50,
-          //   barRadius: Radius.circular(12),
-          //   lineHeight: 14,
-          //   percent: percent,
-          //   backgroundColor: backgroundColor,
-          //   progressColor: progressColor,
-          //   center: const SizedBox.shrink(),
-          // ),
+          LinearPercentIndicator(
+            width: size.width * 0.50,
+            barRadius: Radius.circular(12),
+            lineHeight: 14,
+            percent: percent,
+            backgroundColor: backgroundColor,
+            progressColor: progressColor,
+            center: const SizedBox.shrink(),
+          ),
           const SizedBox(height: 10),
           textMedium(text: value, fontSize: 14),
         ],
