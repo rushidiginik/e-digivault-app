@@ -2,6 +2,7 @@ import 'package:e_digivault_org_app/roles/BD/Dashboard/bd_dashboard_screen.dart'
 import 'package:e_digivault_org_app/roles/BD/HomePageBD/liveTracking/live_tracking_screen_bd.dart';
 import 'package:e_digivault_org_app/roles/BD/HomePageBD/serviceDocuments/service_doc_screen_bd.dart';
 import 'package:e_digivault_org_app/roles/BD/HomePageBD/videoPromo/video_promo_screen_bd.dart';
+import 'package:e_digivault_org_app/roles/BD/Lead/viewleads/view_lead_details_screen.dart';
 import 'package:e_digivault_org_app/roles/MRA/dashboard/mra_dashboard_screen.dart';
 import 'package:e_digivault_org_app/roles/MRA/lead/lead_detail_mra/lead_detail_screen.dart';
 import 'package:e_digivault_org_app/roles/common/login/login_screen.dart';
@@ -23,6 +24,7 @@ import '../roles/BD/HomePageBD/rateChart/rate_chart_screen_bd.dart';
 import '../roles/BD/HomePageBD/rateChart/rate_chart_time_line_screen.dart';
 import '../roles/BD/HomePageBD/serviceDocuments/document_list_screen_bd.dart';
 import '../roles/BD/HomePageBD/serviceDocuments/sub_service_screen_bd.dart';
+import '../roles/BD/Lead/viewleads/view_leads_screen_bd.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: '/splash_screen',
@@ -126,9 +128,17 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(
       path: '/view_leads_screen',
-      builder: (context, state) => DashboardBDScreen(),
+      builder: (context, state) => ViewLeadsScreen(),
     ),
 
+    GoRoute(
+      path: '/view_leads_details_screen',
+      builder: (context, state) {
+        final extra = state.extra as Map<String, dynamic>?;
+        final isPending = extra?['isPending'] ?? false;
+        return ViewLeadDetailsScreen(isPending: isPending);
+      },
+    ),
     //........
     GoRoute(
       path: '/home_page_mra_screen',
