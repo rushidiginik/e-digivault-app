@@ -32,9 +32,9 @@ class _TextContainerConst2State extends State<TextContainerConst2> {
           /// Label text
           Padding(
             padding: EdgeInsets.only(left: 2.w, bottom: 0.5.h),
-            child: textMedium(
+            child: textRegular(
               text: widget.labelTitle.tr(),
-              fontSize: 12.sp,
+              fontSize: 16.sp,
               fontColor: AppStyles.black1A, // responsive font size
             ),
           ),
@@ -52,7 +52,7 @@ class _TextContainerConst2State extends State<TextContainerConst2> {
               text: widget.value,
               fontColor: AppStyles.black1A,
 
-              fontSize: 12.sp, // responsive font size
+              fontSize: 16.sp, // responsive font size
               textAlign: TextAlign.start,
               maxLines: null, // unlimited
               textOverflow: TextOverflow.visible, // no cutting
