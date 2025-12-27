@@ -75,4 +75,11 @@ class ApiUrlList {
       "${AppConstants.baseUrl}settings/getUserManualDocumentUrl/";
   static String userManualVideo =
       "${AppConstants.baseUrl}settings/getUserManualVideoUrl/";
+
+  // Bd Dasboard Apis...
+
+  static String getAllBrochures =
+      "${AppConstants.baseUrl}brochure/getAllBrochures";
+  static String getAllPromoVideos =
+      "${AppConstants.baseUrl}promoVideo/getAllPromoVideos";
 }
