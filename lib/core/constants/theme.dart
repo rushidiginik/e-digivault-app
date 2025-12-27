@@ -119,6 +119,7 @@ class AppStyles {
   static const tealCF = Color(0xFF055160);
   static const grey29 = Color(0XFF212529);
   static const grey = Color(0XFF6F6F6F);
+  static const grey28 = Color(0XFF5D5D5D);
 
   static const green9F = Color(0xFF9FC740);
   static const orangeF3 = Color(0xFFF35E47);
