@@ -1,6 +1,5 @@
 class ImageConst {
   ImageConst._();
-
   /// PNG images
   static const String onboardingPNG = 'assets/images/png/onboarding.png';
   static const String backIconPNG = 'assets/images/png/back_icon.png';
@@ -162,6 +161,9 @@ class ImageConst {
   static const settingsicon = 'assets/images/svg/settingsiconcd.svg';
   static const successIcon = "assets/images/svg/successicon.svg";
   static const rejectIcon = "assets/images/svg/rejectIcon.svg";
+  static const gapIconAc = "assets/images/svg/gap_icon.svg";
+  static const moreIconAc = "assets/images/svg/more_icon.svg";
+  static const paymentIconAc = "assets/images/svg/payment_icon.svg";
 
   static const completed = "assets/images/svg/completed.svg";
   static const ongoing = "assets/images/svg/ongoing.svg";
@@ -173,4 +175,6 @@ class ImageConst {
   static const locationiconcd = "assets/images/svg/locationiconcd.svg";
   static const tasksiconcd = "assets/images/svg/tasksiconcd.svg";
   static const taskslisticoncd = "assets/images/svg/taskslisticoncd.svg";
+
+
 }

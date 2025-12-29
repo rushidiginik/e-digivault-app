@@ -18,6 +18,7 @@ import 'package:e_digivault_org_app/roles/common/settings/common_settings/user_m
 import 'package:e_digivault_org_app/roles/common/splash/splash_screen.dart';
 import 'package:go_router/go_router.dart';
 
+import '../roles/Accountant/DashBoardAc/ac_dashboard_screen.dart';
 import '../roles/BD/HomePageBD/brochure/brochure_screen_bd.dart';
 import '../roles/BD/HomePageBD/liveTracking/live_tracking_actions_screen.dart';
 import '../roles/BD/HomePageBD/rateChart/rate_chart_screen_bd.dart';
@@ -183,5 +184,12 @@ final GoRouter router = GoRouter(
         return UserManualDocScreen(isFromDoc: isFromDoc);
       },
     ),
+
+    // accountant
+    GoRoute(
+      path: '/ac_dashboard_screen',
+      builder: (context, state) => AcDashboardScreen(),
+    ),
+
   ],
 );
