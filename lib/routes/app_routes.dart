@@ -23,9 +23,12 @@ import '../roles/Accountant/UserAc/browse_users/business_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/client_ac/client_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/client_ac/overView_ac/overview_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/delivery_partner_screen_ac.dart';
-import '../roles/Accountant/UserAc/browse_users/incharge_screen_ac.dart';
-import '../roles/Accountant/UserAc/browse_users/mra_screen_ac.dart';
-import '../roles/Accountant/UserAc/browse_users/regional_head_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/incharge_ac/incharge_overview_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/incharge_ac/incharge_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/mra_ac/mra_overview_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/mra_ac/mra_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/regional_head_ac/regional_head_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/regional_head_ac/regionalhead_overview_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/state_head_ac/stateHead_overView_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/state_head_ac/state_head_screen_ac.dart';
 import '../roles/BD/HomePageBD/brochure/brochure_screen_bd.dart';
@@ -245,6 +248,30 @@ final GoRouter router = GoRouter(
       name: 'acStateHeadOverview',
       builder: (context, state) => StateheadOverviewScreenAc(),
     ),
+
+    GoRoute(
+      path: '/ac_RegionalHead_Overview_screen',
+      name: 'acRegionalHeadOverview',
+      builder: (context, state) =>  RegionalheadOverviewScreenAc(),
+    ),
+
+    GoRoute(
+      path: '/ac_Incharge_Overview_screen',
+      name: 'acInchargeOverview',
+      builder: (context, state) =>  InchargeOverviewScreenAc(),
+    ),
+
+ GoRoute(
+      path: '/ac_Mra_Overview_screen',
+      name: 'acMraOverview',
+      builder: (context, state) =>  MraOverviewScreenAc(),
+    ),
+
+
+
+
+
+
 
 
   ],

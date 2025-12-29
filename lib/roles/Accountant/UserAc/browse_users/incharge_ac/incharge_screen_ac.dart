@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../../../core/constants/theme.dart';
-import '../../../../widgets/client_page_container_helper_ac.dart';
-import '../../../../widgets/common_header.dart';
-import '../../../../widgets/common_search_bar_widget.dart';
+import '../../../../../core/constants/theme.dart';
+import '../../../../../widgets/client_page_container_helper_ac.dart';
+import '../../../../../widgets/common_header.dart';
+import '../../../../../widgets/common_search_bar_widget.dart';
 
 class InchargeScreenAc extends StatefulWidget {
   const InchargeScreenAc({super.key});
@@ -88,7 +89,9 @@ class _InchargeScreenAcState extends State<InchargeScreenAc>
       itemCount: 10,
       itemBuilder: (context, index) {
         return ClientPageContainerHelperAc(
-          onTap: () {},
+          onTap: () {
+            context.pushNamed('acInchargeOverview');
+          },
           idPrefix: "INCHARGE",
           idNumber: "567894",
           roleTitle: "Incharge",

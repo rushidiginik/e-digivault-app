@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../../../core/constants/theme.dart';
-import '../../../../widgets/client_page_container_helper_ac.dart';
-import '../../../../widgets/common_header.dart';
-import '../../../../widgets/common_search_bar_widget.dart';
+import '../../../../../core/constants/theme.dart';
+import '../../../../../widgets/client_page_container_helper_ac.dart';
+import '../../../../../widgets/common_header.dart';
+import '../../../../../widgets/common_search_bar_widget.dart';
 
 class RegionalHeadScreenAc extends StatefulWidget {
   const RegionalHeadScreenAc({super.key});
@@ -67,9 +68,7 @@ class _RegionalHeadScreenAcState extends State<RegionalHeadScreenAc>
                       ],
                     ),
                   ),
-
                   const SizedBox(height: 10),
-
                   //  actual list
                   _listSection(),
                 ],
@@ -88,15 +87,15 @@ class _RegionalHeadScreenAcState extends State<RegionalHeadScreenAc>
       itemCount: 10,
       itemBuilder: (context, index) {
         return ClientPageContainerHelperAc(
-          onTap: () {},
+          onTap: () {
+            context.pushNamed('acRegionalHeadOverview');
+          },
           idPrefix: "RH",
           idNumber: "567894",
           roleTitle: "Regional Head",
           progress: "70%",
           status: "Active",
         );
-
-
       },
     );
   }

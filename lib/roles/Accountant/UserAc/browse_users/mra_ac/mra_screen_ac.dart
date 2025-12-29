@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../../../core/constants/theme.dart';
-import '../../../../widgets/client_page_container_helper_ac.dart';
-import '../../../../widgets/common_header.dart';
-import '../../../../widgets/common_search_bar_widget.dart';
+import '../../../../../core/constants/theme.dart';
+import '../../../../../widgets/client_page_container_helper_ac.dart';
+import '../../../../../widgets/common_header.dart';
+import '../../../../../widgets/common_search_bar_widget.dart';
 
 class MraScreenAc extends StatefulWidget {
   const MraScreenAc({super.key});
@@ -29,7 +30,7 @@ class _MraScreenAcState extends State<MraScreenAc>
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child:  CommonSearchBar(),
+              child: CommonSearchBar(),
             ),
 
             const SizedBox(height: 10),
@@ -88,7 +89,9 @@ class _MraScreenAcState extends State<MraScreenAc>
       itemCount: 10,
       itemBuilder: (context, index) {
         return ClientPageContainerHelperAc(
-          onTap: () {},
+          onTap: () {
+            context.pushNamed('acMraOverview');
+          },
           idPrefix: "MRA",
           idNumber: "567894",
           roleTitle: "MRA",

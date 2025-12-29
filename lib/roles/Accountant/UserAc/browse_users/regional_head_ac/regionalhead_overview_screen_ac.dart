@@ -7,15 +7,16 @@ import '../../../../../../core/constants/image_const.dart';
 import '../../../../../../core/constants/theme.dart';
 import '../../../../../../widgets/common_header.dart';
 
-class StateheadOverviewScreenAc extends StatefulWidget {
-  const StateheadOverviewScreenAc({super.key});
+class RegionalheadOverviewScreenAc extends StatefulWidget {
+  const RegionalheadOverviewScreenAc({super.key});
 
   @override
-  State<StateheadOverviewScreenAc> createState() =>
-      _StateheadOverviewScreenAcState();
+  State<RegionalheadOverviewScreenAc> createState() =>
+      _RegionalheadOverviewScreenAcState();
 }
 
-class _StateheadOverviewScreenAcState extends State<StateheadOverviewScreenAc> {
+class _RegionalheadOverviewScreenAcState
+    extends State<RegionalheadOverviewScreenAc> {
   late Size size;
   final TextEditingController controller = TextEditingController();
 
@@ -26,7 +27,7 @@ class _StateheadOverviewScreenAcState extends State<StateheadOverviewScreenAc> {
       top: false,
       child: Scaffold(
         backgroundColor: AppStyles.whiteColor,
-        appBar: CommonHeader(title: 'State Head', showBack: true),
+        appBar: CommonHeader(title: 'Regional Head', showBack: true),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -48,7 +49,7 @@ class _StateheadOverviewScreenAcState extends State<StateheadOverviewScreenAc> {
               SizedBox(height: 6),
               ClientPageContainerHelperAc(
                 onTap: () {},
-                idPrefix: "SH",
+                idPrefix: "RH",
                 idNumber: "567894",
                 status: "Active",
                 phone: "89XXXXXX78",
@@ -133,7 +134,7 @@ class _StateheadOverviewScreenAcState extends State<StateheadOverviewScreenAc> {
             children: [
               _browseItem(
                 svgPath: ImageConst.flowestimateicon,
-                label: "Flow\nEstimate",
+                label: "Estimate",
                 onTap: () {
                   // Navigator.push(
                   //   context,
@@ -185,63 +186,6 @@ class _StateheadOverviewScreenAcState extends State<StateheadOverviewScreenAc> {
                   //   ),
                   //);
                   // Navigator.pushNamed(context, NavigatorConst.invoiceScreen, arguments: {"icons": Icons.receipt_long, "title": "invoice"});
-                },
-              ),
-
-              _browseItem(
-                svgPath: ImageConst.invoiceicon,
-                label: "invoice",
-                onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) {
-                  //       return InvoiceScreen(
-                  //         icons: Icons.receipt_long,
-                  //         title: "Client",
-                  //       );
-                  //     },
-                  //   ),
-                  //);
-                  // Navigator.pushNamed(context, NavigatorConst.invoiceScreen, arguments: {"icons": Icons.receipt_long, "title": "invoice"});
-                },
-              ),
-
-              _browseItem(
-                svgPath: ImageConst.estimateicon,
-                label: "estimates",
-                onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) {
-                  //       return InvoiceScreen(
-                  //         icons: Icons.receipt_long,
-                  //         title: "Client",
-                  //       );
-                  //     },
-                  //   ),
-                  // );
-                  // Navigator.pushNamed(context, NavigatorConst.invoiceScreen, arguments: {"icons": Icons.receipt_long, "title": "estimates"});
-                },
-              ),
-              _browseItem(
-                svgPath: ImageConst.proposalsicon,
-                label: "proposals",
-                onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) {
-                  //       return InvoiceScreen(
-                  //         icons: Icons.receipt_long,
-                  //         title: "Client",
-                  //       );
-                  //     },
-                  //   ),
-                  // );
-
-                  //  Navigator.pushNamed(context, NavigatorConst.invoiceScreen, arguments: {"icons": Icons.receipt_long, "title": "proposals"});
                 },
               ),
             ],

@@ -12,9 +12,9 @@ import '../../../widgets/coustom_circular_percent_painter.dart';
 import '../../../widgets/custom_progres_bar.dart';
 import 'browse_users/business_screen_ac.dart';
 import 'browse_users/delivery_partner_screen_ac.dart';
-import 'browse_users/incharge_screen_ac.dart';
-import 'browse_users/mra_screen_ac.dart';
-import 'browse_users/regional_head_screen_ac.dart';
+import 'browse_users/incharge_ac/incharge_screen_ac.dart';
+import 'browse_users/mra_ac/mra_screen_ac.dart';
+import 'browse_users/regional_head_ac/regional_head_screen_ac.dart';
 import 'browse_users/state_head_ac/state_head_screen_ac.dart';
 
 class UserScreenAc extends StatefulWidget {
