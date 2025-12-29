@@ -183,4 +183,5 @@ class ImageConst {
   static const flowestimateicon = "assets/images/svg/flow_estimates.svg";
   static const requesticone = "assets/images/svg/request_icon.svg";
   static const expenditureicon = "assets/images/svg/expenditure_.svg";
+  static const esttimicone = "assets/images/svg/est_tim.svg";
 }

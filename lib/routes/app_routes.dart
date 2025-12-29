@@ -16,12 +16,14 @@ import 'package:e_digivault_org_app/roles/common/settings/common_settings/settin
 import 'package:e_digivault_org_app/roles/common/settings/common_settings/user_manual/user_manual_doc_screen.dart';
 import 'package:e_digivault_org_app/roles/common/settings/common_settings/user_manual/user_manual_screen.dart';
 import 'package:e_digivault_org_app/roles/common/splash/splash_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../roles/Accountant/DashBoardAc/ac_dashboard_screen.dart';
 import '../roles/Accountant/UserAc/browse_users/business_ac/business_overview_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/business_ac/business_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/client_ac/client_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/client_ac/overView_ac/estimates_client_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/client_ac/overView_ac/overview_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/delivery_partner_ac/delivery_partner_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/delivery_partner_ac/dp_overview_screen_ac.dart';
@@ -277,6 +279,12 @@ final GoRouter router = GoRouter(
       path: '/ac_Business_Overview_screen',
       name: 'acBusinessOverview',
       builder: (context, state) => BusinessOverviewScreenAc(),
+    ),
+
+    GoRoute(
+      path: '/ac_Estimates_Client_screen',
+      name: 'acEstimatesClient',
+      builder: (context, state) => EstimatesClientScreenAc(),
     ),
   ],
 );

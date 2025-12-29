@@ -4,7 +4,6 @@ import '../../../../../core/constants/theme.dart';
 import '../../../../../widgets/client_page_container_helper_ac.dart';
 import '../../../../../widgets/common_header.dart';
 import '../../../../../widgets/common_search_bar_widget.dart';
-import 'overView_ac/overview_screen_ac.dart';
 
 class ClientScreenAc extends StatefulWidget {
   const ClientScreenAc({super.key});
@@ -32,13 +31,10 @@ class _ClientScreenAcState extends State<ClientScreenAc>
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: CommonSearchBar(),
             ),
-
             const SizedBox(height: 10),
-
             Expanded(
               child: ListView(
                 children: [
-                  //  Client header ab scroll karega
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Column(
@@ -68,9 +64,7 @@ class _ClientScreenAcState extends State<ClientScreenAc>
                       ],
                     ),
                   ),
-
                   const SizedBox(height: 10),
-
                   //  actual list
                   _listSection(),
                 ],
