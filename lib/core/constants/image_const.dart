@@ -1,5 +1,6 @@
 class ImageConst {
   ImageConst._();
+
   /// PNG images
   static const String onboardingPNG = 'assets/images/png/onboarding.png';
   static const String backIconPNG = 'assets/images/png/back_icon.png';
@@ -182,11 +183,4 @@ class ImageConst {
   static const flowestimateicon = "assets/images/svg/flow_estimates.svg";
   static const requesticone = "assets/images/svg/request_icon.svg";
   static const expenditureicon = "assets/images/svg/expenditure_.svg";
-
-
-
-
-
-
-
 }
