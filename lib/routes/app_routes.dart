@@ -19,10 +19,12 @@ import 'package:e_digivault_org_app/roles/common/splash/splash_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import '../roles/Accountant/DashBoardAc/ac_dashboard_screen.dart';
-import '../roles/Accountant/UserAc/browse_users/business_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/business_ac/business_overview_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/business_ac/business_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/client_ac/client_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/client_ac/overView_ac/overview_screen_ac.dart';
-import '../roles/Accountant/UserAc/browse_users/delivery_partner_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/delivery_partner_ac/delivery_partner_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/delivery_partner_ac/dp_overview_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/incharge_ac/incharge_overview_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/incharge_ac/incharge_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/mra_ac/mra_overview_screen_ac.dart';
@@ -252,27 +254,29 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/ac_RegionalHead_Overview_screen',
       name: 'acRegionalHeadOverview',
-      builder: (context, state) =>  RegionalheadOverviewScreenAc(),
+      builder: (context, state) => RegionalheadOverviewScreenAc(),
     ),
 
     GoRoute(
       path: '/ac_Incharge_Overview_screen',
       name: 'acInchargeOverview',
-      builder: (context, state) =>  InchargeOverviewScreenAc(),
+      builder: (context, state) => InchargeOverviewScreenAc(),
     ),
 
- GoRoute(
+    GoRoute(
       path: '/ac_Mra_Overview_screen',
       name: 'acMraOverview',
-      builder: (context, state) =>  MraOverviewScreenAc(),
+      builder: (context, state) => MraOverviewScreenAc(),
     ),
-
-
-
-
-
-
-
-
+    GoRoute(
+      path: '/ac_Dp_Overview_screen',
+      name: 'acDpOverview',
+      builder: (context, state) => DpOverviewScreenAc(),
+    ),
+    GoRoute(
+      path: '/ac_Business_Overview_screen',
+      name: 'acBusinessOverview',
+      builder: (context, state) => BusinessOverviewScreenAc(),
+    ),
   ],
 );

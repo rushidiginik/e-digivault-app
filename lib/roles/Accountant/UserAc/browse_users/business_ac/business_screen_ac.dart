@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../../../core/constants/theme.dart';
-import '../../../../widgets/client_page_container_helper_ac.dart';
-import '../../../../widgets/common_header.dart';
-import '../../../../widgets/common_search_bar_widget.dart';
+import '../../../../../core/constants/theme.dart';
+import '../../../../../widgets/client_page_container_helper_ac.dart';
+import '../../../../../widgets/common_header.dart';
+import '../../../../../widgets/common_search_bar_widget.dart';
 
-class DeliveryPartnerScreenAc extends StatefulWidget {
-  const DeliveryPartnerScreenAc({super.key});
+class BusinessScreenAc extends StatefulWidget {
+  const BusinessScreenAc({super.key});
 
   @override
-  State<DeliveryPartnerScreenAc> createState() =>
-      _DeliveryPartnerScreenAcState();
+  State<BusinessScreenAc> createState() => _BusinessScreenAcState();
 }
 
-class _DeliveryPartnerScreenAcState extends State<DeliveryPartnerScreenAc>
+class _BusinessScreenAcState extends State<BusinessScreenAc>
     with SingleTickerProviderStateMixin {
   late Size size;
   final TextEditingController controller = TextEditingController();
@@ -46,7 +46,7 @@ class _DeliveryPartnerScreenAcState extends State<DeliveryPartnerScreenAc>
                       children: [
                         Center(
                           child: const Text(
-                            "Delivery Partner",
+                            "Business Development",
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -58,7 +58,7 @@ class _DeliveryPartnerScreenAcState extends State<DeliveryPartnerScreenAc>
                         Center(
                           child: Container(
                             height: 3,
-                            width: 133,
+                            width: 180,
                             decoration: BoxDecoration(
                               color: Color(0xFF0052CC),
                               borderRadius: BorderRadius.circular(2),
@@ -89,14 +89,15 @@ class _DeliveryPartnerScreenAcState extends State<DeliveryPartnerScreenAc>
       itemCount: 10,
       itemBuilder: (context, index) {
         return ClientPageContainerHelperAc(
-          onTap: () {},
-          idPrefix: "CD",
+          onTap: () {
+            context.pushNamed('acBusinessOverview');
+          },
+          idPrefix: "BD",
           idNumber: "567894",
-          roleTitle: "Delivery Partner",
+          roleTitle: "Business Development",
           progress: "70%",
           status: "Active",
         );
-
       },
     );
   }

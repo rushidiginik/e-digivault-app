@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../../../core/constants/theme.dart';
-import '../../../../widgets/client_page_container_helper_ac.dart';
-import '../../../../widgets/common_header.dart';
-import '../../../../widgets/common_search_bar_widget.dart';
+import '../../../../../core/constants/theme.dart';
+import '../../../../../widgets/client_page_container_helper_ac.dart';
+import '../../../../../widgets/common_header.dart';
+import '../../../../../widgets/common_search_bar_widget.dart';
 
-class BusinessScreenAc extends StatefulWidget {
-  const BusinessScreenAc({super.key});
+class DeliveryPartnerScreenAc extends StatefulWidget {
+  const DeliveryPartnerScreenAc({super.key});
 
   @override
-  State<BusinessScreenAc> createState() => _BusinessScreenAcState();
+  State<DeliveryPartnerScreenAc> createState() =>
+      _DeliveryPartnerScreenAcState();
 }
 
-class _BusinessScreenAcState extends State<BusinessScreenAc>
+class _DeliveryPartnerScreenAcState extends State<DeliveryPartnerScreenAc>
     with SingleTickerProviderStateMixin {
   late Size size;
   final TextEditingController controller = TextEditingController();
@@ -45,7 +47,7 @@ class _BusinessScreenAcState extends State<BusinessScreenAc>
                       children: [
                         Center(
                           child: const Text(
-                            "Business Development",
+                            "Delivery Partner",
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -57,7 +59,7 @@ class _BusinessScreenAcState extends State<BusinessScreenAc>
                         Center(
                           child: Container(
                             height: 3,
-                            width: 180,
+                            width: 133,
                             decoration: BoxDecoration(
                               color: Color(0xFF0052CC),
                               borderRadius: BorderRadius.circular(2),
@@ -88,14 +90,15 @@ class _BusinessScreenAcState extends State<BusinessScreenAc>
       itemCount: 10,
       itemBuilder: (context, index) {
         return ClientPageContainerHelperAc(
-          onTap: () {},
-          idPrefix: "BD",
+          onTap: () {
+            context.pushNamed('acDpOverview');
+          },
+          idPrefix: "CD",
           idNumber: "567894",
-          roleTitle: "Business Development",
+          roleTitle: "Delivery Partner",
           progress: "70%",
           status: "Active",
         );
-
       },
     );
   }
