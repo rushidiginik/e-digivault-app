@@ -53,7 +53,8 @@ class _StateheadOverviewScreenAcState extends State<StateheadOverviewScreenAc> {
                 status: "Active",
                 phone: "89XXXXXX78",
                 email: "Rajesh@gmail.com",
-                createdBy: "Renukha @ ADMIN", // 🔹 HERE
+                createdBy: "Renukha @ ADMIN",
+                // 🔹 HERE
                 showDetailedCard: true,
               ),
               _topContainSection(),
@@ -108,7 +109,6 @@ class _StateheadOverviewScreenAcState extends State<StateheadOverviewScreenAc> {
           //     ],
           //   ),
           // ),
-
           const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -131,7 +131,6 @@ class _StateheadOverviewScreenAcState extends State<StateheadOverviewScreenAc> {
             padding: EdgeInsets.zero,
             childAspectRatio: 1.1,
             children: [
-
               _browseItem(
                 svgPath: ImageConst.flowestimateicon,
                 label: "Flow\nEstimate",
@@ -151,6 +150,62 @@ class _StateheadOverviewScreenAcState extends State<StateheadOverviewScreenAc> {
                 },
               ),
 
+              _browseItem(
+                svgPath: ImageConst.requesticone,
+                label: "Request",
+                onTap: () {
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) {
+                  //       return InvoiceScreen(
+                  //         icons: Icons.receipt_long,
+                  //         title: "Client",
+                  //       );
+                  //     },
+                  //   ),
+                  // );
+                  // Navigator.pushNamed(context, NavigatorConst.invoiceScreen, arguments: {"icons": Icons.receipt_long, "title": "estimates"});
+                },
+              ),
+
+              _browseItem(
+                svgPath: ImageConst.expenditureicon,
+                label: "Expenditure",
+                onTap: () {
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) {
+                  //       return InvoiceScreen(
+                  //         icons: Icons.receipt_long,
+                  //         title: "Client",
+                  //       );
+                  //     },
+                  //   ),
+                  //);
+                  // Navigator.pushNamed(context, NavigatorConst.invoiceScreen, arguments: {"icons": Icons.receipt_long, "title": "invoice"});
+                },
+              ),
+
+              _browseItem(
+                svgPath: ImageConst.invoiceicon,
+                label: "invoice",
+                onTap: () {
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) {
+                  //       return InvoiceScreen(
+                  //         icons: Icons.receipt_long,
+                  //         title: "Client",
+                  //       );
+                  //     },
+                  //   ),
+                  //);
+                  // Navigator.pushNamed(context, NavigatorConst.invoiceScreen, arguments: {"icons": Icons.receipt_long, "title": "invoice"});
+                },
+              ),
 
               _browseItem(
                 svgPath: ImageConst.estimateicon,
@@ -190,76 +245,38 @@ class _StateheadOverviewScreenAcState extends State<StateheadOverviewScreenAc> {
                 },
               ),
 
-              _browseItem(
-                svgPath: ImageConst.invoiceicon,
-                label: "invoice",
-                onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) {
-                  //       return InvoiceScreen(
-                  //         icons: Icons.receipt_long,
-                  //         title: "Client",
-                  //       );
-                  //     },
-                  //   ),
-                  //);
-
-                  // Navigator.pushNamed(context, NavigatorConst.invoiceScreen, arguments: {"icons": Icons.receipt_long, "title": "invoice"});
-                },
-              ),
-              _browseItem(
-                svgPath: ImageConst.serviceicon,
-                label: "Services",
-                onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) {
-                  //       return InvoiceScreen(
-                  //         icons: Icons.receipt_long,
-                  //         title: "Client",
-                  //       );
-                  //     },
-                  //   ),
-                  //);
-
-                  // Navigator.pushNamed(context, NavigatorConst.invoiceScreen, arguments: {"icons": Icons.receipt_long, "title": "invoice"});
-                },
-              ),
-              const SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Divider(color: const Color(0x1A000000), thickness: 2),
-              ),
             ],
+          ),
+          const SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Divider(color: const Color(0x1A000000), thickness: 2),
           ),
         ],
       ),
     );
   }
 
-  Widget _summaryItem({
-    required IconData icon,
-    required String value,
-    required String label,
-  }) {
-    return Row(
-      children: [
-        Icon(icon, color: AppStyles.primaryColor, size: 30),
-        const SizedBox(width: 8),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            textSemiBold(text: value, fontSize: 16),
-            textRegular(text: label.tr(), fontSize: 12),
-          ],
-        ),
-      ],
-    );
-  }
+  // Widget _summaryItem({
+  //   required IconData icon,
+  //   required String value,
+  //   required String label,
+  // }) {
+  //   return Row(
+  //     children: [
+  //       Icon(icon, color: AppStyles.primaryColor, size: 30),
+  //       const SizedBox(width: 8),
+  //       Column(
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         mainAxisAlignment: MainAxisAlignment.center,
+  //         children: [
+  //           textSemiBold(text: value, fontSize: 16),
+  //           textRegular(text: label.tr(), fontSize: 12),
+  //         ],
+  //       ),
+  //     ],
+  //   );
+  // }
 
   Widget _browseItem({
     required String svgPath,
