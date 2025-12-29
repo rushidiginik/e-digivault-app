@@ -25,7 +25,7 @@ class _AcDashboardScreenState extends State<AcDashboardScreen> {
   late Size size;
   int _selectedIndex = 0;
 
-  final List<String> _titles = ["Home", "User", "GAP", "Payments", "More"];
+  final List<String> _titles = ["Home", "User", "GAP", "Payments", "Setting"];
 
   // SVG icons similar to CD dashboard
   final List<Widget> _navIcons = [
@@ -33,7 +33,7 @@ class _AcDashboardScreenState extends State<AcDashboardScreen> {
     SvgPicture.asset(ImageConst.clienticon, height: 24, width: 24),
     SvgPicture.asset(ImageConst.gapIconAc, height: 24, width: 24),
     SvgPicture.asset(ImageConst.paymentIconAc, height: 24, width: 24),
-    SvgPicture.asset(ImageConst.moreIconAc, height: 24, width: 24),
+    SvgPicture.asset(ImageConst.settingsicon, height: 24, width: 24),
   ];
 
   // Add screens for all navigation items
@@ -47,7 +47,7 @@ class _AcDashboardScreenState extends State<AcDashboardScreen> {
       UserScreenAc(),
       GapScreenAc(),
       PaymentsScreenAc(),
-      MoreScreenAc(),
+      SettingScreen(),
     ];
   }
 

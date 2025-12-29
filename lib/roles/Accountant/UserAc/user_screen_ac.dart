@@ -1,6 +1,7 @@
-import 'package:e_digivault_org_app/roles/Accountant/UserAc/browse_users/client_screen_ac.dart';
+import 'package:e_digivault_org_app/roles/Accountant/UserAc/browse_users/client_ac/client_screen_ac.dart';
 import 'package:e_digivault_org_app/widgets/custom_card_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 import '../../../core/constants/app_common_text.dart';
@@ -14,7 +15,7 @@ import 'browse_users/delivery_partner_screen_ac.dart';
 import 'browse_users/incharge_screen_ac.dart';
 import 'browse_users/mra_screen_ac.dart';
 import 'browse_users/regional_head_screen_ac.dart';
-import 'browse_users/state_head_screen_ac.dart';
+import 'browse_users/state_head_ac/state_head_screen_ac.dart';
 
 class UserScreenAc extends StatefulWidget {
   const UserScreenAc({super.key});
@@ -289,10 +290,7 @@ class _UserScreenAcState extends State<UserScreenAc> {
               newCount: "12 New",
               newColor: Colors.green,
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ClientScreenAc()),
-                );
+                context.pushNamed('acClient');
               },
             ),
             CustomCardWidget(
@@ -301,10 +299,7 @@ class _UserScreenAcState extends State<UserScreenAc> {
               newCount: "0 New",
               newColor: Colors.green,
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => StateHeadScreenAc()),
-                );
+                context.pushNamed('acStateHead');
               },
             ),
             CustomCardWidget(
@@ -313,12 +308,7 @@ class _UserScreenAcState extends State<UserScreenAc> {
               newCount: "2 New",
               newColor: Colors.green,
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => RegionalHeadScreenAc(),
-                  ),
-                );
+                context.pushNamed('acRegionalHead');
               },
             ),
             CustomCardWidget(
@@ -327,10 +317,7 @@ class _UserScreenAcState extends State<UserScreenAc> {
               newCount: "3 New",
               newColor: Colors.green,
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => InchargeScreenAc()),
-                );
+                context.pushNamed('acIncharge');
               },
             ),
             CustomCardWidget(
@@ -339,10 +326,7 @@ class _UserScreenAcState extends State<UserScreenAc> {
               newCount: "2 New",
               newColor: Colors.green,
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MraScreenAc()),
-                );
+                context.pushNamed('acMra');
               },
             ),
             CustomCardWidget(
@@ -351,12 +335,7 @@ class _UserScreenAcState extends State<UserScreenAc> {
               newCount: "0 New",
               newColor: Colors.green,
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DeliveryPartnerScreenAc(),
-                  ),
-                );
+                context.pushNamed('acDeliveryPartner');
               },
             ),
             CustomCardWidget(
@@ -365,10 +344,7 @@ class _UserScreenAcState extends State<UserScreenAc> {
               newCount: "2 New",
               newColor: Colors.green,
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => BusinessScreenAc()),
-                );
+                context.pushNamed('acBusiness');
               },
             ),
           ],

@@ -175,6 +175,15 @@ class ImageConst {
   static const locationiconcd = "assets/images/svg/locationiconcd.svg";
   static const tasksiconcd = "assets/images/svg/tasksiconcd.svg";
   static const taskslisticoncd = "assets/images/svg/taskslisticoncd.svg";
+  static const serviceicon = "assets/images/svg/service_icon.svg";
+  static const invoiceicon = "assets/images/svg/invoice.svg";
+  static const proposalsicon = "assets/images/svg/proposals.svg";
+  static const estimateicon = "assets/images/svg/estimate_icon.svg";
+  static const flowestimateicon = "assets/images/svg/flow_estimates.svg";
+
+
+
+
 
 
 }

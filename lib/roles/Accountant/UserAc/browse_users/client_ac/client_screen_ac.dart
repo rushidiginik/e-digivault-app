@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import '../../../../../core/constants/theme.dart';
+import '../../../../../widgets/client_page_container_helper_ac.dart';
+import '../../../../../widgets/common_header.dart';
+import '../../../../../widgets/common_search_bar_widget.dart';
+import 'overView_ac/overview_screen_ac.dart';
 
-import '../../../../core/constants/theme.dart';
-import '../../../../widgets/client_page_container_helper_ac.dart';
-import '../../../../widgets/common_header.dart';
-import '../../../../widgets/common_search_bar_widget.dart';
-
-class StateHeadScreenAc extends StatefulWidget {
-  const StateHeadScreenAc({super.key});
+class ClientScreenAc extends StatefulWidget {
+  const ClientScreenAc({super.key});
 
   @override
-  State<StateHeadScreenAc> createState() => _StateHeadScreenAcState();
+  State<ClientScreenAc> createState() => _ClientScreenAcState();
 }
 
-class _StateHeadScreenAcState extends State<StateHeadScreenAc>
+class _ClientScreenAcState extends State<ClientScreenAc>
     with SingleTickerProviderStateMixin {
   late Size size;
   final TextEditingController controller = TextEditingController();
@@ -45,7 +46,7 @@ class _StateHeadScreenAcState extends State<StateHeadScreenAc>
                       children: [
                         Center(
                           child: const Text(
-                            "State Head",
+                            "Client",
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -57,7 +58,7 @@ class _StateHeadScreenAcState extends State<StateHeadScreenAc>
                         Center(
                           child: Container(
                             height: 3,
-                            width: 90,
+                            width: 60,
                             decoration: BoxDecoration(
                               color: Color(0xFF0052CC),
                               borderRadius: BorderRadius.circular(2),
@@ -88,10 +89,13 @@ class _StateHeadScreenAcState extends State<StateHeadScreenAc>
       itemCount: 10,
       itemBuilder: (context, index) {
         return ClientPageContainerHelperAc(
-          onTap: () {},
-          idPrefix: "SH",
+          onTap: () {
+            context.pushNamed('acOverview');
+            // Navigator.push(context, MaterialPageRoute(builder: (context) => OverviewScreenAc(),));
+          },
+          idPrefix: "CL",
           idNumber: "567894",
-          roleTitle: "State Head",
+          roleTitle: "Client",
           progress: "70%",
           status: "Active",
         );
