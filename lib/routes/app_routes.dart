@@ -24,6 +24,7 @@ import '../roles/Accountant/UserAc/browse_users/business_ac/business_overview_sc
 import '../roles/Accountant/UserAc/browse_users/business_ac/business_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/client_ac/client_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/client_ac/overView_ac/estimates_client_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/client_ac/overView_ac/eye_view_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/client_ac/overView_ac/overview_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/delivery_partner_ac/delivery_partner_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/delivery_partner_ac/dp_overview_screen_ac.dart';
@@ -281,10 +282,27 @@ final GoRouter router = GoRouter(
       builder: (context, state) => BusinessOverviewScreenAc(),
     ),
 
+
     GoRoute(
       path: '/ac_Estimates_Client_screen',
       name: 'acEstimatesClient',
       builder: (context, state) => EstimatesClientScreenAc(),
     ),
+
+
+    GoRoute(
+      path: '/ac_Eye_View_screen',
+      name: 'acEyeView',
+      builder: (context, state) {
+        final status = state.extra as String?;
+        return EyeViewScreenAc(status: status);
+      },
+    ),
+
+
+
+
+
+
   ],
 );

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../../../core/constants/app_common_text.dart';
 import '../../../../../../core/constants/image_const.dart';
@@ -24,12 +25,60 @@ class _EstimatesClientScreenAcState extends State<EstimatesClientScreenAc> {
   final List<Map<String, dynamic>> serviceData = [
     {
       "estimatesId": "Estimate#01",
-      "item": "E-katha Certificate",
-      "date": "11-09-2025",
-      "amount": "₹2,500",
-      "transactionId": "TXN12345",
-      "status": "Active",
+      "item": "GAP-0405",
+      "date": "08 Apr 2025",
+      "amount": "20,000/-",
+      "transactionId": "HJY4563867",
+      "status": "Paid",
       "action": "View",
+    },
+
+    {
+      "estimatesId": "Estimate#02",
+      "item": "GAP-0405",
+      "date": "08 Apr 2025",
+      "amount": "20,000/-",
+      "transactionId": "HJY4563867",
+      "status": "Pending",
+      "action": "-",
+    },
+    {
+      "estimatesId": "Estimate#03",
+      "item": "GAP-0405",
+      "date": "08 Apr 2025",
+      "amount": "20,000/-",
+      "transactionId": "HJY4563867",
+      "status": "Pending",
+      "action": "-",
+    },
+    {
+      "estimatesId": "Estimate#04",
+      "item": "GAP-0405",
+      "date": "08 Apr 2025",
+      "amount": "20,000/-",
+      "transactionId": "HJY4563867",
+      "status": "Pending",
+      "action": "-",
+    },
+
+    {
+      "estimatesId": "Estimate#05",
+      "item": "GAP-0405",
+      "date": "08 Apr 2025",
+      "amount": "20,000/-",
+      "transactionId": "HJY4563867",
+      "status": "Pending",
+      "action": "-",
+    },
+
+    {
+      "estimatesId": "Estimate#06",
+      "item": "GAP-0405",
+      "date": "08 Apr 2025",
+      "amount": "20,000/-",
+      "transactionId": "HJY4563867",
+      "status": "Pending",
+      "action": "-",
     },
   ];
 
@@ -191,7 +240,35 @@ class _EstimatesClientScreenAcState extends State<EstimatesClientScreenAc> {
                 DataCell(
                   SizedBox(
                     width: 80,
-                    child: textRegular(text: row["action"], fontSize: 14),
+                    child: row["action"] == "View"
+                        ? GestureDetector(
+                            onTap: () {
+                              context.pushNamed(
+                                'acEyeView',
+                                extra: row["status"], // "Paid" / "Pending"
+                              );
+                            },
+                            child:
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                              child: Container(
+                                height: 28,
+                                decoration: BoxDecoration(
+                                  color: AppStyles.lightBlueEB,
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: Center(
+                                  child: Icon(
+                                    Icons.remove_red_eye_outlined,
+                                    size: 16,
+                                    color: AppStyles.primaryColor,
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                    )
+                        : textRegular(text: "-", fontSize: 14),
                   ),
                 ),
               ],
