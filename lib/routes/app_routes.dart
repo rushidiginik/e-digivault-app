@@ -23,9 +23,14 @@ import '../roles/Accountant/DashBoardAc/ac_dashboard_screen.dart';
 import '../roles/Accountant/UserAc/browse_users/business_ac/business_overview_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/business_ac/business_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/client_ac/client_screen_ac.dart';
-import '../roles/Accountant/UserAc/browse_users/client_ac/overView_ac/estimates_client_screen_ac.dart';
-import '../roles/Accountant/UserAc/browse_users/client_ac/overView_ac/eye_view_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/client_ac/overView_ac/estimates_client_ac/estimates_client_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/client_ac/overView_ac/estimates_client_ac/eye_view_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/client_ac/overView_ac/invoice_client_ac/invoice_client_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/client_ac/overView_ac/invoice_client_ac/invoice_view_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/client_ac/overView_ac/overview_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/client_ac/overView_ac/proposals_client_ac/proposals_client_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/client_ac/overView_ac/proposals_client_ac/proposals_view_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/client_ac/overView_ac/services_client_ac/services_client_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/delivery_partner_ac/delivery_partner_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/delivery_partner_ac/dp_overview_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/incharge_ac/incharge_overview_screen_ac.dart';
@@ -282,13 +287,11 @@ final GoRouter router = GoRouter(
       builder: (context, state) => BusinessOverviewScreenAc(),
     ),
 
-
     GoRoute(
       path: '/ac_Estimates_Client_screen',
       name: 'acEstimatesClient',
       builder: (context, state) => EstimatesClientScreenAc(),
     ),
-
 
     GoRoute(
       path: '/ac_Eye_View_screen',
@@ -298,11 +301,38 @@ final GoRouter router = GoRouter(
         return EyeViewScreenAc(status: status);
       },
     ),
+    GoRoute(
+      path: '/ac_Proposals_View_screen',
+      name: 'acProposalsView',
+      builder: (context, state) {
+        final status = state.extra as String?;
+        return ProposalsViewScreenAc(status: status);
+      },
+    ),
+    GoRoute(
+      path: '/ac_Proposals_Client_screen',
+      name: 'acProposalsClient',
+      builder: (context, state) => ProposalsClientScreenAc(),
+    ),
 
+    GoRoute(
+      path: '/ac_Invoice_Client_screen',
+      name: 'acInvoiceClient',
+      builder: (context, state) => InvoiceClientScreenAc(),
+    ),
+    GoRoute(
+      path: '/ac_Services_Client_screen',
+      name: 'acServicesClient',
+      builder: (context, state) => ServicesClientScreenAc(),
+    ),
 
-
-
-
-
+    GoRoute(
+      path: '/ac_Invoice_View_screen',
+      name: 'acInvoiceView',
+      builder: (context, state) {
+        final status = state.extra as String?;
+        return InvoiceViewScreenAc(status: status);
+      },
+    ),
   ],
 );

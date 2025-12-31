@@ -136,58 +136,21 @@ class _OverviewScreenAcState extends State<OverviewScreenAc> {
                 svgPath: ImageConst.proposalsicon,
                 label: "proposals",
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) {
-                  //       return InvoiceScreen(
-                  //         icons: Icons.receipt_long,
-                  //         title: "Client",
-                  //       );
-                  //     },
-                  //   ),
-                  // );
-
-                  //  Navigator.pushNamed(context, NavigatorConst.invoiceScreen, arguments: {"icons": Icons.receipt_long, "title": "proposals"});
+                  context.pushNamed('acProposalsClient');
                 },
               ),
-
               _browseItem(
                 svgPath: ImageConst.invoiceicon,
                 label: "invoice",
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) {
-                  //       return InvoiceScreen(
-                  //         icons: Icons.receipt_long,
-                  //         title: "Client",
-                  //       );
-                  //     },
-                  //   ),
-                  //);
-
-                  // Navigator.pushNamed(context, NavigatorConst.invoiceScreen, arguments: {"icons": Icons.receipt_long, "title": "invoice"});
+                  context.pushNamed('acInvoiceClient');
                 },
               ),
               _browseItem(
                 svgPath: ImageConst.serviceicon,
                 label: "Services",
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) {
-                  //       return InvoiceScreen(
-                  //         icons: Icons.receipt_long,
-                  //         title: "Client",
-                  //       );
-                  //     },
-                  //   ),
-                  //);
-
-                  // Navigator.pushNamed(context, NavigatorConst.invoiceScreen, arguments: {"icons": Icons.receipt_long, "title": "invoice"});
+                  context.pushNamed('acServicesClient');
                 },
               ),
             ],
