@@ -16,8 +16,26 @@ import 'package:e_digivault_org_app/roles/common/settings/common_settings/settin
 import 'package:e_digivault_org_app/roles/common/settings/common_settings/user_manual/user_manual_doc_screen.dart';
 import 'package:e_digivault_org_app/roles/common/settings/common_settings/user_manual/user_manual_screen.dart';
 import 'package:e_digivault_org_app/roles/common/splash/splash_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../roles/Accountant/DashBoardAc/ac_dashboard_screen.dart';
+import '../roles/Accountant/UserAc/browse_users/business_ac/business_overview_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/business_ac/business_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/client_ac/client_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/client_ac/overView_ac/estimates_client_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/client_ac/overView_ac/eye_view_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/client_ac/overView_ac/overview_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/delivery_partner_ac/delivery_partner_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/delivery_partner_ac/dp_overview_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/incharge_ac/incharge_overview_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/incharge_ac/incharge_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/mra_ac/mra_overview_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/mra_ac/mra_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/regional_head_ac/regional_head_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/regional_head_ac/regionalhead_overview_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/state_head_ac/stateHead_overView_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/state_head_ac/state_head_screen_ac.dart';
 import '../roles/BD/HomePageBD/brochure/brochure_screen_bd.dart';
 import '../roles/BD/HomePageBD/liveTracking/live_tracking_actions_screen.dart';
 import '../roles/BD/HomePageBD/rateChart/rate_chart_screen_bd.dart';
@@ -183,5 +201,108 @@ final GoRouter router = GoRouter(
         return UserManualDocScreen(isFromDoc: isFromDoc);
       },
     ),
+
+    //////////////////////////////////////  accountant //////////////////////////////////////
+    GoRoute(
+      path: '/ac_dashboard_screen',
+      builder: (context, state) => AcDashboardScreen(),
+    ),
+    GoRoute(
+      path: '/ac_client_screen',
+      name: 'acClient',
+      builder: (context, state) => ClientScreenAc(),
+    ),
+    GoRoute(
+      path: '/ac_stateHead_screen',
+      name: 'acStateHead',
+      builder: (context, state) => StateHeadScreenAc(),
+    ),
+    GoRoute(
+      path: '/ac_regionalHead_screen',
+      name: 'acRegionalHead',
+      builder: (context, state) => RegionalHeadScreenAc(),
+    ),
+    GoRoute(
+      path: '/ac_incharge_screen',
+      name: 'acIncharge',
+      builder: (context, state) => InchargeScreenAc(),
+    ),
+    GoRoute(
+      path: '/ac_mra_screen',
+      name: 'acMra',
+      builder: (context, state) => MraScreenAc(),
+    ),
+    GoRoute(
+      path: '/ac_deliveryPartner_screen',
+      name: 'acDeliveryPartner',
+      builder: (context, state) => DeliveryPartnerScreenAc(),
+    ),
+    GoRoute(
+      path: '/ac_business_screen',
+      name: 'acBusiness',
+      builder: (context, state) => BusinessScreenAc(),
+    ),
+    GoRoute(
+      path: '/ac_overview_screen',
+      name: 'acOverview',
+      builder: (context, state) => OverviewScreenAc(),
+    ),
+
+    GoRoute(
+      path: '/ac_StateHead_Overview_screen',
+      name: 'acStateHeadOverview',
+      builder: (context, state) => StateheadOverviewScreenAc(),
+    ),
+
+    GoRoute(
+      path: '/ac_RegionalHead_Overview_screen',
+      name: 'acRegionalHeadOverview',
+      builder: (context, state) => RegionalheadOverviewScreenAc(),
+    ),
+
+    GoRoute(
+      path: '/ac_Incharge_Overview_screen',
+      name: 'acInchargeOverview',
+      builder: (context, state) => InchargeOverviewScreenAc(),
+    ),
+
+    GoRoute(
+      path: '/ac_Mra_Overview_screen',
+      name: 'acMraOverview',
+      builder: (context, state) => MraOverviewScreenAc(),
+    ),
+    GoRoute(
+      path: '/ac_Dp_Overview_screen',
+      name: 'acDpOverview',
+      builder: (context, state) => DpOverviewScreenAc(),
+    ),
+    GoRoute(
+      path: '/ac_Business_Overview_screen',
+      name: 'acBusinessOverview',
+      builder: (context, state) => BusinessOverviewScreenAc(),
+    ),
+
+
+    GoRoute(
+      path: '/ac_Estimates_Client_screen',
+      name: 'acEstimatesClient',
+      builder: (context, state) => EstimatesClientScreenAc(),
+    ),
+
+
+    GoRoute(
+      path: '/ac_Eye_View_screen',
+      name: 'acEyeView',
+      builder: (context, state) {
+        final status = state.extra as String?;
+        return EyeViewScreenAc(status: status);
+      },
+    ),
+
+
+
+
+
+
   ],
 );

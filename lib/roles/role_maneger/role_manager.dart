@@ -7,7 +7,6 @@ enum UserRole {
   regionalManager,
   incharge,
   marketReaserchAnalyst,
-
   advocate,
   accountant;
 
@@ -21,8 +20,6 @@ enum UserRole {
       case 'businessdevelopment':
       case 'businessdev':
         return UserRole.businessDevelopment;
-        
-        
 
       case 'statehead':
         return UserRole.stateHead;
@@ -73,6 +70,7 @@ class OrgRoleService {
   bool isDeliveryPartner = false;
   bool isAdvocate = false;
   bool isAccounts = false;
+
   // Reset and activate one role
   void activateRole(UserRole role) {
     resetRoles();

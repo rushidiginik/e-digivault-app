@@ -19,11 +19,13 @@ class AuthController extends GetxController {
   RxBool isOtpResend = false.obs;
   RxBool isOTPSenderTrue = true.obs;
   RxBool isSendOtp = false.obs;
+
   // bool isOtpResend = false;
 
   RxBool isVerifyOtpLoading = false.obs;
   LoginResponseModel? loginResponseModel;
   VerifyOtpModel? verifyOtpData;
+
   // bool isOTPSenderTrue = true;
 
   Future<void> sendOtp(String phone) async {
@@ -129,13 +131,12 @@ class AuthController extends GetxController {
         break;
       case UserRole.marketReaserchAnalyst:
         router.go('/home_page_mra_screen');
-
         break;
-
       case UserRole.advocate:
         // Get.offAllNamed(NavigatorConst.legalHeadDashboard);
         break;
       case UserRole.accountant:
+        router.go('/ac_dashboard_screen');
         // Get.offAllNamed(NavigatorConst.accountsDashboard);
         break;
     }

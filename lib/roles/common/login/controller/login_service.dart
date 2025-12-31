@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
-
 class AuthService {
   static const String loginUrl = ApiUrlList.loginUser;
   static const String verifyOtpUrl = ApiUrlList.verifyUserOtp;
