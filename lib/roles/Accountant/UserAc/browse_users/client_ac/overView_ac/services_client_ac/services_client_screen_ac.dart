@@ -194,7 +194,7 @@ class _ServicesClientScreenAcState extends State<ServicesClientScreenAc> {
             ),
             DataColumn(
               label: SizedBox(
-                width: 120,
+                width: 130,
                 child: textMedium(text: "Date", fontSize: 14),
               ),
             ),
@@ -206,7 +206,7 @@ class _ServicesClientScreenAcState extends State<ServicesClientScreenAc> {
             ),
             DataColumn(
               label: SizedBox(
-                width: 130,
+                width: 160,
                 child: textMedium(text: "Transaction Type", fontSize: 14),
               ),
             ),
@@ -429,62 +429,65 @@ class _ServicesClientScreenAcState extends State<ServicesClientScreenAc> {
     required String hint,
     required String? value,
     required List<String> items,
-    required ValueChanged<String?> onChanged,
+    required ValueChanged<String> onChanged,
   }) {
-    return SizedBox(
-      width: 160, // ← image jaisa hi
-      child: Container(
-        height: 40,
-        padding: const EdgeInsets.symmetric(horizontal: 12),
-        decoration: BoxDecoration(
-          border: Border.all(color: AppStyles.greyDE),
-          borderRadius: BorderRadius.circular(6),
-        ),
-        child: DropdownButtonHideUnderline(
-          child: DropdownButton<String>(
-            value: value,
-            hint: Text(
-              hint,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontSize: 14, color: AppStyles.grey66),
-            ),
-            icon: Icon(Icons.keyboard_arrow_down, color: AppStyles.grey66),
-            isExpanded: true,
+    return Builder(
+      builder: (context) {
+        return GestureDetector(
+          onTapDown: (TapDownDetails details) async {
+            final RenderBox overlay =
+                Overlay.of(context).context.findRenderObject() as RenderBox;
 
-            // THIS IS THE REAL FIX
-            selectedItemBuilder: (context) {
-              return items.map((e) {
-                return Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    e,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontSize: 14, color: AppStyles.grey66),
-                  ),
-                );
-              }).toList();
-            },
+            final selected = await showMenu<String>(
+              context: context,
+              position: RelativeRect.fromRect(
+                details.globalPosition & const Size(40, 40),
+                Offset.zero & overlay.size,
+              ),
+              items: items
+                  .map(
+                    (e) => PopupMenuItem<String>(
+                      value: e,
+                      height: 36, // item height control
+                      child: Text(e, style: const TextStyle(fontSize: 14)),
+                    ),
+                  )
+                  .toList(),
+            );
 
-            items: items
-                .map(
-                  (e) => DropdownMenuItem<String>(
-                    value: e,
+            if (selected != null) {
+              onChanged(selected);
+            }
+          },
+          child: SizedBox(
+            width: 160,
+            child: Container(
+              height: 40,
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              decoration: BoxDecoration(
+                border: Border.all(color: AppStyles.greyDE),
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
                     child: Text(
-                      e,
+                      value ?? hint,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontSize: 14),
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: value == null ? AppStyles.grey66 : Colors.black,
+                      ),
                     ),
                   ),
-                )
-                .toList(),
-
-            onChanged: onChanged,
+                  const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
+                ],
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
