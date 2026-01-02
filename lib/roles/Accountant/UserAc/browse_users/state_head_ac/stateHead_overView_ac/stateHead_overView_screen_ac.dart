@@ -23,7 +23,8 @@ class _StateheadOverviewScreenAcState extends State<StateheadOverviewScreenAc> {
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
-    return SafeArea(
+    return
+      SafeArea(
       top: false,
       child: Scaffold(
         backgroundColor: AppStyles.whiteColor,

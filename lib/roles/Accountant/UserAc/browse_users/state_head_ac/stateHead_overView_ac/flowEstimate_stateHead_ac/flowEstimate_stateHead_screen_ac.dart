@@ -30,13 +30,11 @@ class _FlowestimateStateHeadScreenAcState
   String? selectedService;
   bool isServiceOpen = false;
 
-  // ---- TRANSACTION TYPE ----
   final LayerLink _typeLink = LayerLink();
   OverlayEntry? _typeOverlay;
   String? selectedTransactionType;
   bool isTypeOpen = false;
 
-  // ---- TRANSACTION MODE ----
   final LayerLink _modeLink = LayerLink();
   OverlayEntry? _modeOverlay;
   String? selectedTransactionMode;
@@ -138,7 +136,6 @@ class _FlowestimateStateHeadScreenAcState
           ),
         ),
         Divider(height: 12, color: AppStyles.greyDE, indent: 14, endIndent: 14),
-
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
           child: SingleChildScrollView(
@@ -318,7 +315,7 @@ class _FlowestimateStateHeadScreenAcState
                         ? GestureDetector(
                             onTap: () {
                               context.pushNamed(
-                                'acServicesView',
+                                'acFlowEstimateView',
                                 extra: row["status"], // "Paid" / "Pending"
                               );
                             },

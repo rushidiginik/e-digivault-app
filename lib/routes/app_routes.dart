@@ -37,6 +37,7 @@ import '../roles/Accountant/UserAc/browse_users/mra_ac/mra_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/regional_head_ac/regional_head_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/regional_head_ac/regionalhead_overview_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/state_head_ac/stateHead_overView_ac/flowEstimate_stateHead_ac/flowEstimate_stateHead_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/state_head_ac/stateHead_overView_ac/flowEstimate_stateHead_ac/flowEstimate_view_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/state_head_ac/stateHead_overView_ac/stateHead_overView_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/state_head_ac/state_head_screen_ac.dart';
 import '../roles/BD/HomePageBD/brochure/brochure_screen_bd.dart';
@@ -339,7 +340,11 @@ final GoRouter router = GoRouter(
       builder: (context, state) => FlowestimateStateHeadScreenAc(),
     ),
 
-
+    GoRoute(
+      path: '/ac_FlowEstimate_View_screen',
+      name: 'acFlowEstimateView',
+      builder: (context, state) => FlowEstimateViewScreenAc(),
+    ),
 
 
 
