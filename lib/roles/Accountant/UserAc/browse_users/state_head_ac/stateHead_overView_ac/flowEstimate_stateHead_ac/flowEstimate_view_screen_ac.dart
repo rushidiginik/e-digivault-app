@@ -8,7 +8,9 @@ import '../../../../../../../widgets/client_page_container_helper_ac.dart';
 import '../../../../../../../widgets/common_header.dart';
 
 class FlowEstimateViewScreenAc extends StatefulWidget {
-  const FlowEstimateViewScreenAc({super.key});
+  final String status;
+
+  const FlowEstimateViewScreenAc({super.key, required this.status});
 
   @override
   State<FlowEstimateViewScreenAc> createState() =>
@@ -80,18 +82,10 @@ class _FlowEstimateViewScreenAcState extends State<FlowEstimateViewScreenAc> {
                       width: double.infinity,
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFFFE9CC),
                         borderRadius: BorderRadius.circular(30),
                       ),
                       alignment: Alignment.center,
-                      child: const Text(
-                        "Pending",
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Color(0xFFFF9800),
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
+                      child: _statusPill(),
                     ),
                     const SizedBox(height: 26),
                     Container(
@@ -599,6 +593,45 @@ class _FlowEstimateViewScreenAcState extends State<FlowEstimateViewScreenAc> {
       ),
     ),
   );
+
+  Widget _statusPill() {
+    Color bgColor;
+    Color textColor;
+
+    switch (widget.status) {
+      case "Approved":
+        bgColor = const Color(0xFFE6F4EA);
+        textColor = const Color(0xFF2E7D32);
+        break;
+
+      case "Rejected":
+        bgColor = const Color(0xFFFDECEA);
+        textColor = const Color(0xFFD32F2F);
+        break;
+
+      default: // Pending
+        bgColor = const Color(0xFFFFF3E0);
+        textColor = const Color(0xFFFF9800);
+    }
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      decoration: BoxDecoration(
+        color: bgColor,
+        borderRadius: BorderRadius.circular(30),
+      ),
+      alignment: Alignment.center,
+      child: Text(
+        widget.status,
+        style: TextStyle(
+          fontSize: 18,
+          color: textColor,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    );
+  }
 }
 
 /// ---------- PRICE CHIP ----------

@@ -341,10 +341,17 @@ final GoRouter router = GoRouter(
     ),
 
     GoRoute(
-      path: '/ac_FlowEstimate_View_screen',
       name: 'acFlowEstimateView',
-      builder: (context, state) => FlowEstimateViewScreenAc(),
+      path: '/ac-flow-estimate-view',
+      builder: (context, state) {
+        final status = state.extra as String;
+        return FlowEstimateViewScreenAc(
+          status: status, // Pending / Approved / Rejected
+        );
+      },
     ),
+
+
 
 
 

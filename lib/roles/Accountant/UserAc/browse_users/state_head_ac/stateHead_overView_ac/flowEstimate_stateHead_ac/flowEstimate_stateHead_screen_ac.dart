@@ -316,7 +316,7 @@ class _FlowestimateStateHeadScreenAcState
                             onTap: () {
                               context.pushNamed(
                                 'acFlowEstimateView',
-                                extra: row["status"], // "Paid" / "Pending"
+                                extra: row["status"], //  Pending / Approved / Rejected
                               );
                             },
                             child: Padding(
