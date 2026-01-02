@@ -189,11 +189,16 @@ class _FlowEstimateViewScreenAcState extends State<FlowEstimateViewScreenAc> {
                   ),
                 ),
               ),
-
               const SizedBox(height: 20),
-
               if (selectedTab == 0) _flowView(),
               if (selectedTab == 1) _tableView(),
+              if (widget.status == "Rejected") ...[
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: _viewRemarkButton(),
+                ),
+                const SizedBox(height: 20),
+              ],
             ],
           ),
         ),
@@ -201,7 +206,6 @@ class _FlowEstimateViewScreenAcState extends State<FlowEstimateViewScreenAc> {
     );
   }
 
-  /// ---------- TAB BUTTON ----------
   Widget _tabButton(String title, int index) {
     return Expanded(
       child: GestureDetector(
@@ -229,7 +233,6 @@ class _FlowEstimateViewScreenAcState extends State<FlowEstimateViewScreenAc> {
     );
   }
 
-  /// ---------- FLOW UI ----------
   Widget _flowView() {
     return Padding(
       padding: const EdgeInsets.only(left: 12, right: 20),
@@ -595,6 +598,55 @@ class _FlowEstimateViewScreenAcState extends State<FlowEstimateViewScreenAc> {
   );
 
   Widget _statusPill() {
+    if (widget.status == "Rejected") {
+      return Container(
+        width: double.infinity,
+        height: 44,
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        decoration: BoxDecoration(
+          color: const Color(0xFFF6DDDB), //  light red bg (image jaisa)
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 100.0),
+              child: Container(
+                width: 33,
+                height: 33,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                ),
+                child: const Center(
+                  child: Icon(
+                    Icons.error_outline,
+                    size: 28,
+                    color: Color(0xFFFF3B30),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(width: 8),
+            //  Rejected text
+            Padding(
+              padding: const EdgeInsets.only(right: 130.0),
+              child: const Text(
+                "Rejected",
+                style: TextStyle(
+                  color: Color(0xFFD32F2F),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    // बाकी status (Pending / Approved)
     Color bgColor;
     Color textColor;
 
@@ -603,13 +655,7 @@ class _FlowEstimateViewScreenAcState extends State<FlowEstimateViewScreenAc> {
         bgColor = const Color(0xFFE6F4EA);
         textColor = const Color(0xFF2E7D32);
         break;
-
-      case "Rejected":
-        bgColor = const Color(0xFFFDECEA);
-        textColor = const Color(0xFFD32F2F);
-        break;
-
-      default: // Pending
+      default:
         bgColor = const Color(0xFFFFF3E0);
         textColor = const Color(0xFFFF9800);
     }
@@ -625,9 +671,61 @@ class _FlowEstimateViewScreenAcState extends State<FlowEstimateViewScreenAc> {
       child: Text(
         widget.status,
         style: TextStyle(
-          fontSize: 18,
+          fontSize: 16,
           color: textColor,
           fontWeight: FontWeight.w600,
+        ),
+      ),
+    );
+  }
+
+  Widget _viewRemarkButton() {
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.only(right: 90.0, top: 30),
+        child: SizedBox(
+          width: 260,
+          height: 50,
+          child: ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF0052CC),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25),
+              ),
+              padding: const EdgeInsets.only(left: 8), //  START SPACE
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  width: 36,
+                  height: 36,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.remove_red_eye_outlined,
+                    color: Color(0xFF0052CC),
+                    size: 30,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Padding(
+                  padding: const EdgeInsets.only(left: 28.0),
+                  child: const Text(
+                    "View Remark",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
