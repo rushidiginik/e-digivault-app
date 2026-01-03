@@ -82,7 +82,8 @@ class RequestStatusCard extends StatelessWidget {
                       TextSpan(
                         text: email,
                         style: const TextStyle(
-                          color: Colors.green,
+                          color: const Color(0xFFA6E07A)
+                          ,
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
                         ),
@@ -90,9 +91,6 @@ class RequestStatusCard extends StatelessWidget {
                     ],
                   ),
                 ),
-
-                const SizedBox(height: 2),
-                Text("Job ID : $jobId"),
 
                 const SizedBox(height: 2),
                 Text("Job ID : $jobId"),

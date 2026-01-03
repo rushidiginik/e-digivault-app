@@ -22,8 +22,8 @@ class _RequestStateHeadScreenAcState extends State<RequestStateHeadScreenAc> {
 
   final Map<int, Map<String, dynamic>> statusConfig = {
     0: {"text": "Pending for Approval", "color": Colors.orange},
-    1: {"text": "Processed", "color": Colors.green},
-    2: {"text": "Rejected", "color": Colors.red},
+    1: {"text": "Processed", "color": const Color(0xFF50A000)},
+    2: {"text": "Rejected", "color": const Color(0xFFA00000)},
   };
 
   @override
@@ -88,7 +88,7 @@ class _RequestStateHeadScreenAcState extends State<RequestStateHeadScreenAc> {
             statusText: statusConfig[selectedTabIndex]!["text"],
             statusColor: statusConfig[selectedTabIndex]!["color"],
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 6),
           RequestStatusCard(
             name: "State Head-567653",
             phone: "89XXXXXX78",
