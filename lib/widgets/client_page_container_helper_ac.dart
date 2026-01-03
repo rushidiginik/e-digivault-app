@@ -5,7 +5,6 @@ import '../core/constants/image_const.dart';
 class ClientPageContainerHelperAc extends StatefulWidget {
   final VoidCallback onTap;
 
-  // 🔹 EXISTING (DO NOT CHANGE)
   final String idPrefix;
   final String idNumber;
   final String roleTitle;
@@ -13,7 +12,6 @@ class ClientPageContainerHelperAc extends StatefulWidget {
   final String status;
   final String? createdBy;
 
-  // 🔹 NEW (OPTIONAL – DB STYLE CARD)
   final String? phone;
   final String? email;
   final bool showDetailedCard; //  switch

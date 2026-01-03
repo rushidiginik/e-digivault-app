@@ -39,6 +39,7 @@ import '../roles/Accountant/UserAc/browse_users/regional_head_ac/regionalhead_ov
 import '../roles/Accountant/UserAc/browse_users/state_head_ac/stateHead_overView_ac/flowEstimate_stateHead_ac/flowEstimate_stateHead_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/state_head_ac/stateHead_overView_ac/flowEstimate_stateHead_ac/flowEstimate_view_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/state_head_ac/stateHead_overView_ac/request_stateHead_ac/request_stateHead_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/state_head_ac/stateHead_overView_ac/request_stateHead_ac/request_view_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/state_head_ac/stateHead_overView_ac/stateHead_overView_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/state_head_ac/state_head_screen_ac.dart';
 import '../roles/BD/HomePageBD/brochure/brochure_screen_bd.dart';
@@ -351,6 +352,20 @@ final GoRouter router = GoRouter(
         );
       },
     ),
+
+ GoRoute(
+      name: 'acRequestView',
+      path: '/ac-Request-view',
+      builder: (context, state) {
+        final status = state.extra as String;
+        return RequestViewScreenAc(
+          status: status, // Pending / Approved / Rejected
+        );
+      },
+    ),
+
+
+
 
 
     GoRoute(

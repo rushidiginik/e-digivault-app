@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../../../../core/constants/image_const.dart';
 import '../../../../../../../core/constants/theme.dart';
 import '../../../../../../../widgets/common_header.dart';
@@ -38,9 +39,7 @@ class _RequestStateHeadScreenAcState extends State<RequestStateHeadScreenAc> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: CommonSearchBar(),
           ),
-
           const SizedBox(height: 10),
-
           Padding(
             padding: const EdgeInsets.only(left: 20, top: 10),
             child: Row(
@@ -66,8 +65,6 @@ class _RequestStateHeadScreenAcState extends State<RequestStateHeadScreenAc> {
             child: const Divider(thickness: 1),
           ),
           const SizedBox(height: 12),
-
-          /// 🔹 TAB BAR
           pendingCapsuleTabBar(
             tabs: tabs,
             selectedIndex: selectedTabIndex,
@@ -78,26 +75,34 @@ class _RequestStateHeadScreenAcState extends State<RequestStateHeadScreenAc> {
             },
           ),
           SizedBox(height: 10),
-          RequestStatusCard(
-            name: "State Head-567653",
-            phone: "89XXXXXX78",
-            email: "Rajeshn@gmail.com",
-            jobId: "JB-236754",
-            reqAmount: "14A",
-            task: "Online Application",
-            statusText: statusConfig[selectedTabIndex]!["text"],
-            statusColor: statusConfig[selectedTabIndex]!["color"],
-          ),
-          SizedBox(height: 6),
-          RequestStatusCard(
-            name: "State Head-567653",
-            phone: "89XXXXXX78",
-            email: "Rajeshn@gmail.com",
-            jobId: "JB-236754",
-            reqAmount: "14A",
-            task: "Online Application",
-            statusText: statusConfig[selectedTabIndex]!["text"],
-            statusColor: statusConfig[selectedTabIndex]!["color"],
+          GestureDetector(
+            onTap: () {
+              context.pushNamed('acRequestView', extra: tabs[selectedTabIndex]);
+            },
+            child: Column(
+              children: [
+                RequestStatusCard(
+                  name: "State Head-567653",
+                  phone: "89XXXXXX78",
+                  email: "Rajeshn@gmail.com",
+                  jobId: "JB-236754",
+                  reqAmount: "14A",
+                  task: "Online Application",
+                  statusText: statusConfig[selectedTabIndex]!["text"],
+                  statusColor: statusConfig[selectedTabIndex]!["color"],
+                ),
+                RequestStatusCard(
+                  name: "State Head-567653",
+                  phone: "89XXXXXX78",
+                  email: "Rajeshn@gmail.com",
+                  jobId: "JB-236754",
+                  reqAmount: "14A",
+                  task: "Online Application",
+                  statusText: statusConfig[selectedTabIndex]!["text"],
+                  statusColor: statusConfig[selectedTabIndex]!["color"],
+                ),
+              ],
+            ),
           ),
         ],
       ),
