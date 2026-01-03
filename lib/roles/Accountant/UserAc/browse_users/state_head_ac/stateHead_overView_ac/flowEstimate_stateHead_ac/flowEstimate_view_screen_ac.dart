@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
-
 import '../../../../../../../core/constants/image_const.dart';
 import '../../../../../../../core/constants/theme.dart';
 import '../../../../../../../widgets/client_page_container_helper_ac.dart';
@@ -19,6 +18,66 @@ class FlowEstimateViewScreenAc extends StatefulWidget {
 
 class _FlowEstimateViewScreenAcState extends State<FlowEstimateViewScreenAc> {
   int selectedTab = 0; // 0 = Flow , 1 = Table View
+
+  void _showRejectedDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Align(
+                  alignment: Alignment.topRight,
+                  child: GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: const Icon(Icons.close, size: 22),
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 18,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFFDEAEA),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: const Text(
+                    "Rejected",
+                    style: TextStyle(
+                      color: Color(0xFFC62828),
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 14),
+                const Text(
+                  '"Your file Estimation has been Rejected\n'
+                  'Due insufficient step process Detail"',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.black54,
+                    height: 1.4,
+                  ),
+                ),
+                const SizedBox(height: 8),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -216,7 +275,7 @@ class _FlowEstimateViewScreenAcState extends State<FlowEstimateViewScreenAc> {
             color: selectedTab == index
                 ? const Color(0xFF0052CC)
                 : Colors.transparent,
-            borderRadius: BorderRadius.circular(24),
+            borderRadius: BorderRadius.circular(8),
           ),
           alignment: Alignment.center,
           child: Text(
@@ -687,7 +746,9 @@ class _FlowEstimateViewScreenAcState extends State<FlowEstimateViewScreenAc> {
           width: 260,
           height: 50,
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              _showRejectedDialog(context);
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF0052CC),
               shape: RoundedRectangleBorder(

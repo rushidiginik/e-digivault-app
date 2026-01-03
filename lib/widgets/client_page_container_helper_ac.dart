@@ -164,7 +164,8 @@ class _ClientPageContainerHelperAcState
                         ),
                       ),
                     ],
-                    if (widget.showDetailedCard && widget.createdBy != null) ...[
+                    if (widget.showDetailedCard &&
+                        widget.createdBy != null) ...[
                       const SizedBox(height: 4),
                       RichText(
                         text: TextSpan(
@@ -189,12 +190,6 @@ class _ClientPageContainerHelperAcState
                         ),
                       ),
                     ],
-
-
-
-
-
-
 
                     const SizedBox(height: 6),
                     Row(
