@@ -155,61 +155,25 @@ class _StateheadOverviewScreenAcState extends State<StateheadOverviewScreenAc> {
                   context.pushNamed('acExprenditureStateHead');
                 },
               ),
-
               _browseItem(
                 svgPath: ImageConst.invoiceicon,
                 label: "invoice",
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) {
-                  //       return InvoiceScreen(
-                  //         icons: Icons.receipt_long,
-                  //         title: "Client",
-                  //       );
-                  //     },
-                  //   ),
-                  //);
-                  // Navigator.pushNamed(context, NavigatorConst.invoiceScreen, arguments: {"icons": Icons.receipt_long, "title": "invoice"});
+                  context.pushNamed('acInvoceStatehead');
                 },
               ),
-
               _browseItem(
                 svgPath: ImageConst.estimateicon,
                 label: "estimates",
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) {
-                  //       return InvoiceScreen(
-                  //         icons: Icons.receipt_long,
-                  //         title: "Client",
-                  //       );
-                  //     },
-                  //   ),
-                  // );
-                  // Navigator.pushNamed(context, NavigatorConst.invoiceScreen, arguments: {"icons": Icons.receipt_long, "title": "estimates"});
+                  context.pushNamed('acEstimateStatehead');
                 },
               ),
               _browseItem(
                 svgPath: ImageConst.proposalsicon,
                 label: "proposals",
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) {
-                  //       return InvoiceScreen(
-                  //         icons: Icons.receipt_long,
-                  //         title: "Client",
-                  //       );
-                  //     },
-                  //   ),
-                  // );
-
-                  //  Navigator.pushNamed(context, NavigatorConst.invoiceScreen, arguments: {"icons": Icons.receipt_long, "title": "proposals"});
+                  context.pushNamed('acProposalsStatehead');
                 },
               ),
             ],

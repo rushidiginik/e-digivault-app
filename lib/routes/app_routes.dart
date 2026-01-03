@@ -36,10 +36,16 @@ import '../roles/Accountant/UserAc/browse_users/mra_ac/mra_overview_screen_ac.da
 import '../roles/Accountant/UserAc/browse_users/mra_ac/mra_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/regional_head_ac/regional_head_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/regional_head_ac/regionalhead_overview_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/state_head_ac/stateHead_overView_ac/estimates_stateHead_ac/estimate_stateHead_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/state_head_ac/stateHead_overView_ac/estimates_stateHead_ac/estimate_stateHead_view_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/state_head_ac/stateHead_overView_ac/expenditure_stateHead_ac/exprenditure_stateHead_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/state_head_ac/stateHead_overView_ac/expenditure_stateHead_ac/exprenditure_view_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/state_head_ac/stateHead_overView_ac/flowEstimate_stateHead_ac/flowEstimate_stateHead_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/state_head_ac/stateHead_overView_ac/flowEstimate_stateHead_ac/flowEstimate_view_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/state_head_ac/stateHead_overView_ac/invoce_stateHead_ac/invoce_stateHead_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/state_head_ac/stateHead_overView_ac/invoce_stateHead_ac/invoice_stateHead_view_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/state_head_ac/stateHead_overView_ac/proposals_stateHead_ac/proposals_stateHead_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/state_head_ac/stateHead_overView_ac/proposals_stateHead_ac/proposals_stateHead_view_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/state_head_ac/stateHead_overView_ac/request_stateHead_ac/request_stateHead_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/state_head_ac/stateHead_overView_ac/request_stateHead_ac/request_view_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/state_head_ac/stateHead_overView_ac/stateHead_overView_screen_ac.dart';
@@ -378,12 +384,57 @@ final GoRouter router = GoRouter(
       builder: (context, state) => ExprenditureStateHeadScreenAc(),
     ),
 
-
-     GoRoute(
+    GoRoute(
       path: '/ac_Exprenditure_View_screen',
       name: 'acExprenditureView',
       builder: (context, state) => ExprenditureViewScreenAc(),
     ),
+
+    GoRoute(
+      path: '/ac_Invoce_Statehead_screen',
+      name: 'acInvoceStatehead',
+      builder: (context, state) => InvoceStateheadScreenAc(),
+    ),
+
+    GoRoute(
+      path: '/ac_Invoice_Statehead_View_screen',
+      name: 'acInvoiceStateheadView',
+      builder: (context, state) => InvoiceStateheadViewScreenAc(),
+    ),
+
+    GoRoute(
+      path: '/ac_Estimate_Statehead_screen',
+      name: 'acEstimateStatehead',
+      builder: (context, state) => EstimateStateheadScreenAc(),
+    ),
+
+
+GoRoute(
+      path: '/ac_Proposals_Statehead_screen',
+      name: 'acProposalsStatehead',
+      builder: (context, state) => ProposalsStateheadScreenAc(),
+    ),
+
+
+    GoRoute(
+      path: '/ac_Estimate_Statehead_View_screen',
+      name: 'acEstimateStateheadView',
+      builder: (context, state) => EstimateStateheadViewScreenAc(),
+    ),
+
+     GoRoute(
+      path: '/ac_Proposals_Statehead_View_screen',
+      name: 'acProposalsStateheadView',
+      builder: (context, state) => ProposalsStateheadViewScreenAc(),
+    ),
+
+
+
+
+
+
+
+
 
 
 
