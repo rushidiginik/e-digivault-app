@@ -408,13 +408,11 @@ final GoRouter router = GoRouter(
       builder: (context, state) => EstimateStateheadScreenAc(),
     ),
 
-
-GoRoute(
+    GoRoute(
       path: '/ac_Proposals_Statehead_screen',
       name: 'acProposalsStatehead',
       builder: (context, state) => ProposalsStateheadScreenAc(),
     ),
-
 
     GoRoute(
       path: '/ac_Estimate_Statehead_View_screen',
@@ -422,23 +420,10 @@ GoRoute(
       builder: (context, state) => EstimateStateheadViewScreenAc(),
     ),
 
-     GoRoute(
+    GoRoute(
       path: '/ac_Proposals_Statehead_View_screen',
       name: 'acProposalsStateheadView',
       builder: (context, state) => ProposalsStateheadViewScreenAc(),
     ),
-
-
-
-
-
-
-
-
-
-
-
-
-
   ],
 );
