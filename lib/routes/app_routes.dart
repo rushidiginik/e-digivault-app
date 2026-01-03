@@ -36,6 +36,8 @@ import '../roles/Accountant/UserAc/browse_users/mra_ac/mra_overview_screen_ac.da
 import '../roles/Accountant/UserAc/browse_users/mra_ac/mra_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/regional_head_ac/regional_head_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/regional_head_ac/regionalhead_overview_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/state_head_ac/stateHead_overView_ac/expenditure_stateHead_ac/exprenditure_stateHead_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/state_head_ac/stateHead_overView_ac/expenditure_stateHead_ac/exprenditure_view_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/state_head_ac/stateHead_overView_ac/flowEstimate_stateHead_ac/flowEstimate_stateHead_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/state_head_ac/stateHead_overView_ac/flowEstimate_stateHead_ac/flowEstimate_view_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/state_head_ac/stateHead_overView_ac/request_stateHead_ac/request_stateHead_screen_ac.dart';
@@ -353,7 +355,7 @@ final GoRouter router = GoRouter(
       },
     ),
 
- GoRoute(
+    GoRoute(
       name: 'acRequestView',
       path: '/ac-Request-view',
       builder: (context, state) {
@@ -364,15 +366,25 @@ final GoRouter router = GoRouter(
       },
     ),
 
-
-
-
-
     GoRoute(
       path: '/ac_Request_StateHead_screen',
       name: 'acRequestStateHead',
       builder: (context, state) => RequestStateHeadScreenAc(),
     ),
+
+    GoRoute(
+      path: '/ac_Exprenditure_StateHead_screen',
+      name: 'acExprenditureStateHead',
+      builder: (context, state) => ExprenditureStateHeadScreenAc(),
+    ),
+
+
+     GoRoute(
+      path: '/ac_Exprenditure_View_screen',
+      name: 'acExprenditureView',
+      builder: (context, state) => ExprenditureViewScreenAc(),
+    ),
+
 
 
 
