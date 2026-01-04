@@ -151,18 +151,7 @@ class _MraOverviewScreenAcState extends State<MraOverviewScreenAc> {
                 svgPath: ImageConst.expenditureicon,
                 label: "Expenditure",
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) {
-                  //       return InvoiceScreen(
-                  //         icons: Icons.receipt_long,
-                  //         title: "Client",
-                  //       );
-                  //     },
-                  //   ),
-                  //);
-                  // Navigator.pushNamed(context, NavigatorConst.invoiceScreen, arguments: {"icons": Icons.receipt_long, "title": "invoice"});
+                  context.pushNamed('acExpenditureMra');
                 },
               ),
             ],

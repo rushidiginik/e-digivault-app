@@ -19,6 +19,12 @@ import 'package:go_router/go_router.dart';
 import '../roles/Accountant/DashBoardAc/ac_dashboard_screen.dart';
 import '../roles/Accountant/UserAc/browse_users/business_ac/business_overview_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/business_ac/business_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/business_ac/estimates_business_ac/estimates_business_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/business_ac/estimates_business_ac/estimates_business_view_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/business_ac/invoice_business_ac/inovice_business_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/business_ac/invoice_business_ac/inovice_business_view_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/business_ac/proposals_business_ac/proposals_business_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/business_ac/proposals_business_ac/proposals_business_view_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/client_ac/client_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/client_ac/overView_ac/estimates_client_ac/estimates_client_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/client_ac/overView_ac/estimates_client_ac/eye_view_screen_ac.dart';
@@ -30,6 +36,12 @@ import '../roles/Accountant/UserAc/browse_users/client_ac/overView_ac/proposals_
 import '../roles/Accountant/UserAc/browse_users/client_ac/overView_ac/services_client_ac/services_client_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/delivery_partner_ac/delivery_partner_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/delivery_partner_ac/dp_overview_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/delivery_partner_ac/estimate_dp_ac/estimate_dp_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/delivery_partner_ac/estimate_dp_ac/estimate_dp_view_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/delivery_partner_ac/expenditure_dp_ac/expenditure_dp_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/delivery_partner_ac/expenditure_dp_ac/expenditure_dp_view_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/delivery_partner_ac/request_dp_ac/request_dp_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/delivery_partner_ac/request_dp_ac/request_dp_view_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/incharge_ac/estimate_incharge_ac/estimate_incharge_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/incharge_ac/estimate_incharge_ac/estimate_incharge_view_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/incharge_ac/expenditure_incharge_ac/expenditure_incharge_screen_ac.dart';
@@ -40,6 +52,8 @@ import '../roles/Accountant/UserAc/browse_users/incharge_ac/request_inchage_ac/r
 import '../roles/Accountant/UserAc/browse_users/incharge_ac/request_inchage_ac/request_incharge_view_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/mra_ac/estimate_mra_screen_ac/estimate_mra_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/mra_ac/estimate_mra_screen_ac/estimate_mra_view_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/mra_ac/expenditure_mra_ac/expenditure_mra_screen_ac.dart';
+import '../roles/Accountant/UserAc/browse_users/mra_ac/expenditure_mra_ac/expenditure_mra_view_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/mra_ac/mra_overview_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/mra_ac/mra_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/mra_ac/request_mra_ac/request_mra_screen_ac.dart';
@@ -432,7 +446,7 @@ final GoRouter router = GoRouter(
       },
     ),
 
-GoRoute(
+    GoRoute(
       name: 'acEstimateMraView',
       path: '/ac-Estimate-Mra-view',
       builder: (context, state) {
@@ -443,7 +457,7 @@ GoRoute(
       },
     ),
 
-GoRoute(
+    GoRoute(
       name: 'acRequestMraView',
       path: '/ac-Request-Mra-view',
       builder: (context, state) {
@@ -454,21 +468,27 @@ GoRoute(
       },
     ),
 
+    GoRoute(
+      name: 'acEstimateDpView',
+      path: '/ac-Estimate-Dp-view',
+      builder: (context, state) {
+        final status = state.extra as String;
+        return EstimateDpViewScreenAc(
+          status: status, // Pending / Approved / Rejected
+        );
+      },
+    ),
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    GoRoute(
+      name: 'acRequestDpView',
+      path: '/ac-Request-Dp-view',
+      builder: (context, state) {
+        final status = state.extra as String;
+        return RequestDpViewScreenAc(
+          status: status, // Pending / Approved / Rejected
+        );
+      },
+    ),
 
     GoRoute(
       path: '/ac-Expenditure-Incharge-view',
@@ -494,35 +514,95 @@ GoRoute(
       builder: (context, state) => RequestInchargeScreenAc(),
     ),
 
-GoRoute(
+    GoRoute(
       path: '/ac_Expenditure_Incharge_screen',
       name: 'acExpenditureIncharge',
       builder: (context, state) => ExpenditureInchargeScreenAc(),
     ),
 
-GoRoute(
+    GoRoute(
       path: '/ac_Estimate_Mra_screen',
       name: 'acEstimateMra',
       builder: (context, state) => EstimateMraScreenAc(),
     ),
 
-
-GoRoute(
+    GoRoute(
       path: '/ac_Request_Mra_screen',
       name: 'acRequestMra',
       builder: (context, state) => RequestMraScreenAc(),
     ),
 
+    GoRoute(
+      path: '/ac_Expenditure_Mra_screen',
+      name: 'acExpenditureMra',
+      builder: (context, state) => ExpenditureMraScreenAc(),
+    ),
 
+    GoRoute(
+      path: '/ac_Expenditure_Mra_View_screen',
+      name: 'acExpenditureMraView',
+      builder: (context, state) => ExpenditureMraViewScreenAc(),
+    ),
 
+    GoRoute(
+      path: '/ac_Estimate_Dp_screen',
+      name: 'acEstimateDp',
+      builder: (context, state) => EstimateDpScreenAc(),
+    ),
 
+    GoRoute(
+      path: '/ac_Expenditure_Dp_screen',
+      name: 'acExpenditureDp',
+      builder: (context, state) => ExpenditureDpScreenAc(),
+    ),
 
+    GoRoute(
+      path: '/ac_Expenditure_Dp_View_screen',
+      name: 'acExpenditureDpView',
+      builder: (context, state) => ExpenditureDpViewScreenAc(),
+    ),
 
+    GoRoute(
+      path: '/ac_Request_Dp_screen',
+      name: 'acRequestDp',
+      builder: (context, state) => RequestDpScreenAc(),
+    ),
 
+    GoRoute(
+      path: '/ac_Inovice_Business_screen',
+      name: 'acInoviceBusiness',
+      builder: (context, state) => InoviceBusinessScreenAc(),
+    ),
 
+    GoRoute(
+      path: '/ac_Inovice_Business_View_screen',
+      name: 'acInoviceBusinessView',
+      builder: (context, state) => InoviceBusinessViewScreenAc(),
+    ),
 
+    GoRoute(
+      path: '/ac_Estimates_Business_screen',
+      name: 'acEstimatesBusiness',
+      builder: (context, state) => EstimatesBusinessScreenAc(),
+    ),
 
+    GoRoute(
+      path: '/ac_Estimates_Business_View_screen',
+      name: 'acEstimatesBusinessView',
+      builder: (context, state) => EstimatesBusinessViewScreenAc(),
+    ),
 
+    GoRoute(
+      path: '/ac_Proposals_Business_screen',
+      name: 'acProposalsBusiness',
+      builder: (context, state) => ProposalsBusinessScreenAc(),
+    ),
+
+    GoRoute(
+      path: '/ac_Proposals_Business_View_screen',
+      name: 'acProposalsBusinessView',
+      builder: (context, state) => ProposalsBusinessViewScreenAc(),
+    ),
 
     GoRoute(
       path: '/ac_Request_StateHead_screen',

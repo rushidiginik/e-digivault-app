@@ -6,17 +6,17 @@ import '../../../../../../../core/constants/theme.dart';
 import '../../../../../../../widgets/client_page_container_helper_ac.dart';
 import '../../../../../../../widgets/common_header.dart';
 
-class EstimateMraViewScreenAc extends StatefulWidget {
+class EstimateDpViewScreenAc extends StatefulWidget {
   final String status;
 
-  const EstimateMraViewScreenAc({super.key, required this.status});
+  const EstimateDpViewScreenAc({super.key, required this.status});
 
   @override
-  State<EstimateMraViewScreenAc> createState() =>
-      _EstimateMraViewScreenAcState();
+  State<EstimateDpViewScreenAc> createState() =>
+      _EstimateDpViewScreenAcState();
 }
 
-class _EstimateMraViewScreenAcState extends State<EstimateMraViewScreenAc> {
+class _EstimateDpViewScreenAcState extends State<EstimateDpViewScreenAc> {
   int selectedTab = 0; // 0 = Flow , 1 = Table View
 
   void _showRejectedDialog(BuildContext context) {
@@ -62,7 +62,7 @@ class _EstimateMraViewScreenAcState extends State<EstimateMraViewScreenAc> {
                 const SizedBox(height: 14),
                 const Text(
                   '"Your file Estimation has been Rejected\n'
-                  'Due insufficient step process Detail"',
+                      'Due insufficient step process Detail"',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 14,
@@ -85,7 +85,7 @@ class _EstimateMraViewScreenAcState extends State<EstimateMraViewScreenAc> {
       top: false,
       child: Scaffold(
         backgroundColor: AppStyles.whiteColor,
-        appBar: CommonHeader(title: 'MRA', showBack: true),
+        appBar: CommonHeader(title: 'DP', showBack: true),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -122,7 +122,7 @@ class _EstimateMraViewScreenAcState extends State<EstimateMraViewScreenAc> {
 
               ClientPageContainerHelperAc(
                 onTap: () {},
-                idPrefix: "MRA",
+                idPrefix: "DP",
                 idNumber: "567894",
                 status: "Active",
                 phone: "89XXXXXX78",
@@ -193,7 +193,7 @@ class _EstimateMraViewScreenAcState extends State<EstimateMraViewScreenAc> {
                                 ),
                               ),
                               Text(
-                                "Kiran @MRA",
+                                "Kiran @DP",
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 16,
@@ -311,7 +311,7 @@ class _EstimateMraViewScreenAcState extends State<EstimateMraViewScreenAc> {
           Column(
             children: List.generate(
               3,
-              (index) => Padding(
+                  (index) => Padding(
                 padding: const EdgeInsets.only(left: 22, bottom: 20),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,

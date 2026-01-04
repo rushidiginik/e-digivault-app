@@ -125,7 +125,7 @@ class _FlowestimateStateHeadScreenAcState
           child: Row(
             children: [
               SvgPicture.asset(
-                ImageConst.expenditureicon,
+                ImageConst.flowestimateicon,
                 height: 20,
                 width: 20,
                 color: AppStyles.primaryColor,
@@ -142,6 +142,8 @@ class _FlowestimateStateHeadScreenAcState
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
+                _clientDropdown(),
+                const SizedBox(width: 8),
                 _dateFilter(),
                 const SizedBox(width: 8),
                 _serviceDropdown(),
@@ -394,6 +396,17 @@ class _FlowestimateStateHeadScreenAcState
       hint: "Service",
       value: selectedService,
       items: const ["E-katha"],
+      onChanged: (val) {
+        setState(() => selectedService = val);
+      },
+    );
+  }
+
+  Widget _clientDropdown() {
+    return _customDropdown(
+      hint: "Client ID",
+      value: selectedService,
+      items: const ["CL-1234567", "CL-1234567"],
       onChanged: (val) {
         setState(() => selectedService = val);
       },

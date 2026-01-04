@@ -6,78 +6,17 @@ import '../../../../../../../core/constants/theme.dart';
 import '../../../../../../../widgets/client_page_container_helper_ac.dart';
 import '../../../../../../../widgets/common_header.dart';
 
-class EstimateMraViewScreenAc extends StatefulWidget {
+class RequestDpViewScreenAc extends StatefulWidget {
   final String status;
 
-  const EstimateMraViewScreenAc({super.key, required this.status});
+  const RequestDpViewScreenAc({super.key, required this.status});
 
   @override
-  State<EstimateMraViewScreenAc> createState() =>
-      _EstimateMraViewScreenAcState();
+  State<RequestDpViewScreenAc> createState() => _RequestDpViewScreenAcState();
 }
 
-class _EstimateMraViewScreenAcState extends State<EstimateMraViewScreenAc> {
+class _RequestDpViewScreenAcState extends State<RequestDpViewScreenAc> {
   int selectedTab = 0; // 0 = Flow , 1 = Table View
-
-  void _showRejectedDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) {
-        return Dialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Align(
-                  alignment: Alignment.topRight,
-                  child: GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: const Icon(Icons.close, size: 22),
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 18,
-                    vertical: 6,
-                  ),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFFDEAEA),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: const Text(
-                    "Rejected",
-                    style: TextStyle(
-                      color: Color(0xFFC62828),
-                      fontWeight: FontWeight.w600,
-                      fontSize: 14,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 14),
-                const Text(
-                  '"Your file Estimation has been Rejected\n'
-                  'Due insufficient step process Detail"',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.black54,
-                    height: 1.4,
-                  ),
-                ),
-                const SizedBox(height: 8),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +24,7 @@ class _EstimateMraViewScreenAcState extends State<EstimateMraViewScreenAc> {
       top: false,
       child: Scaffold(
         backgroundColor: AppStyles.whiteColor,
-        appBar: CommonHeader(title: 'MRA', showBack: true),
+        appBar: CommonHeader(title: 'DP', showBack: true),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -101,14 +40,14 @@ class _EstimateMraViewScreenAcState extends State<EstimateMraViewScreenAc> {
                 child: Row(
                   children: [
                     SvgPicture.asset(
-                      ImageConst.flowestimateicon,
+                      ImageConst.requesticone,
                       height: 20,
                       width: 20,
                       color: AppStyles.primaryColor,
                     ),
                     const SizedBox(width: 12),
                     Text(
-                      "Estimates".tr,
+                      "Request".tr,
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -122,7 +61,7 @@ class _EstimateMraViewScreenAcState extends State<EstimateMraViewScreenAc> {
 
               ClientPageContainerHelperAc(
                 onTap: () {},
-                idPrefix: "MRA",
+                idPrefix: "DP",
                 idNumber: "567894",
                 status: "Active",
                 phone: "89XXXXXX78",
@@ -193,7 +132,7 @@ class _EstimateMraViewScreenAcState extends State<EstimateMraViewScreenAc> {
                                 ),
                               ),
                               Text(
-                                "Kiran @MRA",
+                                "Kiran @DP",
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 16,
@@ -214,7 +153,7 @@ class _EstimateMraViewScreenAcState extends State<EstimateMraViewScreenAc> {
                               ),
                               Flexible(
                                 child: const Text(
-                                  "Ramesh @ INCHARGE",
+                                  "Ramesh @ DP",
                                   textAlign: TextAlign.end,
                                   style: TextStyle(
                                     fontWeight: FontWeight.w500,
@@ -232,25 +171,11 @@ class _EstimateMraViewScreenAcState extends State<EstimateMraViewScreenAc> {
               ),
 
               const SizedBox(height: 20),
-
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Container(
-                  padding: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: Row(
-                    children: [
-                      _tabButton("Flow", 0),
-                      _tabButton("Table View", 1),
-                    ],
-                  ),
-                ),
+                child: _requestDetailsForm(),
               ),
               const SizedBox(height: 20),
-              if (selectedTab == 0) _flowView(),
-              if (selectedTab == 1) _tableView(),
               if (widget.status == "Rejected") ...[
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -261,6 +186,80 @@ class _EstimateMraViewScreenAcState extends State<EstimateMraViewScreenAc> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _requestDetailsForm() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _readonlyField(
+          "Client Name",
+          "Rajesh Kumar",
+          isBold: true, //
+        ),
+        _readonlyField(
+          "Property",
+          "Apartment",
+          isBold: true, //
+        ),
+        _readonlyField(
+          "Job ID",
+          "BA-MA-560265",
+          isBold: true, //
+        ),
+        _readonlyField(
+          "Category",
+          "Revenue Records",
+          isBold: true, //
+        ),
+
+        _readonlyField(
+          "Main Service",
+          "Gram PanState Headayat",
+          isBold: true, //
+        ),
+
+        _blueField(
+          label: "Sub Service 1",
+          value: "E-katha",
+          icon: Icons.keyboard_arrow_down,
+        ),
+        _blueField(label: "Step No", value: "4"),
+        _blueField(label: "Amount", value: "250A"),
+      ],
+    );
+  }
+
+  Widget _readonlyField(String label, String value, {bool isBold = false}) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 14),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: isBold ? FontWeight.bold : FontWeight.w500,
+              color: isBold ? Colors.black : Colors.black54,
+            ),
+          ),
+          const SizedBox(height: 6),
+          TextFormField(
+            initialValue: value,
+            readOnly: true,
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: const Color(0xFFF2F2F2),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide.none,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -746,9 +745,7 @@ class _EstimateMraViewScreenAcState extends State<EstimateMraViewScreenAc> {
           width: 260,
           height: 50,
           child: ElevatedButton(
-            onPressed: () {
-              _showRejectedDialog(context);
-            },
+            onPressed: () {},
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF0052CC),
               shape: RoundedRectangleBorder(
@@ -788,6 +785,60 @@ class _EstimateMraViewScreenAcState extends State<EstimateMraViewScreenAc> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _blueField({
+    required String label,
+    required String value,
+    IconData? icon,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 14),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          /// 🔹 TITLE (Bold + Black)
+          Text(
+            label,
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+          const SizedBox(height: 6),
+
+          /// 🔹 FIELD
+          TextFormField(
+            initialValue: value,
+            readOnly: true,
+            decoration: InputDecoration(
+              suffixIcon: icon != null
+                  ? Icon(icon, color: const Color(0xFF0A0E0A))
+                  : null,
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: 14,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: const BorderSide(
+                  color: Color(0xFF0052CC), // 🔵 blue border
+                  width: 1.2,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: const BorderSide(
+                  color: Color(0xFF0052CC),
+                  width: 1.2,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
