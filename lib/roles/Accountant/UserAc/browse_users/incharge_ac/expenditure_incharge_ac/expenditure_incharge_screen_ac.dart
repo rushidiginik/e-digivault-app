@@ -9,16 +9,16 @@ import '../../../../../../../core/constants/theme.dart';
 import '../../../../../../../widgets/common_header.dart';
 import '../../../../../../../widgets/common_search_bar_widget.dart';
 
-class ExprenditureStateHeadScreenAc extends StatefulWidget {
-  const ExprenditureStateHeadScreenAc({super.key});
+class ExpenditureInchargeScreenAc extends StatefulWidget {
+  const ExpenditureInchargeScreenAc({super.key});
 
   @override
-  State<ExprenditureStateHeadScreenAc> createState() =>
-      _ExprenditureStateHeadScreenAcState();
+  State<ExpenditureInchargeScreenAc> createState() =>
+      _ExpenditureInchargeScreenAcState();
 }
 
-class _ExprenditureStateHeadScreenAcState
-    extends State<ExprenditureStateHeadScreenAc> {
+class _ExpenditureInchargeScreenAcState
+    extends State<ExpenditureInchargeScreenAc> {
   late Size size;
   final TextEditingController controller = TextEditingController();
   final ScrollController scrollController = ScrollController();
@@ -98,7 +98,7 @@ class _ExprenditureStateHeadScreenAcState
       top: false,
       child: Scaffold(
         backgroundColor: AppStyles.whiteColor,
-        appBar: CommonHeader(title: 'State Head', showBack: true),
+        appBar: CommonHeader(title: 'INCHARGE', showBack: true),
         body: CustomScrollView(
           controller: scrollController,
           slivers: [
@@ -307,10 +307,7 @@ class _ExprenditureStateHeadScreenAcState
                     child: row["receipt"] == "View"
                         ? GestureDetector(
                             onTap: () {
-                              context.pushNamed(
-                                'acExprenditureView',
-                                extra: row["status"], // "Paid" / "Pending"
-                              );
+                              context.pushNamed('acExpenditureInchargeView');
                             },
                             child: Padding(
                               padding: const EdgeInsets.symmetric(

@@ -9,16 +9,16 @@ import '../../../../../../../core/constants/theme.dart';
 import '../../../../../../../widgets/common_header.dart';
 import '../../../../../../../widgets/common_search_bar_widget.dart';
 
-class ExprenditureStateHeadScreenAc extends StatefulWidget {
-  const ExprenditureStateHeadScreenAc({super.key});
+class EstimateRegionalheadScreenAc extends StatefulWidget {
+  const EstimateRegionalheadScreenAc({super.key});
 
   @override
-  State<ExprenditureStateHeadScreenAc> createState() =>
-      _ExprenditureStateHeadScreenAcState();
+  State<EstimateRegionalheadScreenAc> createState() =>
+      _EstimateRegionalheadScreenAcState();
 }
 
-class _ExprenditureStateHeadScreenAcState
-    extends State<ExprenditureStateHeadScreenAc> {
+class _EstimateRegionalheadScreenAcState
+    extends State<EstimateRegionalheadScreenAc> {
   late Size size;
   final TextEditingController controller = TextEditingController();
   final ScrollController scrollController = ScrollController();
@@ -30,13 +30,11 @@ class _ExprenditureStateHeadScreenAcState
   String? selectedService;
   bool isServiceOpen = false;
 
-  // ---- TRANSACTION TYPE ----
   final LayerLink _typeLink = LayerLink();
   OverlayEntry? _typeOverlay;
   String? selectedTransactionType;
   bool isTypeOpen = false;
 
-  // ---- TRANSACTION MODE ----
   final LayerLink _modeLink = LayerLink();
   OverlayEntry? _modeOverlay;
   String? selectedTransactionMode;
@@ -52,42 +50,45 @@ class _ExprenditureStateHeadScreenAcState
 
   final List<Map<String, dynamic>> serviceData = [
     {
-      "ClientId": "CLNT0001234",
-      "jobId": "JB-235673",
-      "service": "E-katha",
-      "Task": "Online",
+      "estimateId": "Estimate #1",
+      "mainService": "DP- Office",
+      "subService": "E-katha",
+      "office": "DP- Office",
+      "documentName": "khatha Correction",
       "date": "08 Apr 2025",
-      "amountRequested": "25A",
-      "transactionMode": "Bride",
-      "transactionType": "Credit",
-      "amountSpent": "25A",
-      "receipt": "-",
+      "requestBy": "in-charge Pending",
+      "requestStatus": "DC-Kumar",
+      "amount": "₹20,000/-",
+      "status": "Pending",
+      "action": "View",
     },
 
     {
-      "ClientId": "CLNT0001235",
-      "jobId": "JB-235673",
-      "service": "E-katha",
-      "Task": "Online",
+      "estimateId": "Estimate #2",
+      "mainService": "DP- Office",
+      "subService": "E-katha",
+      "office": "DP- Office",
+      "documentName": "khatha Correction",
       "date": "08 Apr 2025",
-      "amountRequested": "25A",
-      "transactionMode": "Bride",
-      "transactionType": "Credit",
-      "amountSpent": "25A",
-      "receipt": "View",
+      "requestBy": "in-charge Pending",
+      "requestStatus": "DC-Kumar",
+      "amount": "₹20,000/-",
+      "status": "Approved",
+      "action": "View",
     },
 
     {
-      "ClientId": "CLNT0001236",
-      "jobId": "JB-235673",
-      "service": "E-katha",
-      "Task": "Online",
+      "estimateId": "Estimate #3",
+      "mainService": "DP- Office",
+      "subService": "E-katha",
+      "office": "DP- Office",
+      "documentName": "khatha Correction",
       "date": "08 Apr 2025",
-      "amountRequested": "25A",
-      "transactionMode": "Bride",
-      "transactionType": "Credit",
-      "amountSpent": "25A",
-      "receipt": "-",
+      "requestBy": "in-charge Pending",
+      "requestStatus": "DC-Kumar",
+      "amount": "₹20,000/-",
+      "status": "Rejected",
+      "action": "View",
     },
   ];
 
@@ -98,7 +99,7 @@ class _ExprenditureStateHeadScreenAcState
       top: false,
       child: Scaffold(
         backgroundColor: AppStyles.whiteColor,
-        appBar: CommonHeader(title: 'State Head', showBack: true),
+        appBar: CommonHeader(title: 'Regional Head', showBack: true),
         body: CustomScrollView(
           controller: scrollController,
           slivers: [
@@ -114,7 +115,6 @@ class _ExprenditureStateHeadScreenAcState
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 18),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: CommonSearchBar(),
@@ -131,12 +131,11 @@ class _ExprenditureStateHeadScreenAcState
                 color: AppStyles.primaryColor,
               ),
               const SizedBox(width: 8),
-              textSemiBold(text: "Expenditure".tr(), fontSize: 16),
+              textSemiBold(text: "Estimates".tr(), fontSize: 16),
             ],
           ),
         ),
         Divider(height: 12, color: AppStyles.greyDE, indent: 14, endIndent: 14),
-
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
           child: SingleChildScrollView(
@@ -144,8 +143,6 @@ class _ExprenditureStateHeadScreenAcState
             child: Row(
               children: [
                 _dateFilter(),
-                const SizedBox(width: 8),
-                _clientIdDropdown(),
                 const SizedBox(width: 8),
                 _serviceDropdown(),
                 const SizedBox(width: 8),
@@ -173,25 +170,31 @@ class _ExprenditureStateHeadScreenAcState
             DataColumn(
               label: SizedBox(
                 width: 90,
-                child: textMedium(text: "Client ID", fontSize: 14),
+                child: textMedium(text: "Estimate ID", fontSize: 14),
               ),
             ),
             DataColumn(
               label: SizedBox(
                 width: 150,
-                child: textMedium(text: "Job ID", fontSize: 14),
+                child: textMedium(text: "Main Service", fontSize: 14),
               ),
             ),
             DataColumn(
               label: SizedBox(
                 width: 100,
-                child: textMedium(text: "Service", fontSize: 14),
+                child: textMedium(text: "Sub service", fontSize: 14),
               ),
             ),
             DataColumn(
               label: SizedBox(
                 width: 100,
-                child: textMedium(text: "Task", fontSize: 14),
+                child: textMedium(text: "Office", fontSize: 14),
+              ),
+            ),
+            DataColumn(
+              label: SizedBox(
+                width: 130,
+                child: textMedium(text: "Document Name", fontSize: 14),
               ),
             ),
             DataColumn(
@@ -202,32 +205,35 @@ class _ExprenditureStateHeadScreenAcState
             ),
             DataColumn(
               label: SizedBox(
-                width: 130,
-                child: textMedium(text: "Amount Requested", fontSize: 14),
-              ),
-            ),
-            DataColumn(
-              label: SizedBox(
-                width: 130,
-                child: textMedium(text: "Transaction Mode", fontSize: 14),
-              ),
-            ),
-            DataColumn(
-              label: SizedBox(
                 width: 160,
-                child: textMedium(text: "Transaction Type", fontSize: 14),
+                child: textMedium(text: "Request By", fontSize: 14),
               ),
             ),
             DataColumn(
               label: SizedBox(
                 width: 80,
-                child: textMedium(text: "Amount Spent", fontSize: 14),
+                child: textMedium(text: "Request Status", fontSize: 14),
               ),
             ),
+
             DataColumn(
               label: SizedBox(
                 width: 80,
-                child: textMedium(text: "Receipt", fontSize: 14),
+                child: textMedium(text: "Amount", fontSize: 14),
+              ),
+            ),
+
+            DataColumn(
+              label: SizedBox(
+                width: 80,
+                child: textMedium(text: "Status", fontSize: 14),
+              ),
+            ),
+
+            DataColumn(
+              label: SizedBox(
+                width: 80,
+                child: textMedium(text: "Action", fontSize: 14),
               ),
             ),
           ],
@@ -237,25 +243,31 @@ class _ExprenditureStateHeadScreenAcState
                 DataCell(
                   SizedBox(
                     width: 130,
-                    child: textSemiBold(text: row["ClientId"], fontSize: 14),
+                    child: textSemiBold(text: row["estimateId"], fontSize: 14),
                   ),
                 ),
                 DataCell(
                   SizedBox(
                     width: 150,
-                    child: textRegular(text: row["jobId"], fontSize: 14),
+                    child: textRegular(text: row["mainService"], fontSize: 14),
                   ),
                 ),
                 DataCell(
                   SizedBox(
                     width: 100,
-                    child: textRegular(text: row["service"], fontSize: 14),
+                    child: textRegular(text: row["subService"], fontSize: 14),
                   ),
                 ),
                 DataCell(
                   SizedBox(
                     width: 100,
-                    child: textRegular(text: row["Task"], fontSize: 14),
+                    child: textRegular(text: row["office"], fontSize: 14),
+                  ),
+                ),
+                DataCell(
+                  SizedBox(
+                    width: 120,
+                    child: textRegular(text: row["documentName"], fontSize: 14),
                   ),
                 ),
                 DataCell(
@@ -267,9 +279,16 @@ class _ExprenditureStateHeadScreenAcState
 
                 DataCell(
                   SizedBox(
+                    width: 130,
+                    child: textRegular(text: row["requestBy"], fontSize: 14),
+                  ),
+                ),
+
+                DataCell(
+                  SizedBox(
                     width: 80,
                     child: textRegular(
-                      text: row["amountRequested"],
+                      text: row["requestStatus"],
                       fontSize: 14,
                     ),
                   ),
@@ -278,38 +297,27 @@ class _ExprenditureStateHeadScreenAcState
                 DataCell(
                   SizedBox(
                     width: 80,
-                    child: textRegular(
-                      text: row["transactionMode"],
-                      fontSize: 14,
-                    ),
+                    child: textRegular(text: row["amount"], fontSize: 14),
                   ),
                 ),
 
                 DataCell(
                   SizedBox(
                     width: 80,
-                    child: textRegular(
-                      text: row["transactionType"],
-                      fontSize: 14,
-                    ),
+                    child: textRegular(text: row["status"], fontSize: 14),
                   ),
                 ),
 
                 DataCell(
                   SizedBox(
                     width: 80,
-                    child: textRegular(text: row["amountSpent"], fontSize: 14),
-                  ),
-                ),
-                DataCell(
-                  SizedBox(
-                    width: 80,
-                    child: row["receipt"] == "View"
+                    child: row["action"] == "View"
                         ? GestureDetector(
                             onTap: () {
                               context.pushNamed(
-                                'acExprenditureView',
-                                extra: row["status"], // "Paid" / "Pending"
+                                'acEmtimateRegionalheadView',
+                                extra:
+                                    row["status"], //  Pending / Approved / Rejected
                               );
                             },
                             child: Padding(
@@ -388,17 +396,6 @@ class _ExprenditureStateHeadScreenAcState
       items: const ["E-katha"],
       onChanged: (val) {
         setState(() => selectedService = val);
-      },
-    );
-  }
-
-  Widget _clientIdDropdown() {
-    return _customDropdown(
-      hint: "Client ID",
-      value: selectedTransactionMode,
-      items: const ["CL-234563", "CL-234563"],
-      onChanged: (val) {
-        setState(() => selectedTransactionMode = val);
       },
     );
   }
