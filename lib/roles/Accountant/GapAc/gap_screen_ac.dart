@@ -170,7 +170,7 @@ class _GapScreenAcState extends State<GapScreenAc> {
                             }
                           } else if (selectedTabIndex == 1) {
                             context.pushNamed(
-                              'acRequestView',
+                              'acGapDpApproved',
                               extra: "Approved",
                             );
                           } else if (selectedTabIndex == 2) {
