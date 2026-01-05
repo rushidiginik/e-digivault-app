@@ -89,7 +89,8 @@ class _InvoiceClientScreenAcState extends State<InvoiceClientScreenAc> {
       child: Scaffold(
         backgroundColor: AppStyles.whiteColor,
         appBar: CommonHeader(title: 'Invocie', showBack: true),
-        body: CustomScrollView(
+        body:
+        CustomScrollView(
           controller: scrollController,
           slivers: [
             SliverToBoxAdapter(child: _topContainerSection()),

@@ -5,9 +5,9 @@ class RequestStatusCard extends StatelessWidget {
   final String name;
   final String phone;
   final String email;
-  final String jobId;
-  final String reqAmount;
-  final String task;
+  final String? jobId;
+  final String? reqAmount;
+  final String? task;
   final String statusText;
   final Color statusColor;
   final VoidCallback? onTap;
@@ -17,9 +17,9 @@ class RequestStatusCard extends StatelessWidget {
     required this.name,
     required this.phone,
     required this.email,
-    required this.jobId,
-    required this.reqAmount,
-    required this.task,
+    this.jobId,
+    this.reqAmount,
+    this.task,
     required this.statusText,
     required this.statusColor,
     this.onTap,
@@ -73,7 +73,6 @@ class RequestStatusCard extends StatelessWidget {
                   const SizedBox(height: 2),
                   const SizedBox(height: 2),
 
-                  // YAHAN ADD KARNA HAI
                   RichText(
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
@@ -95,12 +94,21 @@ class RequestStatusCard extends StatelessWidget {
                     ),
                   ),
 
-                  const SizedBox(height: 2),
-                  Text("Job ID : $jobId"),
-                  const SizedBox(height: 2),
-                  Text("Req Amount : $reqAmount"),
-                  const SizedBox(height: 2),
-                  Text("Task : $task"),
+                  if (jobId != null && jobId!.isNotEmpty) ...[
+                    const SizedBox(height: 2),
+                    Text("Job ID : $jobId"),
+                  ],
+
+                  if (reqAmount != null && reqAmount!.isNotEmpty) ...[
+                    const SizedBox(height: 2),
+                    Text("Req Amount : $reqAmount"),
+                  ],
+
+                  if (task != null && task!.isNotEmpty) ...[
+                    const SizedBox(height: 2),
+                    Text("Task : $task"),
+                  ],
+
                   const SizedBox(height: 6),
 
                   /// STATUS

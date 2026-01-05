@@ -9,14 +9,16 @@ import '../../../../../../../core/constants/theme.dart';
 import '../../../../../../../widgets/common_header.dart';
 import '../../../../../../../widgets/common_search_bar_widget.dart';
 
-class ServicesClientScreenAc extends StatefulWidget {
-  const ServicesClientScreenAc({super.key});
+class ExpenditurePaymentScreenAc extends StatefulWidget {
+  const ExpenditurePaymentScreenAc({super.key});
 
   @override
-  State<ServicesClientScreenAc> createState() => _ServicesClientScreenAcState();
+  State<ExpenditurePaymentScreenAc> createState() =>
+      _ExpenditurePaymentScreenAcState();
 }
 
-class _ServicesClientScreenAcState extends State<ServicesClientScreenAc> {
+class _ExpenditurePaymentScreenAcState
+    extends State<ExpenditurePaymentScreenAc> {
   late Size size;
   final TextEditingController controller = TextEditingController();
   final ScrollController scrollController = ScrollController();
@@ -55,11 +57,11 @@ class _ServicesClientScreenAcState extends State<ServicesClientScreenAc> {
       "service": "E-katha",
       "Task": "Online",
       "date": "08 Apr 2025",
+      "amountRequested": "25A",
       "transactionMode": "Bride",
       "transactionType": "Credit",
-      "estimation": "100A",
       "amountSpent": "25A",
-      "orRequest": "10A",
+      "onRequest": "10A",
       "receipt": "-",
     },
 
@@ -69,11 +71,11 @@ class _ServicesClientScreenAcState extends State<ServicesClientScreenAc> {
       "service": "E-katha",
       "Task": "Online",
       "date": "08 Apr 2025",
+      "amountRequested": "25A",
       "transactionMode": "Bride",
       "transactionType": "Credit",
-      "estimation": "100A",
       "amountSpent": "25A",
-      "orRequest": "10A",
+      "onRequest": "10A",
       "receipt": "View",
     },
 
@@ -83,11 +85,11 @@ class _ServicesClientScreenAcState extends State<ServicesClientScreenAc> {
       "service": "E-katha",
       "Task": "Online",
       "date": "08 Apr 2025",
+      "amountRequested": "25A",
       "transactionMode": "Bride",
       "transactionType": "Credit",
-      "estimation": "100A",
       "amountSpent": "25A",
-      "orRequest": "10A",
+      "onRequest": "10A",
       "receipt": "-",
     },
   ];
@@ -99,7 +101,7 @@ class _ServicesClientScreenAcState extends State<ServicesClientScreenAc> {
       top: false,
       child: Scaffold(
         backgroundColor: AppStyles.whiteColor,
-        appBar: CommonHeader(title: 'Service', showBack: true),
+        appBar: CommonHeader(title: 'Payments', showBack: true),
         body: CustomScrollView(
           controller: scrollController,
           slivers: [
@@ -115,6 +117,7 @@ class _ServicesClientScreenAcState extends State<ServicesClientScreenAc> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        SizedBox(height: 18),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: CommonSearchBar(),
@@ -144,6 +147,8 @@ class _ServicesClientScreenAcState extends State<ServicesClientScreenAc> {
             child: Row(
               children: [
                 _dateFilter(),
+                const SizedBox(width: 8),
+                _clientIdDropdown(),
                 const SizedBox(width: 8),
                 _serviceDropdown(),
                 const SizedBox(width: 8),
@@ -201,6 +206,12 @@ class _ServicesClientScreenAcState extends State<ServicesClientScreenAc> {
             DataColumn(
               label: SizedBox(
                 width: 130,
+                child: textMedium(text: "Amount Requested", fontSize: 14),
+              ),
+            ),
+            DataColumn(
+              label: SizedBox(
+                width: 130,
                 child: textMedium(text: "Transaction Mode", fontSize: 14),
               ),
             ),
@@ -213,24 +224,15 @@ class _ServicesClientScreenAcState extends State<ServicesClientScreenAc> {
             DataColumn(
               label: SizedBox(
                 width: 80,
-                child: textMedium(text: "Estimation", fontSize: 14),
-              ),
-            ),
-
-            DataColumn(
-              label: SizedBox(
-                width: 80,
                 child: textMedium(text: "Amount Spent", fontSize: 14),
               ),
             ),
-
             DataColumn(
               label: SizedBox(
                 width: 80,
                 child: textMedium(text: "On Request", fontSize: 14),
               ),
             ),
-
             DataColumn(
               label: SizedBox(
                 width: 80,
@@ -271,6 +273,23 @@ class _ServicesClientScreenAcState extends State<ServicesClientScreenAc> {
                     child: textRegular(text: row["date"], fontSize: 14),
                   ),
                 ),
+
+                DataCell(
+                  SizedBox(
+                    width: 80,
+                    child: textRegular(
+                      text: row["amountRequested"],
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+                DataCell(
+                  SizedBox(
+                    width: 80,
+                    child: textRegular(text: row["onRequest"], fontSize: 14),
+                  ),
+                ),
+
                 DataCell(
                   SizedBox(
                     width: 80,
@@ -294,34 +313,16 @@ class _ServicesClientScreenAcState extends State<ServicesClientScreenAc> {
                 DataCell(
                   SizedBox(
                     width: 80,
-                    child: textRegular(text: row["estimation"], fontSize: 14),
-                  ),
-                ),
-
-                DataCell(
-                  SizedBox(
-                    width: 80,
                     child: textRegular(text: row["amountSpent"], fontSize: 14),
                   ),
                 ),
-
-                DataCell(
-                  SizedBox(
-                    width: 80,
-                    child: textRegular(text: row["orRequest"], fontSize: 14),
-                  ),
-                ),
-
                 DataCell(
                   SizedBox(
                     width: 80,
                     child: row["receipt"] == "View"
                         ? GestureDetector(
                             onTap: () {
-                              context.pushNamed(
-                                'acServicesView',
-                                extra: row["status"], // "Paid" / "Pending"
-                              );
+                              context.pushNamed('acExpenditurePaymentView');
                             },
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
@@ -399,6 +400,17 @@ class _ServicesClientScreenAcState extends State<ServicesClientScreenAc> {
       items: const ["E-katha"],
       onChanged: (val) {
         setState(() => selectedService = val);
+      },
+    );
+  }
+
+  Widget _clientIdDropdown() {
+    return _customDropdown(
+      hint: "Client ID",
+      value: selectedTransactionMode,
+      items: const ["CL-234563", "CL-234563"],
+      onChanged: (val) {
+        setState(() => selectedTransactionMode = val);
       },
     );
   }
@@ -490,7 +502,4 @@ class _ServicesClientScreenAcState extends State<ServicesClientScreenAc> {
       },
     );
   }
-
-
-
 }
