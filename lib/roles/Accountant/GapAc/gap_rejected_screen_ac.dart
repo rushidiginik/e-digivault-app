@@ -6,16 +6,16 @@ import '../../../../../../../core/constants/theme.dart';
 import '../../../../../../../widgets/client_page_container_helper_ac.dart';
 import '../../../../../../../widgets/common_header.dart';
 
-class GapViewScreenAc extends StatefulWidget {
+class GapRejectedScreenAc extends StatefulWidget {
   final String status;
 
-  const GapViewScreenAc({super.key, required this.status});
+  const GapRejectedScreenAc({super.key, required this.status});
 
   @override
-  State<GapViewScreenAc> createState() => _GapViewScreenAcState();
+  State<GapRejectedScreenAc> createState() => _GapRejectedScreenAcState();
 }
 
-class _GapViewScreenAcState extends State<GapViewScreenAc> {
+class _GapRejectedScreenAcState extends State<GapRejectedScreenAc> {
   int selectedTab = 0; // 0 = Flow , 1 = Table View
 
   @override

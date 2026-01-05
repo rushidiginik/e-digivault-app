@@ -17,7 +17,7 @@ import 'package:e_digivault_org_app/roles/common/settings/common_settings/user_m
 import 'package:e_digivault_org_app/roles/common/splash/splash_screen.dart';
 import 'package:go_router/go_router.dart';
 import '../roles/Accountant/DashBoardAc/ac_dashboard_screen.dart';
-import '../roles/Accountant/GapAc/gap_view_screen_ac.dart';
+import '../roles/Accountant/GapAc/gap_rejected_screen_ac.dart';
 import '../roles/Accountant/PaymentsAc/expenditure_payment_ac/expenditure_payment_screen_ac.dart';
 import '../roles/Accountant/PaymentsAc/expenditure_payment_ac/expenditure_payment_view_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/business_ac/business_overview_screen_ac.dart';
@@ -494,22 +494,15 @@ final GoRouter router = GoRouter(
     ),
 
     GoRoute(
-      name: 'acGapDpView',
-      path: '/ac-Gap-view-screen',
+      name: 'acGapDpRejected',
+      path: '/ac-Gap-Rejected-screen',
       builder: (context, state) {
         final status = state.extra as String;
-        return GapViewScreenAc(
+        return GapRejectedScreenAc(
           status: status, // Pending / Approved / Rejected
         );
       },
     ),
-
-
-
-
-
-
-
 
     GoRoute(
       path: '/ac-Expenditure-Incharge-view',
@@ -702,6 +695,7 @@ final GoRouter router = GoRouter(
       name: 'acExpenditurePaymentView',
       builder: (context, state) => ExpenditurePaymentViewScreenAc(),
     ),
+
 
     GoRoute(
       path: '/ac_Expenditure_Regionalhead_View_screen',
