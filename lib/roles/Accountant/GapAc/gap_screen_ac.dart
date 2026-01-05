@@ -7,7 +7,9 @@ import '../../../../../../../widgets/custom_tabBar_widget.dart';
 import '../../../../../../../widgets/request_status_card.dart';
 
 class GapScreenAc extends StatefulWidget {
-  const GapScreenAc({super.key});
+  final String? status;
+
+  const GapScreenAc({super.key, this.status});
 
   @override
   State<GapScreenAc> createState() => _GapScreenAcState();
@@ -150,7 +152,10 @@ class _GapScreenAcState extends State<GapScreenAc> {
 
                             switch (cardStatus) {
                               case "GAP_PAYMENT_VERIFY":
-                                context.pushNamed('gapPaymentVerifyScreen');
+                                context.pushNamed(
+                                  'acPendingGap',
+                                  extra: "Pending",
+                                );
                                 break;
 
                               case "PENDING_ESTIMATE":
