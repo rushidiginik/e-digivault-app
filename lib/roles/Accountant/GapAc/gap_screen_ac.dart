@@ -16,6 +16,25 @@ class GapScreenAc extends StatefulWidget {
 class _GapScreenAcState extends State<GapScreenAc> {
   int selectedTabIndex = 0;
 
+  String _pendingStatusText(String status) {
+    switch (status) {
+      case "GAP_PAYMENT_VERIFY":
+        return "Gap Payment Verify";
+
+      case "PENDING_ESTIMATE":
+        return "Pending for Estimate";
+
+      case "PENDING_INVOICE":
+        return "Pending for Invoice";
+
+      case "PENDING_INVOICE_VERIFY":
+        return "Pending for Invoice Verification";
+
+      default:
+        return "Pending";
+    }
+  }
+
   final List<String> tabs = ["Pending", "Approved", "Rejected"];
 
   final Map<int, Map<String, dynamic>> statusConfig = {
@@ -29,16 +48,25 @@ class _GapScreenAcState extends State<GapScreenAc> {
       "name": "Client ID : Cl-457158",
       "phone": "89XXXXXX78",
       "email": "Rajeshn@gmail.com",
+      "cardStatus": "GAP_PAYMENT_VERIFY",
     },
     {
       "name": "Client ID : Cl-457158",
       "phone": "98XXXXXX21",
       "email": "Amit@gmail.com",
+      "cardStatus": "PENDING_ESTIMATE",
     },
     {
       "name": "Client ID : Cl-457158",
       "phone": "76XXXXXX54",
       "email": "Suresh@gmail.com",
+      "cardStatus": "PENDING_INVOICE",
+    },
+    {
+      "name": "Client ID : Cl-457158",
+      "phone": "76XXXXXX54",
+      "email": "Suresh@gmail.com",
+      "cardStatus": "PENDING_INVOICE_VERIFY",
     },
   ];
 
@@ -117,16 +145,49 @@ class _GapScreenAcState extends State<GapScreenAc> {
 
                       return GestureDetector(
                         onTap: () {
-                          context.pushNamed(
-                            'acRequestView',
-                            extra: tabs[selectedTabIndex],
-                          );
+                          if (selectedTabIndex == 0) {
+                            final cardStatus = item["cardStatus"];
+
+                            switch (cardStatus) {
+                              case "GAP_PAYMENT_VERIFY":
+                                context.pushNamed('gapPaymentVerifyScreen');
+                                break;
+
+                              case "PENDING_ESTIMATE":
+                                context.pushNamed('estimateScreen');
+                                break;
+
+                              case "PENDING_INVOICE":
+                              case "PENDING_INVOICE_VERIFY":
+                                context.pushNamed('invoiceScreen');
+                                break;
+
+                              default:
+                                context.pushNamed(
+                                  'acRequestView',
+                                  extra: "Pending",
+                                );
+                            }
+                          } else if (selectedTabIndex == 1) {
+                            context.pushNamed(
+                              'acRequestView',
+                              extra: "Approved",
+                            );
+                          } else if (selectedTabIndex == 2) {
+                            context.pushNamed(
+                              'acRequestView',
+                              extra: "Rejected",
+                            );
+                          }
                         },
+
                         child: RequestStatusCard(
                           name: item["name"]!,
                           phone: item["phone"]!,
                           email: item["email"]!,
-                          statusText: statusConfig[selectedTabIndex]!["text"],
+                          statusText: selectedTabIndex == 0
+                              ? _pendingStatusText(item["cardStatus"]!)
+                              : statusConfig[selectedTabIndex]!["text"],
                           statusColor: statusConfig[selectedTabIndex]!["color"],
                         ),
                       );

@@ -112,22 +112,31 @@ class RequestStatusCard extends StatelessWidget {
                   const SizedBox(height: 6),
 
                   /// STATUS
-                  RichText(
-                    text: TextSpan(
-                      text: "Status : ",
-                      style: const TextStyle(color: Colors.black),
-                      children: [
-                        TextSpan(
-                          text: statusText,
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: statusColor,
-                            fontWeight: FontWeight.w600,
+                  /// STATUS
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Status : ",
+                        style: TextStyle(fontSize: 14, color: Colors.black),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 4),
+                          child: Text(
+                            statusText,
+                            softWrap: true,
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: statusColor,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
+
                   SizedBox(height: 18),
                 ],
               ),
