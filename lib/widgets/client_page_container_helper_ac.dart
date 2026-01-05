@@ -14,7 +14,11 @@ class ClientPageContainerHelperAc extends StatefulWidget {
 
   final String? phone;
   final String? email;
-  final bool showDetailedCard; //  switch
+  final bool showDetailedCard;
+
+  final String? displayName; // 🔹 NEW (optional)
+  final bool replaceIdWithName; // 🔹 NEW
+//  switch
 
   const ClientPageContainerHelperAc({
     super.key,
@@ -30,6 +34,9 @@ class ClientPageContainerHelperAc extends StatefulWidget {
     this.phone,
     this.email,
     this.showDetailedCard = false,
+    // 🔹 NEW (safe defaults)
+    this.displayName,
+    this.replaceIdWithName = false,
   });
 
   @override
@@ -79,7 +86,9 @@ class _ClientPageContainerHelperAcState
                   children: [
                     //  ID
                     Text(
-                      "${widget.idPrefix}-${widget.idNumber}",
+                      widget.replaceIdWithName && widget.displayName != null
+                          ? widget.displayName!
+                          : "${widget.idPrefix}-${widget.idNumber}",
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
@@ -88,6 +97,7 @@ class _ClientPageContainerHelperAcState
                             : Colors.black,
                       ),
                     ),
+
                     // 🔹 ROLE
                     if (widget.roleTitle.isNotEmpty) ...[
                       Text(
