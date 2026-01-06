@@ -17,6 +17,14 @@ class _RequestPaymentViewScreenAcState
     extends State<RequestPaymentViewScreenAc> {
   int selectedTab = 0;
 
+  bool isManuallyRejected = false;
+
+  bool get isPending =>
+      widget.status.trim().toLowerCase() == "pending" && !isManuallyRejected;
+
+  bool get isRejected =>
+      widget.status.trim().toLowerCase() == "rejected" || isManuallyRejected;
+
   String getDisplayStatus(String status) {
     if (status.trim().toLowerCase() == "pending") {
       return "Active";
@@ -76,7 +84,7 @@ class _RequestPaymentViewScreenAcState
                       width: 28,
                       height: 28,
                       decoration: const BoxDecoration(
-                        color: Color(0xFFEAF2FF),
+                        color: Color(0x266CA5F8),
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(
@@ -140,6 +148,293 @@ class _RequestPaymentViewScreenAcState
         );
       },
     );
+  }
+
+  void _showRejectConfirmDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12), // dialog corner
+          ),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 24, 20, 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                /// ICON WITH BACKGROUND (IMAGE JAISE)
+                Container(
+                  width: 56,
+                  height: 56,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFEFDEDE),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Center(
+                    child: Icon(
+                      Icons.close,
+                      size: 30,
+                      color: Color(0xFFC62828),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 14),
+
+                /// TITLE
+                const Text(
+                  "Reject ?",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                ),
+
+                const SizedBox(height: 8),
+
+                /// SUB TEXT
+                const Text(
+                  "Estimate for CL-215487 created by\nCD kiran",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Color(0xFF666666),
+                    height: 1.4,
+                  ),
+                ),
+
+                const SizedBox(height: 22),
+
+                /// BUTTON ROW
+                Row(
+                  children: [
+                    /// CANCEL
+                    Expanded(
+                      child: OutlinedButton(
+                        onPressed: () => Navigator.pop(context),
+                        style: OutlinedButton.styleFrom(
+                          side: const BorderSide(color: Color(0xFF0052CC)),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              6,
+                            ), //  LESS RADIUS
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                        ),
+                        child: const Text(
+                          "Cancel",
+                          style: TextStyle(
+                            color: Color(0xFF0052CC),
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(width: 12),
+
+                    /// REJECT
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          _showRemarkDialog(context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF0052CC),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              6,
+                            ), //  LESS RADIUS
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                        ),
+                        child: const Text(
+                          "Reject",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _showRemarkDialog(BuildContext context) {
+    TextEditingController remarkCtrl = TextEditingController();
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 20, 20, 22),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                /// HEADER
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Remark",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () => Navigator.pop(context),
+                      child: Container(
+                        width: 32,
+                        height: 32,
+                        decoration: const BoxDecoration(
+                          color: Color(0xFFD6E6FE),
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.close,
+                          size: 18,
+                          color: Color(0xFF0052CC),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 16),
+
+                /// 🔹 DASHED BORDER TEXTAREA (STACK IS MUST)
+                SizedBox(
+                  height: 140,
+                  child: Stack(
+                    children: [
+                      /// TEXT FIELD
+                      Padding(
+                        padding: const EdgeInsets.all(14),
+                        child: TextField(
+                          controller: remarkCtrl,
+                          maxLines: 5,
+                          decoration: const InputDecoration(
+                            hintText: "Price could be negotiated",
+                            border: InputBorder.none,
+                          ),
+                        ),
+                      ),
+
+                      /// DASHED BORDER OVERLAY
+                      Positioned.fill(
+                        child: IgnorePointer(
+                          child: CustomPaint(painter: _DashedBorderPainter()),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 22),
+
+                /// SEND BUTTON
+                SizedBox(
+                  width: double.infinity,
+                  height: 44,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      _showRejectedSuccessDialog(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF0052CC),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: const Text(
+                      "Send",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _showRejectedSuccessDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18),
+          ),
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.78, //  dialog width
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                /// ICON WITH BG
+                Container(
+                  width: 64, //  thoda bada
+                  height: 64,
+                  decoration: const BoxDecoration(
+                    color: Color(0xFFEFDEDE),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Center(
+                    child: Icon(
+                      Icons.close,
+                      size: 34,
+                      color: Color(0xFFC62828),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 18),
+
+                /// TEXT
+                const Text(
+                  "Rejected",
+                  style: TextStyle(
+                    fontSize: 22, //  thoda bada text
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 8),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+
+    Future.delayed(const Duration(seconds: 1), () {
+      Navigator.pop(context);
+      setState(() {
+        isManuallyRejected = true;
+      });
+    });
   }
 
   @override
@@ -394,11 +689,67 @@ class _RequestPaymentViewScreenAcState
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: _requestDetailsForm(),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
+
+              if (widget.status.trim().toLowerCase() == "pending") ...[
+                _pendingActionButtons(),
+                const SizedBox(height: 60),
+              ],
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _pendingActionButtons() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        //  Reject
+        ElevatedButton(
+          onPressed: () {
+            _showRejectConfirmDialog(context); // same dialog reuse
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFFF56860),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(6),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+          ),
+          child: const Text(
+            "Reject",
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
+          ),
+        ),
+
+        const SizedBox(width: 20),
+
+        //  Pay
+        ElevatedButton(
+          onPressed: () {},
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF68B031),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(6),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 10),
+          ),
+          child: const Text(
+            "Pay",
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -1125,4 +1476,40 @@ class _HeaderCell extends StatelessWidget {
       ),
     );
   }
+}
+
+class _DashedBorderPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    const dashWidth = 5; // image jaisa
+    const dashSpace = 6; // image jaisa
+    final paint = Paint()
+      ..color = const Color(0xFFBDBDBD)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1; // thin border
+
+    final rrect = RRect.fromRectAndRadius(
+      Rect.fromLTWH(0, 0, size.width, size.height),
+      const Radius.circular(12),
+    );
+
+    final path = Path()..addRRect(rrect);
+    final metrics = path.computeMetrics();
+
+    for (final metric in metrics) {
+      double distance = 0;
+      while (distance < metric.length) {
+        final len = (distance + dashWidth < metric.length)
+            ? dashWidth
+            : metric.length - distance;
+
+        canvas.drawPath(metric.extractPath(distance, distance + len), paint);
+
+        distance += dashWidth + dashSpace;
+      }
+    }
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
