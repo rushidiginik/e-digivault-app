@@ -657,10 +657,13 @@ class _RequestPaymentViewScreenAcState
   }
 
   void _showPaymentSuccessDialog(BuildContext context) {
+    late BuildContext dialogContext;
+
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (_) {
+      builder: (ctx) {
+        dialogContext = ctx; // ✅ dialog ka actual context
         return Dialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(24),
@@ -670,23 +673,17 @@ class _RequestPaymentViewScreenAcState
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Center(
-                  child: Image.asset(
-                    ImageConst.verifyDonePNG,
-                    width: 60,
-                    height: 60,
-                    fit: BoxFit.contain,
-                  ),
+                Image.asset(
+                  ImageConst.verifyDonePNG,
+                  width: 60,
+                  height: 60,
                 ),
-
                 const SizedBox(height: 18),
-
                 const Text(
                   "Payment Sent",
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
-                    color: Colors.black,
                   ),
                 ),
               ],
@@ -696,9 +693,12 @@ class _RequestPaymentViewScreenAcState
       },
     );
 
-    /// AUTO APPROVED (same as before)
     Future.delayed(const Duration(seconds: 1), () {
-      Navigator.pop(context);
+      if (!mounted) return;
+
+      // ✅ Dialog guaranteed close
+      Navigator.of(dialogContext).pop();
+
       setState(() {
         isManuallyApproved = true;
       });
