@@ -184,4 +184,16 @@ class ImageConst {
   static const requesticone = "assets/images/svg/request_icon.svg";
   static const expenditureicon = "assets/images/svg/expenditure_.svg";
   static const esttimicone = "assets/images/svg/est_tim.svg";
+  static const moreestiicon = "assets/images/svg/more_esti_icon.svg";
+  static const moreestimateicone = 'assets/images/svg/more_estimate_cone.svg';
+  static const moreinvoiceicon = 'assets/images/svg/more_invoice_icon.svg';
+  static const moreproposalicon = 'assets/images/svg/more_proposal_icon.svg';
+
+
+
+
+
+
+
+
 }
