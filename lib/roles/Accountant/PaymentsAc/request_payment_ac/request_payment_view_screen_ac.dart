@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../../../../core/constants/theme.dart';
 import '../../../../../../../widgets/client_page_container_helper_ac.dart';
 import '../../../../../../../widgets/common_header.dart';
+import '../../../../core/constants/image_const.dart';
 
 class RequestPaymentViewScreenAc extends StatefulWidget {
   final String status;
@@ -662,30 +663,31 @@ class _RequestPaymentViewScreenAcState
       builder: (_) {
         return Dialog(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(24),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 40),
+            padding: const EdgeInsets.symmetric(vertical: 36),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Container(
-                  width: 60,
-                  height: 60,
-                  decoration: const BoxDecoration(
-                    color: Color(0xFFEAF2FF),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.check,
-                    color: Color(0xFF0052CC),
-                    size: 32,
+                Center(
+                  child: Image.asset(
+                    ImageConst.verifyDonePNG,
+                    width: 60,
+                    height: 60,
+                    fit: BoxFit.contain,
                   ),
                 ),
-                const SizedBox(height: 16),
+
+                const SizedBox(height: 18),
+
                 const Text(
                   "Payment Sent",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black,
+                  ),
                 ),
               ],
             ),
@@ -694,7 +696,7 @@ class _RequestPaymentViewScreenAcState
       },
     );
 
-    /// AUTO APPROVED
+    /// AUTO APPROVED (same as before)
     Future.delayed(const Duration(seconds: 1), () {
       Navigator.pop(context);
       setState(() {

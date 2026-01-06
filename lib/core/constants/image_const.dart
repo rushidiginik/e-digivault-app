@@ -188,6 +188,7 @@ class ImageConst {
   static const moreestimateicone = 'assets/images/svg/more_estimate_cone.svg';
   static const moreinvoiceicon = 'assets/images/svg/more_invoice_icon.svg';
   static const moreproposalicon = 'assets/images/svg/more_proposal_icon.svg';
+  static const successicon = "assets/images/svg/success_icon.svg";
 
 
 
