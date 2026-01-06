@@ -11,6 +11,8 @@ class ClientPageContainerHelperAc extends StatefulWidget {
   final String progress;
   final String status;
   final String? createdBy;
+  final Color? statusBgColor;
+  final Color? statusTextColor;
 
   final String? phone;
   final String? email;
@@ -18,7 +20,7 @@ class ClientPageContainerHelperAc extends StatefulWidget {
 
   final String? displayName; // 🔹 NEW (optional)
   final bool replaceIdWithName; // 🔹 NEW
-//  switch
+  //  switch
 
   const ClientPageContainerHelperAc({
     super.key,
@@ -37,6 +39,8 @@ class ClientPageContainerHelperAc extends StatefulWidget {
     // 🔹 NEW (safe defaults)
     this.displayName,
     this.replaceIdWithName = false,
+    this.statusBgColor,
+    this.statusTextColor,
   });
 
   @override
@@ -219,9 +223,11 @@ class _ClientPageContainerHelperAcState
                             vertical: 3,
                           ),
                           decoration: BoxDecoration(
-                            color: widget.showDetailedCard
-                                ? const Color(0xFFEDE7F6)
-                                : const Color(0xFFF2EAFE),
+                            color:
+                                widget.statusBgColor ??
+                                (widget.showDetailedCard
+                                    ? const Color(0xFFEDE7F6)
+                                    : const Color(0xFFF2EAFE)),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
@@ -229,9 +235,11 @@ class _ClientPageContainerHelperAcState
                             style: TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.w600,
-                              color: widget.showDetailedCard
-                                  ? const Color(0xFF6F42C1)
-                                  : const Color(0xFF7A3EF0),
+                              color:
+                                  widget.statusTextColor ??
+                                  (widget.showDetailedCard
+                                      ? const Color(0xFF6F42C1)
+                                      : const Color(0xFF7A3EF0)),
                             ),
                           ),
                         ),

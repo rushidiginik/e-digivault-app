@@ -37,7 +37,7 @@ class _GapScreenAcState extends State<GapScreenAc> {
     }
   }
 
-  final List<String> tabs = ["Pending", "Approved", "Rejected"];
+  final List<String> tabs = ["Assigned", "Approved", "Rejected"];
 
   final Map<int, Map<String, dynamic>> statusConfig = {
     0: {"text": "Pending for Approval", "color": Colors.orange},

@@ -97,13 +97,14 @@ class _PaymentsScreenAcState extends State<PaymentsScreenAc> {
             //  important
             crossAxisSpacing: 12,
             childAspectRatio: 1.6,
-            //  height kam hogi
             padding: const EdgeInsets.symmetric(horizontal: 90),
             children: [
               _browseItem(
                 svgPath: ImageConst.requesticone,
                 label: "Request",
-                onTap: () {},
+                onTap: () {
+                  context.pushNamed('acRequestPayment');
+                },
               ),
               _browseItem(
                 svgPath: ImageConst.expenditureicon,

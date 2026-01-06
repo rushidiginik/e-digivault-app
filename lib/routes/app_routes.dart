@@ -22,6 +22,8 @@ import '../roles/Accountant/GapAc/gap_rejected_screen_ac.dart';
 import '../roles/Accountant/GapAc/pending_gap_ac/pending_gap_screen_ac.dart';
 import '../roles/Accountant/PaymentsAc/expenditure_payment_ac/expenditure_payment_screen_ac.dart';
 import '../roles/Accountant/PaymentsAc/expenditure_payment_ac/expenditure_payment_view_screen_ac.dart';
+import '../roles/Accountant/PaymentsAc/request_payment_ac/request_payment_screen_ac.dart';
+import '../roles/Accountant/PaymentsAc/request_payment_ac/request_payment_view_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/business_ac/business_overview_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/business_ac/business_screen_ac.dart';
 import '../roles/Accountant/UserAc/browse_users/business_ac/estimates_business_ac/estimates_business_screen_ac.dart';
@@ -526,11 +528,39 @@ final GoRouter router = GoRouter(
       },
     ),
 
+      GoRoute(
+      name: 'acRequestPaymentView',
+      path: '/ac-Request-Payment-View_screen',
+      builder: (context, state) {
+        final status = state.extra as String;
+        return RequestPaymentViewScreenAc(status: status);
+      },
+    ),
+
+
+
+
+
+
+
+
     GoRoute(
       path: '/ac-Expenditure-Incharge-view',
       name: 'acExpenditureInchargeView',
       builder: (context, state) => ExpenditureInchargeViewScreenAc(),
     ),
+
+     GoRoute(
+      path: '/ac-Request-Payment-Screen',
+      name: 'acRequestPayment',
+      builder: (context, state) => RequestPaymentScreenAc(),
+    ),
+
+
+
+
+
+
 
     GoRoute(
       path: '/ac_Estimate_Regionalhead_screen',

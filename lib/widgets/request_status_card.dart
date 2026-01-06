@@ -3,9 +3,11 @@ import '../core/constants/image_const.dart';
 
 class RequestStatusCard extends StatelessWidget {
   final String name;
-  final String phone;
-  final String email;
+  final String? phone;
+  final String? email;
   final String? jobId;
+  final String? progress;
+  final String? step;
   final String? reqAmount;
   final String? task;
   final String statusText;
@@ -15,11 +17,13 @@ class RequestStatusCard extends StatelessWidget {
   const RequestStatusCard({
     super.key,
     required this.name,
-    required this.phone,
-    required this.email,
+    this.phone,
+    this.email,
     this.jobId,
     this.reqAmount,
     this.task,
+    this.progress,
+    this.step,
     required this.statusText,
     required this.statusColor,
     this.onTap,
@@ -69,30 +73,54 @@ class RequestStatusCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  Text("Phone No: $phone"),
+                  if (phone != null && phone!.isNotEmpty) ...[
+                    const SizedBox(height: 4),
+                    Text("Phone No: $phone"),
+                  ],
+
                   const SizedBox(height: 2),
                   const SizedBox(height: 2),
 
-                  RichText(
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    text: TextSpan(
+                  if (email != null && email!.isNotEmpty) ...[
+                    const SizedBox(height: 2),
+                    RichText(
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      text: TextSpan(
+                        children: [
+                          const TextSpan(
+                            text: "Email: ",
+                            style: TextStyle(color: Colors.black, fontSize: 14),
+                          ),
+                          TextSpan(
+                            text: email!,
+                            style: const TextStyle(
+                              color: Color(0xFFA6E07A),
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+
+                  // 🔹 PROGRESS (ONLY PENDING)
+                  if (progress != null) ...[
+                    const SizedBox(height: 4),
+                    Row(
                       children: [
-                        const TextSpan(
-                          text: "Email: ",
-                          style: TextStyle(color: Colors.black, fontSize: 14),
-                        ),
-                        TextSpan(
-                          text: email,
+                        const Text("Progress: "),
+                        Text(
+                          progress!,
                           style: const TextStyle(
-                            color: const Color(0xFFA6E07A),
-                            fontSize: 14,
                             fontWeight: FontWeight.bold,
+                            color: Color(0xFF4F8922),
                           ),
                         ),
                       ],
                     ),
-                  ),
+                  ],
 
                   if (jobId != null && jobId!.isNotEmpty) ...[
                     const SizedBox(height: 2),
@@ -104,6 +132,11 @@ class RequestStatusCard extends StatelessWidget {
                     Text("Req Amount : $reqAmount"),
                   ],
 
+                  if (step != null) ...[
+                    const SizedBox(height: 4),
+                    Text("Step $step", style: const TextStyle()),
+                  ],
+
                   if (task != null && task!.isNotEmpty) ...[
                     const SizedBox(height: 2),
                     Text("Task : $task"),
@@ -111,8 +144,6 @@ class RequestStatusCard extends StatelessWidget {
 
                   const SizedBox(height: 6),
 
-                  /// STATUS
-                  /// STATUS
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
