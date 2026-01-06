@@ -322,8 +322,6 @@ class _RequestPaymentViewScreenAcState
                 ),
 
                 const SizedBox(height: 16),
-
-                /// 🔹 DASHED BORDER TEXTAREA (STACK IS MUST)
                 SizedBox(
                   height: 140,
                   child: Stack(
@@ -477,8 +475,8 @@ class _RequestPaymentViewScreenAcState
                             const Text(
                               "Transaction Mode",
                               style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                             const SizedBox(height: 10),
@@ -486,16 +484,60 @@ class _RequestPaymentViewScreenAcState
                             Row(
                               children: ["UPI", "Cash", "Cheque"].map((mode) {
                                 return Expanded(
-                                  child: RadioListTile<String>(
-                                    contentPadding: EdgeInsets.zero,
-                                    dense: true,
-                                    value: mode,
-                                    groupValue: paymentMode,
-                                    activeColor: const Color(0xFF6F3DFF),
-                                    title: Text(mode),
-                                    onChanged: (val) {
-                                      setSheetState(() => paymentMode = val!);
+                                  child: InkWell(
+                                    onTap: () {
+                                      setSheetState(() => paymentMode = mode);
                                     },
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Radio<String>(
+                                          value: mode,
+                                          groupValue: paymentMode,
+                                          onChanged: (val) {
+                                            setSheetState(
+                                              () => paymentMode = val!,
+                                            );
+                                          },
+
+                                          //  RADIO COLOR CONTROL
+                                          fillColor:
+                                              MaterialStateProperty.resolveWith(
+                                                (states) {
+                                                  if (states.contains(
+                                                    MaterialState.selected,
+                                                  )) {
+                                                    return const Color(
+                                                      0xFF7749F8,
+                                                    ); // selected purple
+                                                  }
+                                                  return Colors
+                                                      .grey; // unselected grey
+                                                },
+                                              ),
+
+                                          materialTapTargetSize:
+                                              MaterialTapTargetSize.shrinkWrap,
+                                          visualDensity: const VisualDensity(
+                                            horizontal: -4,
+                                            vertical: -4,
+                                          ),
+                                        ),
+
+                                        //  VERY SMALL GAP (round ke bilkul paas)
+                                        const SizedBox(width: 4),
+
+                                        Text(
+                                          mode,
+                                          style: const TextStyle(
+                                            fontSize: 16,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 );
                               }).toList(),
@@ -551,7 +593,7 @@ class _RequestPaymentViewScreenAcState
                       ),
                     ),
 
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 10),
 
                     Row(
                       children: [
@@ -585,7 +627,7 @@ class _RequestPaymentViewScreenAcState
                                 : null,
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF0052CC),
-                              disabledBackgroundColor: Colors.grey.shade300,
+                              disabledBackgroundColor: Color(0xFF0052CC),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(6),
                               ),
@@ -593,7 +635,11 @@ class _RequestPaymentViewScreenAcState
                             ),
                             child: const Text(
                               "Pay",
-                              style: TextStyle(fontWeight: FontWeight.w600),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
@@ -1057,7 +1103,7 @@ class _RequestPaymentViewScreenAcState
         children: [
           Text(
             label,
-            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: 6),
           TextField(
