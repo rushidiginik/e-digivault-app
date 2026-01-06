@@ -15,9 +15,13 @@ class RequestPaymentViewScreenAc extends StatefulWidget {
 
 class _RequestPaymentViewScreenAcState
     extends State<RequestPaymentViewScreenAc> {
+  String paymentMode = "UPI"; // UPI | Cash | Cheque
+  bool paymentConfirmed = false;
+
   int selectedTab = 0;
 
   bool isManuallyRejected = false;
+  bool isManuallyApproved = false;
 
   bool get isPending =>
       widget.status.trim().toLowerCase() == "pending" && !isManuallyRejected;
@@ -26,6 +30,9 @@ class _RequestPaymentViewScreenAcState
       widget.status.trim().toLowerCase() == "rejected" || isManuallyRejected;
 
   String getDisplayStatus(String status) {
+    if (isManuallyApproved) return "Approved";
+    if (isManuallyRejected) return "Rejected";
+
     if (status.trim().toLowerCase() == "pending") {
       return "Active";
     }
@@ -437,6 +444,219 @@ class _RequestPaymentViewScreenAcState
     });
   }
 
+  ///////////////////////////// pay ////////////////////////////////
+
+  void _openPaymentBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (_) {
+        return StatefulBuilder(
+          builder: (context, setSheetState) {
+            return SizedBox(
+              height: MediaQuery.of(context).size.height * 0.65,
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(
+                  20,
+                  20,
+                  20,
+                  16 + MediaQuery.of(context).padding.bottom,
+                ),
+                child: Column(
+                  children: [
+                    ///  SCROLLABLE CONTENT
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Transaction Mode",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+
+                            Row(
+                              children: ["UPI", "Cash", "Cheque"].map((mode) {
+                                return Expanded(
+                                  child: RadioListTile<String>(
+                                    contentPadding: EdgeInsets.zero,
+                                    dense: true,
+                                    value: mode,
+                                    groupValue: paymentMode,
+                                    activeColor: const Color(0xFF6F3DFF),
+                                    title: Text(mode),
+                                    onChanged: (val) {
+                                      setSheetState(() => paymentMode = val!);
+                                    },
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+
+                            const SizedBox(height: 12),
+                            _bottomGreyField("Amount", "Enter the Amount"),
+
+                            if (paymentMode == "UPI")
+                              _bottomGreyField("UPI ID", "Enter the UPI ID"),
+
+                            if (paymentMode == "Cheque")
+                              _bottomGreyField(
+                                "Cheque Number",
+                                "Enter the Cheque Number",
+                              ),
+
+                            _bottomGreyField(
+                              "Receiver Name",
+                              "Enter Receiver Name",
+                            ),
+
+                            if (paymentMode == "Cash")
+                              _bottomGreyField(
+                                "Upload Documents",
+                                "xyzDOC.pdf",
+                              ),
+
+                            const SizedBox(height: 12),
+
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Checkbox(
+                                  value: paymentConfirmed,
+                                  onChanged: (v) {
+                                    setSheetState(() => paymentConfirmed = v!);
+                                  },
+                                ),
+                                const Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsets.only(top: 12),
+                                    child: Text(
+                                      "I here by Certify that i have checked the Payment and verified it.",
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 16),
+
+                    Row(
+                      children: [
+                        Expanded(
+                          child: OutlinedButton(
+                            onPressed: () => Navigator.pop(context),
+                            style: OutlinedButton.styleFrom(
+                              side: const BorderSide(color: Color(0xFF0052CC)),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                            ),
+                            child: const Text(
+                              "Cancel",
+                              style: TextStyle(
+                                color: Color(0xFF0052CC),
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 14),
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: paymentConfirmed
+                                ? () {
+                                    Navigator.pop(context);
+                                    _showPaymentSuccessDialog(context);
+                                  }
+                                : null,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF0052CC),
+                              disabledBackgroundColor: Colors.grey.shade300,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                            ),
+                            child: const Text(
+                              "Pay",
+                              style: TextStyle(fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void _showPaymentSuccessDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 40),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: 60,
+                  height: 60,
+                  decoration: const BoxDecoration(
+                    color: Color(0xFFEAF2FF),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.check,
+                    color: Color(0xFF0052CC),
+                    size: 32,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                const Text(
+                  "Payment Sent",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+
+    /// AUTO APPROVED
+    Future.delayed(const Duration(seconds: 1), () {
+      Navigator.pop(context);
+      setState(() {
+        isManuallyApproved = true;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -732,7 +952,9 @@ class _RequestPaymentViewScreenAcState
 
         //  Pay
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            _openPaymentBottomSheet(context);
+          },
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xFF68B031),
             shape: RoundedRectangleBorder(
@@ -818,6 +1040,37 @@ class _RequestPaymentViewScreenAcState
               fillColor: const Color(0xFFF2F2F2),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide.none,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _bottomGreyField(String label, String hint) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+          ),
+          const SizedBox(height: 6),
+          TextField(
+            decoration: InputDecoration(
+              hintText: hint,
+              filled: true,
+              fillColor: const Color(0xFFEFEFEF),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: 14,
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
                 borderSide: BorderSide.none,
               ),
             ),
@@ -1350,6 +1603,30 @@ class _RequestPaymentViewScreenAcState
           color: textColor,
           fontWeight: FontWeight.w600,
         ),
+      ),
+    );
+  }
+
+  Widget _greyField(String label, String hint) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label, style: const TextStyle(fontWeight: FontWeight.w600)),
+          const SizedBox(height: 6),
+          TextField(
+            decoration: InputDecoration(
+              hintText: hint,
+              filled: true,
+              fillColor: const Color(0xFFF2F2F2),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide.none,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
