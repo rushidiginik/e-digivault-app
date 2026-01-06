@@ -657,7 +657,8 @@ class _RequestMraViewScreenAcState extends State<RequestMraViewScreenAc> {
 
   Widget _statusPill() {
     if (widget.status == "Rejected") {
-      return Container(
+      return
+        Container(
         width: double.infinity,
         height: 44,
         padding: const EdgeInsets.symmetric(horizontal: 12),

@@ -50,6 +50,98 @@ class _RequestPaymentViewScreenAcState
     }
   }
 
+  void _showRejectedDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+        return Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.88,
+            padding: const EdgeInsets.fromLTRB(20, 20, 20, 24),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(18),
+            ),
+            child: Stack(
+              children: [
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Container(
+                      width: 28,
+                      height: 28,
+                      decoration: const BoxDecoration(
+                        color: Color(0xFFEAF2FF),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.close,
+                        size: 16,
+                        color: Color(0xFF0052CC),
+                      ),
+                    ),
+                  ),
+                ),
+
+                /// CONTENT
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const SizedBox(height: 20),
+
+                    /// Rejected chip (CENTER PERFECT)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 6,
+                        ),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFFDEAEA),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: const Text(
+                          "Rejected",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFFC62828),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 10),
+
+                    /// Message (IMAGE LINE BREAK SAME)
+                    Center(
+                      child: const Text(
+                        "Your GAP has been Rejected\n"
+                        "Due insufficient Legal Detail",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey,
+                          height: 1.4,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -92,15 +184,6 @@ class _RequestPaymentViewScreenAcState
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   children: [
-                    if (widget.status.trim().toLowerCase() == "rejected") ...[
-                      Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        alignment: Alignment.center,
-                        child: _statusPill(),
-                      ),
-                      const SizedBox(height: 26),
-                    ],
                     Container(
                       width: double.infinity,
                       padding: const EdgeInsets.all(16),
@@ -193,15 +276,6 @@ class _RequestPaymentViewScreenAcState
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   children: [
-                    if (widget.status.trim().toLowerCase() == "rejected") ...[
-                      Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        alignment: Alignment.center,
-                        child: _statusPill(),
-                      ),
-                      const SizedBox(height: 26),
-                    ],
                     Container(
                       width: double.infinity,
                       padding: const EdgeInsets.all(16),
@@ -305,6 +379,12 @@ class _RequestPaymentViewScreenAcState
                         ],
                       ),
                     ),
+                    SizedBox(height: 20),
+                    SizedBox(height: 20),
+                    if (widget.status.trim().toLowerCase() == "rejected") ...[
+                      _rejectedRemarkButton(),
+                      const SizedBox(height: 26),
+                    ],
                   ],
                 ),
               ),
@@ -315,13 +395,6 @@ class _RequestPaymentViewScreenAcState
                 child: _requestDetailsForm(),
               ),
               const SizedBox(height: 20),
-              if (widget.status.trim().toLowerCase() == "rejected") ...[
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: _viewRemarkButton(),
-                ),
-                const SizedBox(height: 20),
-              ],
             ],
           ),
         ),
@@ -399,6 +472,60 @@ class _RequestPaymentViewScreenAcState
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _rejectedRemarkButton() {
+    return InkWell(
+      borderRadius: BorderRadius.circular(30),
+      onTap: () {
+        _showRejectedDialog(context);
+      },
+      child: Container(
+        width: double.infinity,
+        height: 44,
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        decoration: BoxDecoration(
+          color: const Color(0xFFF6DDDB), //  light red bg (image jaisa)
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 100.0),
+              child: Container(
+                width: 33,
+                height: 33,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                ),
+                child: const Center(
+                  child: Icon(
+                    Icons.error_outline,
+                    size: 28,
+                    color: Color(0xFFFF3B30),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(width: 8),
+            //  Rejected text
+            Padding(
+              padding: const EdgeInsets.only(right: 130.0),
+              child: const Text(
+                "Rejected",
+                style: TextStyle(
+                  color: Color(0xFFD32F2F),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -801,7 +928,7 @@ class _RequestPaymentViewScreenAcState
         height: 44,
         padding: const EdgeInsets.symmetric(horizontal: 12),
         decoration: BoxDecoration(
-          color: const Color(0xFFF6DDDB), //  light red bg (image jaisa)
+          color: const Color(0xFFF6DDDB),
           borderRadius: BorderRadius.circular(30),
         ),
         child: Row(
@@ -876,58 +1003,6 @@ class _RequestPaymentViewScreenAcState
     );
   }
 
-  Widget _viewRemarkButton() {
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.only(right: 90.0, top: 30),
-        child: SizedBox(
-          width: 260,
-          height: 50,
-          child: ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF0052CC),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(25),
-              ),
-              padding: const EdgeInsets.only(left: 8), //  START SPACE
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  width: 36,
-                  height: 36,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.remove_red_eye_outlined,
-                    color: Color(0xFF0052CC),
-                    size: 30,
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Padding(
-                  padding: const EdgeInsets.only(left: 28.0),
-                  child: const Text(
-                    "View Remark",
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
   Widget _blueField({
     required String label,
     required String value,
@@ -983,7 +1058,6 @@ class _RequestPaymentViewScreenAcState
   }
 }
 
-/// ---------- PRICE CHIP ----------
 class _priceChip extends StatelessWidget {
   final String amount;
   final String label;
