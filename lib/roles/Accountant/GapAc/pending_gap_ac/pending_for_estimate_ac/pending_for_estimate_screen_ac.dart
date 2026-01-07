@@ -898,7 +898,7 @@ class _PendingForEstimateScreenAcState
   Widget _propertyRow(String title, String amount) {
     return InkWell(
       onTap: () {
-        // navigate to property detail
+        context.pushNamed('acPendingEstimateViewest');
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12),

@@ -167,7 +167,7 @@ class _GapScreenAcState extends State<GapScreenAc> {
 
                               case "PENDING_INVOICE":
                               case "PENDING_INVOICE_VERIFY":
-                                context.pushNamed('invoiceScreen');
+                                context.pushNamed('acPendingForInvoice');
                                 break;
 
                               default:
