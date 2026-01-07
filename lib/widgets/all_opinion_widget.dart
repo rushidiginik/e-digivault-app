@@ -26,7 +26,6 @@ class AllOpinionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        /// ---------- HEADER ----------
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: Row(
@@ -35,7 +34,7 @@ class AllOpinionWidget extends StatelessWidget {
               const SizedBox(width: 8),
               textSemiBold(
                 text: title2,
-                fontSize: 14,
+                fontSize: 20,
                 fontColor: AppStyles.grey29,
               ),
             ],
@@ -119,13 +118,19 @@ class AllOpinionWidget extends StatelessWidget {
 
                   Text(
                     "Client: $clientName",
-                    style: const TextStyle(fontSize: 14),
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 4),
 
                   Text(
                     "Document : $documentName",
-                    style: const TextStyle(fontSize: 14),
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
 
                   const SizedBox(height: 20),
@@ -133,7 +138,7 @@ class AllOpinionWidget extends StatelessWidget {
                   /// OVERVIEW
                   const Text(
                     "Overview",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
                   ),
                   const SizedBox(height: 10),
 
@@ -144,7 +149,7 @@ class AllOpinionWidget extends StatelessWidget {
                   /// LEGAL
                   const Text(
                     "Legal",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
                   ),
                   const SizedBox(height: 10),
 
@@ -161,12 +166,12 @@ class AllOpinionWidget extends StatelessWidget {
   /// ---------- ICON ----------
   Widget _toolIcon(String asset) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 6),
-      child: Image.asset(asset, height: 22),
+      padding: const EdgeInsets.symmetric(horizontal: 1),
+      child: Image.asset(asset, height: 28),
     );
   }
 
-  Widget _gap() => const SizedBox(width: 12);
+  Widget _gap() => const SizedBox(width: 6);
 
   /// ---------- BULLET LIST ----------
   Widget _bulletList(List<String> points) {
