@@ -673,18 +673,11 @@ class _RequestPaymentViewScreenAcState
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Image.asset(
-                  ImageConst.verifyDonePNG,
-                  width: 60,
-                  height: 60,
-                ),
+                Image.asset(ImageConst.verifyDonePNG, width: 60, height: 60),
                 const SizedBox(height: 18),
                 const Text(
                   "Payment Sent",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                  ),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                 ),
               ],
             ),
