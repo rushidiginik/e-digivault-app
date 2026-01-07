@@ -2,6 +2,7 @@ import 'package:e_digivault_org_app/core/constants/app_common_text.dart';
 import 'package:e_digivault_org_app/core/constants/theme.dart';
 import 'package:e_digivault_org_app/widgets/bottom_navigation_bar_mra.dart';
 import 'package:e_digivault_org_app/widgets/common_app_bar_widget.dart';
+import 'package:e_digivault_org_app/widgets/common_header.dart';
 
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -32,7 +33,7 @@ class _HomePageScreenState extends State<MraDashboardScreen> {
     size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: AppStyles.whiteColor,
-      appBar: CommonAppBarWidget(title: "dashboard", isBack: false),
+      appBar: CommonHeader(title: "Dashboard", showBack: false),
       bottomNavigationBar: BottomNavigationBarMra(),
       body: SingleChildScrollView(
         child: Padding(

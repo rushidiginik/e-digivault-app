@@ -6,6 +6,7 @@ import 'package:e_digivault_org_app/roles/common/login/controller/login_controll
 import 'package:e_digivault_org_app/roles/common/settings/common_settings/settings/controller/settings_controller.dart';
 import 'package:e_digivault_org_app/utils/alert_utils.dart';
 import 'package:e_digivault_org_app/utils/app_storage.dart';
+import 'package:e_digivault_org_app/widgets/bottom_navigation_bar_mra.dart';
 import 'package:e_digivault_org_app/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -56,6 +57,7 @@ class _SettingScreenState extends State<SettingScreen> {
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
     return Scaffold(
+      bottomNavigationBar: BottomNavigationBarMra(),
       backgroundColor: AppStyles.whiteColor,
       body: SingleChildScrollView(
         child: Column(

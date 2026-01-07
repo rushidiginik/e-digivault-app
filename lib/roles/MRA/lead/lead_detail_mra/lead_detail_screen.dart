@@ -1,12 +1,15 @@
 import 'package:e_digivault_org_app/core/constants/app_common_text.dart';
+import 'package:e_digivault_org_app/core/constants/image_const.dart';
 import 'package:e_digivault_org_app/core/constants/theme.dart';
 import 'package:e_digivault_org_app/widgets/bottom_navigation_bar_mra.dart';
 import 'package:e_digivault_org_app/widgets/button_widget.dart';
+import 'package:e_digivault_org_app/widgets/common_header.dart';
 import 'package:e_digivault_org_app/widgets/custom_app_bar_widget.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:percent_indicator/flutter_percent_indicator.dart';
 
@@ -38,7 +41,7 @@ class _LeadScreenState extends State<LeadDetailScreenMra> {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBarMra(),
       backgroundColor: AppStyles.whiteColor,
-      appBar: CustomAppbar(title: 'Lead', isBack: true),
+      appBar: CommonHeader(title: 'Leads', showBack: true),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(12.0),
@@ -63,7 +66,7 @@ class _LeadScreenState extends State<LeadDetailScreenMra> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(Icons.bar_chart_rounded, color: AppStyles.grey66),
-            textMedium(text: "Status Summary", fontSize: 14, fontColor: AppStyles.grey66),
+            textMedium(text: "Status Summary Cards Of Leads", fontSize: 14, fontColor: AppStyles.grey66),
           ],
         ),
         Padding(
@@ -112,8 +115,10 @@ class _LeadScreenState extends State<LeadDetailScreenMra> {
                   child: SizedBox(
                     height: 50,
                     child: ButtonWidget(
-                      onTap: () {},
-                      title: 'add new lead',
+                      onTap: () {
+                        context.go('/add_leads_screen_mra');
+                      },
+                      title: 'Add new Leads',
                       icons: Icons.add,
                       bgColor: AppStyles.primaryColor,
                       textColor: AppStyles.whiteColor,
@@ -125,8 +130,10 @@ class _LeadScreenState extends State<LeadDetailScreenMra> {
                   child: SizedBox(
                     height: 50,
                     child: ButtonWidget(
-                      onTap: () {},
-                      title: "View Report",
+                      onTap: () {
+                        context.go('/view_leads_screen');
+                      },
+                      title: "Leads Report",
                       icons: CupertinoIcons.eye,
                       bgColor: AppStyles.whiteColor,
                       textColor: AppStyles.primaryColor,
@@ -148,7 +155,7 @@ class _LeadScreenState extends State<LeadDetailScreenMra> {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SvgPicture.asset(""),
+            SvgPicture.asset(ImageConst.recentClockSvg),
             SizedBox(width: 8),
             textSemiBold(text: "Recent Activity List", fontSize: 16),
           ],
