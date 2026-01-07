@@ -151,7 +151,7 @@ class _PendingEstimateViewopinionScreenAcState
                     child: row["viewOpinion"] == "View"
                         ? GestureDetector(
                             onTap: () {
-                              context.pushNamed('acViewestView');
+                              context.pushNamed('acOpinionView');
                             },
                             child: Padding(
                               padding: const EdgeInsets.symmetric(

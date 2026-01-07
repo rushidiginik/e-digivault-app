@@ -163,7 +163,6 @@ class AllOpinionWidget extends StatelessWidget {
     );
   }
 
-  /// ---------- ICON ----------
   Widget _toolIcon(String asset) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 1),
@@ -173,7 +172,6 @@ class AllOpinionWidget extends StatelessWidget {
 
   Widget _gap() => const SizedBox(width: 6);
 
-  /// ---------- BULLET LIST ----------
   Widget _bulletList(List<String> points) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
