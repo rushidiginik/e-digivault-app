@@ -159,7 +159,10 @@ class _GapScreenAcState extends State<GapScreenAc> {
                                 break;
 
                               case "PENDING_ESTIMATE":
-                                context.pushNamed('estimateScreen');
+                                context.pushNamed(
+                                  'acPendingForEstimate',
+                                  extra: "Pending",
+                                );
                                 break;
 
                               case "PENDING_INVOICE":
