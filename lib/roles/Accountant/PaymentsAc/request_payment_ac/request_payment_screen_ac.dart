@@ -65,21 +65,21 @@ class _RequestPaymentScreenAcState extends State<RequestPaymentScreenAc> {
                 RequestStatusCard(
                   name: "MRA-567653",
 
-                  // 🔥 Pending me phone/email NAHI
+                  //  Pending me phone/email NAHI
                   phone: isPending ? null : "89XXXXXX78",
                   email: isPending ? null : "Rajeshn@gmail.com",
 
-                  // 🔥 Pending me Job & Amount NAHI
+                  //  Pending me Job & Amount NAHI
                   jobId: isPending ? null : "JB-236754",
                   reqAmount: isPending ? null : "14A",
 
-                  // 🔥 Task KISI TAB ME NAHI
+                  //  Task KISI TAB ME NAHI
                   task: null,
 
-                  // 🔥 Pending me Progress
+                  //  Pending me Progress
                   progress: isPending ? "70%" : null,
 
-                  // 🔥 Approved / Rejected me Step 4
+                  //  Approved / Rejected me Step 4
                   step: (isApproved || isRejected) ? "4" : null,
 
                   statusText: statusConfig[selectedTabIndex]!["text"],

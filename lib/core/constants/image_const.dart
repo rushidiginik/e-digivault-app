@@ -190,6 +190,7 @@ class ImageConst {
   static const moreproposalicon = 'assets/images/svg/more_proposal_icon.svg';
   static const successicon = "assets/images/svg/success_icon.svg";
   static const buildingimage = "assets/images/svg/building.svg";
+  static const successgreenicon = "assets/images/svg/success_green_icon.svg";
 
 
 
