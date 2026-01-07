@@ -145,8 +145,7 @@ class _PendingEstimateViewestScreenAcState
                         ? GestureDetector(
                             onTap: () {
                               context.pushNamed(
-                                'acInvoiceView',
-                                extra: row["status"], // "Paid" / "Pending"
+                                'acViewestView',
                               );
                             },
                             child: Padding(
