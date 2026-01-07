@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../../../../core/constants/image_const.dart';
 import '../../../../../../../core/constants/theme.dart';
 import '../../../../../../../widgets/common_header.dart';
@@ -405,7 +406,7 @@ class _PendingForEstimateScreenAcState
       context: context,
       barrierDismissible: false,
       builder: (ctx) {
-        dialogContext = ctx; // ✅ dialog ka actual context
+        dialogContext = ctx;
         return Dialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(24),
@@ -828,7 +829,12 @@ class _PendingForEstimateScreenAcState
                       ),
                     ),
                     const Spacer(),
-                    _linkText("View EST", onTap: () {}),
+                    _linkText(
+                      "View EST",
+                      onTap: () {
+                        context.pushNamed('acPendingEstimateViewest');
+                      },
+                    ),
                     const SizedBox(width: 18),
                     _linkText("View opinion", onTap: () {}),
                   ],

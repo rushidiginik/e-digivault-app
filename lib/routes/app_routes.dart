@@ -19,6 +19,7 @@ import 'package:go_router/go_router.dart';
 import '../roles/Accountant/DashBoardAc/ac_dashboard_screen.dart';
 import '../roles/Accountant/GapAc/approved_gap_screen_ac.dart';
 import '../roles/Accountant/GapAc/gap_rejected_screen_ac.dart';
+import '../roles/Accountant/GapAc/pending_gap_ac/pending_for_estimate_ac/pending_estimate_viewest_screen_ac.dart';
 import '../roles/Accountant/GapAc/pending_gap_ac/pending_for_estimate_ac/pending_for_estimate_screen_ac.dart';
 import '../roles/Accountant/GapAc/pending_gap_ac/pending_gap_screen_ac.dart';
 import '../roles/Accountant/PaymentsAc/expenditure_payment_ac/expenditure_payment_screen_ac.dart';
@@ -561,7 +562,11 @@ final GoRouter router = GoRouter(
 
 
 
-
+    GoRoute(
+      path: '/ac-Pending-Estimate-Viewest',
+      name: 'acPendingEstimateViewest',
+      builder: (context, state) => PendingEstimateViewestScreenAc(),
+    ),
 
 
 

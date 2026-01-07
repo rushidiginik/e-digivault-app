@@ -9,75 +9,37 @@ import '../../../../../../../core/constants/theme.dart';
 import '../../../../../../../widgets/common_header.dart';
 import '../../../../../../../widgets/common_search_bar_widget.dart';
 
-class InvoiceClientScreenAc extends StatefulWidget {
-  const InvoiceClientScreenAc({super.key});
+class PendingEstimateViewestScreenAc extends StatefulWidget {
+  const PendingEstimateViewestScreenAc({super.key});
 
   @override
-  State<InvoiceClientScreenAc> createState() => _InvoiceClientScreenAcState();
+  State<PendingEstimateViewestScreenAc> createState() =>
+      _PendingEstimateViewestScreenAcState();
 }
 
-class _InvoiceClientScreenAcState extends State<InvoiceClientScreenAc> {
+class _PendingEstimateViewestScreenAcState
+    extends State<PendingEstimateViewestScreenAc> {
   late Size size;
   final TextEditingController controller = TextEditingController();
   final ScrollController scrollController = ScrollController();
 
   final List<Map<String, dynamic>> serviceData = [
     {
-      "invoiceId": "Invoice#01",
-      "item": "GAP-0405",
-      "date": "08 Apr 2025",
-      "amount": "20,000/-",
-      "transactionId": "HJY4563867",
-      "status": "Paid",
-      "action": "View",
+      "documentTitle": "E-khatha 1",
+      "dateAdded": "13-05-2025",
+      "viewOpinion": "View",
     },
 
     {
-      "invoiceId": "Invoice#02",
-      "item": "GAP-0405",
-      "date": "08 Apr 2025",
-      "amount": "20,000/-",
-      "transactionId": "HJY4563867",
-      "status": "Pending",
-      "action": "-",
-    },
-    {
-      "invoiceId": "Invoice#03",
-      "item": "GAP-0405",
-      "date": "08 Apr 2025",
-      "amount": "20,000/-",
-      "transactionId": "HJY4563867",
-      "status": "Pending",
-      "action": "-",
-    },
-    {
-      "invoiceId": "Invoice#04",
-      "item": "GAP-0405",
-      "date": "08 Apr 2025",
-      "amount": "20,000/-",
-      "transactionId": "HJY4563867",
-      "status": "Pending",
-      "action": "-",
+      "documentTitle": "Khatha Extract",
+      "dateAdded": "13-05-2025",
+      "viewOpinion": "View",
     },
 
     {
-      "invoiceId": "Invoice#05",
-      "item": "GAP-0405",
-      "date": "08 Apr 2025",
-      "amount": "20,000/-",
-      "transactionId": "HJY4563867",
-      "status": "Pending",
-      "action": "-",
-    },
-
-    {
-      "invoiceId": "Invoice#06",
-      "item": "GAP-0405",
-      "date": "08 Apr 2025",
-      "amount": "20,000/-",
-      "transactionId": "HJY4563867",
-      "status": "Pending",
-      "action": "-",
+      "documentTitle": "E-khatha 4",
+      "dateAdded": "13-05-2025",
+      "viewOpinion": "View",
     },
   ];
 
@@ -88,7 +50,7 @@ class _InvoiceClientScreenAcState extends State<InvoiceClientScreenAc> {
       top: false,
       child: Scaffold(
         backgroundColor: AppStyles.whiteColor,
-        appBar: CommonHeader(title: 'Invocie', showBack: true),
+        appBar: CommonHeader(title: 'Property', showBack: true),
         body: CustomScrollView(
           controller: scrollController,
           slivers: [
@@ -114,13 +76,13 @@ class _InvoiceClientScreenAcState extends State<InvoiceClientScreenAc> {
           child: Row(
             children: [
               SvgPicture.asset(
-                ImageConst.esttimicone,
+                ImageConst.servicelisticon,
                 height: 20,
                 width: 20,
-                color: AppStyles.primaryColor,
+                color: AppStyles.grey,
               ),
               const SizedBox(width: 8),
-              textSemiBold(text: "Invocie".tr(), fontSize: 16),
+              textSemiBold(text: "Service List Table".tr(), fontSize: 16),
             ],
           ),
         ),
@@ -141,50 +103,20 @@ class _InvoiceClientScreenAcState extends State<InvoiceClientScreenAc> {
           columns: [
             DataColumn(
               label: SizedBox(
-                width: 50,
-                child: textMedium(text: "Invoice ID", fontSize: 14),
-              ),
-            ),
-            DataColumn(
-              label: SizedBox(
-                width: 150,
-                child: textMedium(text: "Item ", fontSize: 14),
+                width: 109,
+                child: textMedium(text: "Document Title", fontSize: 14),
               ),
             ),
             DataColumn(
               label: SizedBox(
                 width: 100,
-                child: textMedium(text: "Date", fontSize: 14),
+                child: textMedium(text: "Date Added", fontSize: 14),
               ),
             ),
             DataColumn(
               label: SizedBox(
                 width: 100,
-                child: textMedium(text: "Amount", fontSize: 14),
-              ),
-            ),
-            DataColumn(
-              label: SizedBox(
-                width: 120,
-                child: textMedium(text: "Transaction ID", fontSize: 14),
-              ),
-            ),
-            DataColumn(
-              label: SizedBox(
-                width: 80,
-                child: textMedium(text: "Status", fontSize: 14),
-              ),
-            ),
-            DataColumn(
-              label: SizedBox(
-                width: 80,
-                child: textMedium(text: "Amount", fontSize: 14),
-              ),
-            ),
-            DataColumn(
-              label: SizedBox(
-                width: 80,
-                child: textMedium(text: "Action", fontSize: 14),
+                child: textMedium(text: "View Opinion", fontSize: 14),
               ),
             ),
           ],
@@ -193,53 +125,23 @@ class _InvoiceClientScreenAcState extends State<InvoiceClientScreenAc> {
               cells: [
                 DataCell(
                   SizedBox(
-                    width: 50,
-                    child: textSemiBold(text: row["invoiceId"], fontSize: 14),
-                  ),
-                ),
-                DataCell(
-                  SizedBox(
-                    width: 150,
-                    child: textRegular(text: row["item"], fontSize: 14),
-                  ),
-                ),
-                DataCell(
-                  SizedBox(
-                    width: 100,
-                    child: textRegular(text: row["date"], fontSize: 14),
-                  ),
-                ),
-                DataCell(
-                  SizedBox(
-                    width: 100,
-                    child: textRegular(text: row["amount"], fontSize: 14),
-                  ),
-                ),
-                DataCell(
-                  SizedBox(
-                    width: 120,
-                    child: textRegular(
-                      text: row["transactionId"],
+                    width: 109,
+                    child: textSemiBold(
+                      text: row["documentTitle"],
                       fontSize: 14,
                     ),
                   ),
                 ),
                 DataCell(
                   SizedBox(
-                    width: 80,
-                    child: textRegular(text: row["status"], fontSize: 14),
+                    width: 100,
+                    child: textRegular(text: row["dateAdded"], fontSize: 14),
                   ),
                 ),
                 DataCell(
                   SizedBox(
-                    width: 80,
-                    child: textRegular(text: row["amount"], fontSize: 14),
-                  ),
-                ),
-                DataCell(
-                  SizedBox(
-                    width: 80,
-                    child: row["action"] == "View"
+                    width: 100,
+                    child: row["viewOpinion"] == "View"
                         ? GestureDetector(
                             onTap: () {
                               context.pushNamed(
@@ -249,7 +151,7 @@ class _InvoiceClientScreenAcState extends State<InvoiceClientScreenAc> {
                             },
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
-                                horizontal: 24.0,
+                                horizontal: 34.0,
                               ),
                               child: Container(
                                 height: 28,
