@@ -2,10 +2,11 @@ import 'package:e_digivault_org_app/widgets/client_page_container_helper_ac.dart
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_svg/svg.dart';
-import '../../../../../../core/constants/app_common_text.dart';
-import '../../../../../../core/constants/image_const.dart';
-import '../../../../../../core/constants/theme.dart';
-import '../../../../../../widgets/common_header.dart';
+import 'package:go_router/go_router.dart';
+import '../../../../../../../core/constants/app_common_text.dart';
+import '../../../../../../../core/constants/image_const.dart';
+import '../../../../../../../core/constants/theme.dart';
+import '../../../../../../../widgets/common_header.dart';
 
 class StateheadOverviewScreenAc extends StatefulWidget {
   const StateheadOverviewScreenAc({super.key});
@@ -135,18 +136,7 @@ class _StateheadOverviewScreenAcState extends State<StateheadOverviewScreenAc> {
                 svgPath: ImageConst.flowestimateicon,
                 label: "Flow\nEstimate",
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) {
-                  //       return InvoiceScreen(
-                  //         icons: Icons.receipt_long,
-                  //         title: "Client",
-                  //       );
-                  //     },
-                  //   ),
-                  // );
-                  // Navigator.pushNamed(context, NavigatorConst.invoiceScreen, arguments: {"icons": Icons.receipt_long, "title": "estimates"});
+                  context.pushNamed('acFlowestimateStateHead');
                 },
               ),
 
@@ -154,18 +144,7 @@ class _StateheadOverviewScreenAcState extends State<StateheadOverviewScreenAc> {
                 svgPath: ImageConst.requesticone,
                 label: "Request",
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) {
-                  //       return InvoiceScreen(
-                  //         icons: Icons.receipt_long,
-                  //         title: "Client",
-                  //       );
-                  //     },
-                  //   ),
-                  // );
-                  // Navigator.pushNamed(context, NavigatorConst.invoiceScreen, arguments: {"icons": Icons.receipt_long, "title": "estimates"});
+                  context.pushNamed('acRequestStateHead');
                 },
               ),
 
@@ -173,75 +152,28 @@ class _StateheadOverviewScreenAcState extends State<StateheadOverviewScreenAc> {
                 svgPath: ImageConst.expenditureicon,
                 label: "Expenditure",
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) {
-                  //       return InvoiceScreen(
-                  //         icons: Icons.receipt_long,
-                  //         title: "Client",
-                  //       );
-                  //     },
-                  //   ),
-                  //);
-                  // Navigator.pushNamed(context, NavigatorConst.invoiceScreen, arguments: {"icons": Icons.receipt_long, "title": "invoice"});
+                  context.pushNamed('acExprenditureStateHead');
                 },
               ),
-
               _browseItem(
                 svgPath: ImageConst.invoiceicon,
                 label: "invoice",
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) {
-                  //       return InvoiceScreen(
-                  //         icons: Icons.receipt_long,
-                  //         title: "Client",
-                  //       );
-                  //     },
-                  //   ),
-                  //);
-                  // Navigator.pushNamed(context, NavigatorConst.invoiceScreen, arguments: {"icons": Icons.receipt_long, "title": "invoice"});
+                  context.pushNamed('acInvoceStatehead');
                 },
               ),
-
               _browseItem(
                 svgPath: ImageConst.estimateicon,
                 label: "estimates",
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) {
-                  //       return InvoiceScreen(
-                  //         icons: Icons.receipt_long,
-                  //         title: "Client",
-                  //       );
-                  //     },
-                  //   ),
-                  // );
-                  // Navigator.pushNamed(context, NavigatorConst.invoiceScreen, arguments: {"icons": Icons.receipt_long, "title": "estimates"});
+                  context.pushNamed('acEstimateStatehead');
                 },
               ),
               _browseItem(
                 svgPath: ImageConst.proposalsicon,
                 label: "proposals",
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) {
-                  //       return InvoiceScreen(
-                  //         icons: Icons.receipt_long,
-                  //         title: "Client",
-                  //       );
-                  //     },
-                  //   ),
-                  // );
-
-                  //  Navigator.pushNamed(context, NavigatorConst.invoiceScreen, arguments: {"icons": Icons.receipt_long, "title": "proposals"});
+                  context.pushNamed('acProposalsStatehead');
                 },
               ),
             ],

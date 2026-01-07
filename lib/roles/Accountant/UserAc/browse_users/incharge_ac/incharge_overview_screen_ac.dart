@@ -2,6 +2,7 @@ import 'package:e_digivault_org_app/widgets/client_page_container_helper_ac.dart
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../../../core/constants/app_common_text.dart';
 import '../../../../../../core/constants/image_const.dart';
 import '../../../../../../core/constants/theme.dart';
@@ -135,18 +136,7 @@ class _InchargeOverviewScreenAcState extends State<InchargeOverviewScreenAc> {
                 svgPath: ImageConst.flowestimateicon,
                 label: "Estimate",
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) {
-                  //       return InvoiceScreen(
-                  //         icons: Icons.receipt_long,
-                  //         title: "Client",
-                  //       );
-                  //     },
-                  //   ),
-                  // );
-                  // Navigator.pushNamed(context, NavigatorConst.invoiceScreen, arguments: {"icons": Icons.receipt_long, "title": "estimates"});
+                  context.pushNamed('acEstimateIncharge');
                 },
               ),
 
@@ -154,18 +144,7 @@ class _InchargeOverviewScreenAcState extends State<InchargeOverviewScreenAc> {
                 svgPath: ImageConst.requesticone,
                 label: "Request",
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) {
-                  //       return InvoiceScreen(
-                  //         icons: Icons.receipt_long,
-                  //         title: "Client",
-                  //       );
-                  //     },
-                  //   ),
-                  // );
-                  // Navigator.pushNamed(context, NavigatorConst.invoiceScreen, arguments: {"icons": Icons.receipt_long, "title": "estimates"});
+                  context.pushNamed('acRequestIncharge');
                 },
               ),
 
@@ -173,18 +152,7 @@ class _InchargeOverviewScreenAcState extends State<InchargeOverviewScreenAc> {
                 svgPath: ImageConst.expenditureicon,
                 label: "Expenditure",
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) {
-                  //       return InvoiceScreen(
-                  //         icons: Icons.receipt_long,
-                  //         title: "Client",
-                  //       );
-                  //     },
-                  //   ),
-                  //);
-                  // Navigator.pushNamed(context, NavigatorConst.invoiceScreen, arguments: {"icons": Icons.receipt_long, "title": "invoice"});
+                  context.pushNamed('acExpenditureIncharge');
                 },
               ),
             ],

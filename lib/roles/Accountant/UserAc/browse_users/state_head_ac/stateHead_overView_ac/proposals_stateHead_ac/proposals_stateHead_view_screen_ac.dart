@@ -1,20 +1,22 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import '../../../../../../core/constants/app_common_text.dart';
-import '../../../../../../core/constants/theme.dart';
-import '../../../../../../widgets/common_header.dart';
+import '../../../../../../../core/constants/app_common_text.dart';
+import '../../../../../../../core/constants/theme.dart';
+import '../../../../../../../widgets/common_header.dart';
 
-class EyeViewScreenAc extends StatefulWidget {
+class ProposalsStateheadViewScreenAc extends StatefulWidget {
   final String? status;
 
-  const EyeViewScreenAc({super.key, this.status});
+  const ProposalsStateheadViewScreenAc({super.key, this.status});
 
   @override
-  State<EyeViewScreenAc> createState() => _EyeViewScreenAcState();
+  State<ProposalsStateheadViewScreenAc> createState() =>
+      _ProposalsStateheadViewScreenAcState();
 }
 
-class _EyeViewScreenAcState extends State<EyeViewScreenAc> {
+class _ProposalsStateheadViewScreenAcState
+    extends State<ProposalsStateheadViewScreenAc> {
   late Size size;
 
   @override
@@ -24,7 +26,7 @@ class _EyeViewScreenAcState extends State<EyeViewScreenAc> {
       top: false,
       child: Scaffold(
         backgroundColor: AppStyles.whiteColor,
-        appBar: CommonHeader(title: 'Estimate', showBack: true),
+        appBar: CommonHeader(title: 'Proposal', showBack: true),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(12.0),
@@ -55,7 +57,7 @@ class _EyeViewScreenAcState extends State<EyeViewScreenAc> {
                                 ),
                                 SizedBox(width: 8),
                                 textSemiBold(
-                                  text: "Estimate".tr(),
+                                  text: "Proposal".tr(),
                                   fontSize: 16,
                                 ),
                               ],
@@ -190,9 +192,9 @@ class _EyeViewScreenAcState extends State<EyeViewScreenAc> {
                 SizedBox(width: 10),
                 Container(
                   color: AppStyles.darkBlue24,
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 3),
                   child: textRegular(
-                    text: "Est number".tr(),
+                    text: "Proposal #1".tr(),
                     fontSize: 12,
                     fontColor: Colors.white,
                   ),

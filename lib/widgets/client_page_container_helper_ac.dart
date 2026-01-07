@@ -5,18 +5,22 @@ import '../core/constants/image_const.dart';
 class ClientPageContainerHelperAc extends StatefulWidget {
   final VoidCallback onTap;
 
-  // 🔹 EXISTING (DO NOT CHANGE)
   final String idPrefix;
   final String idNumber;
   final String roleTitle;
   final String progress;
   final String status;
   final String? createdBy;
+  final Color? statusBgColor;
+  final Color? statusTextColor;
 
-  // 🔹 NEW (OPTIONAL – DB STYLE CARD)
   final String? phone;
   final String? email;
-  final bool showDetailedCard; //  switch
+  final bool showDetailedCard;
+
+  final String? displayName; // 🔹 NEW (optional)
+  final bool replaceIdWithName; // 🔹 NEW
+  //  switch
 
   const ClientPageContainerHelperAc({
     super.key,
@@ -32,6 +36,11 @@ class ClientPageContainerHelperAc extends StatefulWidget {
     this.phone,
     this.email,
     this.showDetailedCard = false,
+    // 🔹 NEW (safe defaults)
+    this.displayName,
+    this.replaceIdWithName = false,
+    this.statusBgColor,
+    this.statusTextColor,
   });
 
   @override
@@ -81,7 +90,9 @@ class _ClientPageContainerHelperAcState
                   children: [
                     //  ID
                     Text(
-                      "${widget.idPrefix}-${widget.idNumber}",
+                      widget.replaceIdWithName && widget.displayName != null
+                          ? widget.displayName!
+                          : "${widget.idPrefix}-${widget.idNumber}",
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
@@ -90,6 +101,7 @@ class _ClientPageContainerHelperAcState
                             : Colors.black,
                       ),
                     ),
+
                     // 🔹 ROLE
                     if (widget.roleTitle.isNotEmpty) ...[
                       Text(
@@ -164,7 +176,8 @@ class _ClientPageContainerHelperAcState
                         ),
                       ),
                     ],
-                    if (widget.showDetailedCard && widget.createdBy != null) ...[
+                    if (widget.showDetailedCard &&
+                        widget.createdBy != null) ...[
                       const SizedBox(height: 4),
                       RichText(
                         text: TextSpan(
@@ -190,12 +203,6 @@ class _ClientPageContainerHelperAcState
                       ),
                     ],
 
-
-
-
-
-
-
                     const SizedBox(height: 6),
                     Row(
                       children: [
@@ -216,9 +223,11 @@ class _ClientPageContainerHelperAcState
                             vertical: 3,
                           ),
                           decoration: BoxDecoration(
-                            color: widget.showDetailedCard
-                                ? const Color(0xFFEDE7F6)
-                                : const Color(0xFFF2EAFE),
+                            color:
+                                widget.statusBgColor ??
+                                (widget.showDetailedCard
+                                    ? const Color(0xFFEDE7F6)
+                                    : const Color(0xFFF2EAFE)),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
@@ -226,9 +235,11 @@ class _ClientPageContainerHelperAcState
                             style: TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.w600,
-                              color: widget.showDetailedCard
-                                  ? const Color(0xFF6F42C1)
-                                  : const Color(0xFF7A3EF0),
+                              color:
+                                  widget.statusTextColor ??
+                                  (widget.showDetailedCard
+                                      ? const Color(0xFF6F42C1)
+                                      : const Color(0xFF7A3EF0)),
                             ),
                           ),
                         ),

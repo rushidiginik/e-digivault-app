@@ -3,28 +3,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sizer/sizer.dart';
-import '../../../../../../core/constants/app_common_text.dart';
-import '../../../../../../core/constants/image_const.dart';
-import '../../../../../../core/constants/theme.dart';
-import '../../../../../../widgets/common_header.dart';
-import '../../../../../../widgets/common_search_bar_widget.dart';
+import '../../../../../../../core/constants/app_common_text.dart';
+import '../../../../../../../core/constants/image_const.dart';
+import '../../../../../../../core/constants/theme.dart';
+import '../../../../../../../widgets/common_header.dart';
+import '../../../../../../../widgets/common_search_bar_widget.dart';
 
-class EstimatesClientScreenAc extends StatefulWidget {
-  const EstimatesClientScreenAc({super.key});
+class ProposalsBusinessScreenAc extends StatefulWidget {
+  const ProposalsBusinessScreenAc({super.key});
 
   @override
-  State<EstimatesClientScreenAc> createState() =>
-      _EstimatesClientScreenAcState();
+  State<ProposalsBusinessScreenAc> createState() =>
+      _ProposalsBusinessScreenAcState();
 }
 
-class _EstimatesClientScreenAcState extends State<EstimatesClientScreenAc> {
+class _ProposalsBusinessScreenAcState extends State<ProposalsBusinessScreenAc> {
   late Size size;
   final TextEditingController controller = TextEditingController();
   final ScrollController scrollController = ScrollController();
 
   final List<Map<String, dynamic>> serviceData = [
     {
-      "estimatesId": "Estimate#01",
+      "proposalId": "Proposal#01",
       "item": "GAP-0405",
       "date": "08 Apr 2025",
       "amount": "20,000/-",
@@ -34,7 +34,7 @@ class _EstimatesClientScreenAcState extends State<EstimatesClientScreenAc> {
     },
 
     {
-      "estimatesId": "Estimate#02",
+      "proposalId": "Proposal#02",
       "item": "GAP-0405",
       "date": "08 Apr 2025",
       "amount": "20,000/-",
@@ -43,7 +43,7 @@ class _EstimatesClientScreenAcState extends State<EstimatesClientScreenAc> {
       "action": "-",
     },
     {
-      "estimatesId": "Estimate#03",
+      "proposalId": "Proposal#03",
       "item": "GAP-0405",
       "date": "08 Apr 2025",
       "amount": "20,000/-",
@@ -52,17 +52,7 @@ class _EstimatesClientScreenAcState extends State<EstimatesClientScreenAc> {
       "action": "-",
     },
     {
-      "estimatesId": "Estimate#04",
-      "item": "GAP-0405",
-      "date": "08 Apr 2025",
-      "amount": "20,000/-",
-      "transactionId": "HJY4563867",
-      "status": "Pending",
-      "action": "-",
-    },
-
-    {
-      "estimatesId": "Estimate#05",
+      "proposalId": "Proposal#04",
       "item": "GAP-0405",
       "date": "08 Apr 2025",
       "amount": "20,000/-",
@@ -72,7 +62,17 @@ class _EstimatesClientScreenAcState extends State<EstimatesClientScreenAc> {
     },
 
     {
-      "estimatesId": "Estimate#06",
+      "proposalId": "Proposal#05",
+      "item": "GAP-0405",
+      "date": "08 Apr 2025",
+      "amount": "20,000/-",
+      "transactionId": "HJY4563867",
+      "status": "Pending",
+      "action": "-",
+    },
+
+    {
+      "proposalId": "Proposal#06",
       "item": "GAP-0405",
       "date": "08 Apr 2025",
       "amount": "20,000/-",
@@ -89,7 +89,7 @@ class _EstimatesClientScreenAcState extends State<EstimatesClientScreenAc> {
       top: false,
       child: Scaffold(
         backgroundColor: AppStyles.whiteColor,
-        appBar: CommonHeader(title: 'Estimate', showBack: true),
+        appBar: CommonHeader(title: 'Proposal', showBack: true),
         body: CustomScrollView(
           controller: scrollController,
           slivers: [
@@ -121,7 +121,7 @@ class _EstimatesClientScreenAcState extends State<EstimatesClientScreenAc> {
                 color: AppStyles.primaryColor,
               ),
               const SizedBox(width: 8),
-              textSemiBold(text: "Estimate".tr(), fontSize: 16),
+              textSemiBold(text: "Proposal".tr(), fontSize: 16),
             ],
           ),
         ),
@@ -143,7 +143,7 @@ class _EstimatesClientScreenAcState extends State<EstimatesClientScreenAc> {
             DataColumn(
               label: SizedBox(
                 width: 50,
-                child: textMedium(text: "Estimates ID", fontSize: 14),
+                child: textMedium(text: "Proposal ID", fontSize: 14),
               ),
             ),
             DataColumn(
@@ -195,7 +195,7 @@ class _EstimatesClientScreenAcState extends State<EstimatesClientScreenAc> {
                 DataCell(
                   SizedBox(
                     width: 50,
-                    child: textSemiBold(text: row["estimatesId"], fontSize: 14),
+                    child: textSemiBold(text: row["proposalId"], fontSize: 14),
                   ),
                 ),
                 DataCell(
@@ -244,13 +244,14 @@ class _EstimatesClientScreenAcState extends State<EstimatesClientScreenAc> {
                         ? GestureDetector(
                             onTap: () {
                               context.pushNamed(
-                                'acEyeView',
+                                'acProposalsBusinessView',
                                 extra: row["status"], // "Paid" / "Pending"
                               );
                             },
-                            child:
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 24.0,
+                              ),
                               child: Container(
                                 height: 28,
                                 decoration: BoxDecoration(
@@ -266,8 +267,7 @@ class _EstimatesClientScreenAcState extends State<EstimatesClientScreenAc> {
                                 ),
                               ),
                             ),
-
-                    )
+                          )
                         : textRegular(text: "-", fontSize: 14),
                   ),
                 ),
