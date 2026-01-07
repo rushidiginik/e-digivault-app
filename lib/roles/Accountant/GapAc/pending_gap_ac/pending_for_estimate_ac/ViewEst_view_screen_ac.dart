@@ -10,7 +10,7 @@ class ViewestViewScreenAc extends StatefulWidget {
 }
 
 class _ViewestViewScreenAcState extends State<ViewestViewScreenAc> {
-  int selectedTab = 0; // 0 = Flow , 1 = Table View
+  int selectedTab = 0;
 
   @override
   Widget build(BuildContext context) {

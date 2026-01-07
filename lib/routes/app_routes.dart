@@ -22,6 +22,8 @@ import '../roles/Accountant/DashBoardAc/ac_dashboard_screen.dart';
 import '../roles/Accountant/GapAc/approved_gap_screen_ac.dart';
 import '../roles/Accountant/GapAc/gap_rejected_screen_ac.dart';
 import '../roles/Accountant/GapAc/pending_gap_ac/pending_for_estimate_ac/ViewEst_view_screen_ac.dart';
+import '../roles/Accountant/GapAc/pending_gap_ac/pending_for_estimate_ac/opinion_view_screen_ac.dart';
+import '../roles/Accountant/GapAc/pending_gap_ac/pending_for_estimate_ac/pending_estimate_viewOpinion_screen_ac.dart';
 import '../roles/Accountant/GapAc/pending_gap_ac/pending_for_estimate_ac/pending_estimate_viewest_screen_ac.dart';
 import '../roles/Accountant/GapAc/pending_gap_ac/pending_for_estimate_ac/pending_for_estimate_screen_ac.dart';
 import '../roles/Accountant/GapAc/pending_gap_ac/pending_gap_screen_ac.dart';
@@ -439,6 +441,23 @@ final GoRouter router = GoRouter(
       path: '/ac_Viewest_View_screen',
       builder: (context, state) {
         return ViewestViewScreenAc();
+      },
+    ),
+
+GoRoute(
+      name: 'acPendingEstimateViewopinion',
+      path: '/ac_Pending_Estimate_Viewopinion_screen',
+      builder: (context, state) {
+        return PendingEstimateViewopinionScreenAc();
+      },
+    ),
+
+
+GoRoute(
+      name: 'acOpinionView',
+      path: '/ac_Opinion_View_screen',
+      builder: (context, state) {
+        return OpinionViewScreenAc();
       },
     ),
 

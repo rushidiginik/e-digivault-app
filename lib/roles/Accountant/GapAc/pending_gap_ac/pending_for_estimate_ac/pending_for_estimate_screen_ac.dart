@@ -836,7 +836,12 @@ class _PendingForEstimateScreenAcState
                       },
                     ),
                     const SizedBox(width: 18),
-                    _linkText("View opinion", onTap: () {}),
+                    _linkText(
+                      "View opinion",
+                      onTap: () {
+                        context.pushNamed('acPendingEstimateViewopinion');
+                      },
+                    ),
                   ],
                 ),
 
