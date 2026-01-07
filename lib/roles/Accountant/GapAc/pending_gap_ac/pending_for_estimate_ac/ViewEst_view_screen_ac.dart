@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:get/get_utils/src/extensions/internacionalization.dart';
-import '../../../../../../../core/constants/image_const.dart';
 import '../../../../../../../core/constants/theme.dart';
-import '../../../../../../../widgets/client_page_container_helper_ac.dart';
 import '../../../../../../../widgets/common_header.dart';
 
 class ViewestViewScreenAc extends StatefulWidget {
@@ -22,7 +18,7 @@ class _ViewestViewScreenAcState extends State<ViewestViewScreenAc> {
       top: false,
       child: Scaffold(
         backgroundColor: AppStyles.whiteColor,
-        appBar: CommonHeader(title: 'State Head', showBack: true),
+        appBar: CommonHeader(title: 'Estimate Status', showBack: true),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -67,39 +63,73 @@ class _ViewestViewScreenAcState extends State<ViewestViewScreenAc> {
                           ),
                           const SizedBox(height: 18),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: const [
-                              Text(
-                                "Created By",
-                                style: TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: 16,
+                              Expanded(
+                                child: Text(
+                                  "Created By",
+                                  style: TextStyle(
+                                    color: Colors.black54,
+                                    fontSize: 16,
+                                  ),
                                 ),
                               ),
-                              Text(
-                                "Kiran @CD",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 16,
+                              SizedBox(
+                                width: 160, //  SAME WIDTH FOR ALL
+                                child: Text(
+                                  "Kiran @CD",
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                  ),
                                 ),
                               ),
                             ],
                           ),
+
                           const SizedBox(height: 18),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                "Approved By",
-                                style: TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: 16,
+                            children: const [
+                              Expanded(
+                                child: Text(
+                                  "Approved By",
+                                  style: TextStyle(
+                                    color: Colors.black54,
+                                    fontSize: 16,
+                                  ),
                                 ),
                               ),
-                              Flexible(
-                                child: const Text(
+                              SizedBox(
+                                width: 160,
+                                child: Text(
                                   "Ramesh @MRA",
-                                  textAlign: TextAlign.end,
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          const SizedBox(height: 18),
+                          Row(
+                            children: const [
+                              Expanded(
+                                child: Text(
+                                  "Rejected By",
+                                  style: TextStyle(
+                                    color: Colors.black54,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 160,
+                                child: Text(
+                                  "Ramesh @Incharge",
+                                  textAlign: TextAlign.left,
                                   style: TextStyle(
                                     fontWeight: FontWeight.w500,
                                     fontSize: 16,

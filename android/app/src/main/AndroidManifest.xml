@@ -3,7 +3,7 @@
     <application
         android:label="e-digivault Org"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/e_digivault">
         <activity
             android:name=".MainActivity"
             android:exported="true"
