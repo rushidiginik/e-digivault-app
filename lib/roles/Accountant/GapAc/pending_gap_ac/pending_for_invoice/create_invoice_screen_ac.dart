@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../../widgets/common_header.dart';
 
 class CreateInvoiceScreenAc extends StatefulWidget {
@@ -53,7 +54,9 @@ class _CreateInvoiceScreenAcState extends State<CreateInvoiceScreenAc> {
                     ),
                     elevation: 0,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    context.pushNamed('acInvoiceEdit');
+                  },
                   child: const Text(
                     'Verify Invoice',
                     style: TextStyle(

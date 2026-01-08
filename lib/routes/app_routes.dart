@@ -27,6 +27,7 @@ import '../roles/Accountant/GapAc/pending_gap_ac/pending_for_estimate_ac/pending
 import '../roles/Accountant/GapAc/pending_gap_ac/pending_for_estimate_ac/pending_estimate_viewest_screen_ac.dart';
 import '../roles/Accountant/GapAc/pending_gap_ac/pending_for_estimate_ac/pending_for_estimate_screen_ac.dart';
 import '../roles/Accountant/GapAc/pending_gap_ac/pending_for_invoice/create_invoice_screen_ac.dart';
+import '../roles/Accountant/GapAc/pending_gap_ac/pending_for_invoice/invoice_edit_screen_ac.dart';
 import '../roles/Accountant/GapAc/pending_gap_ac/pending_for_invoice/pending_for_invoice_screen_ac.dart';
 import '../roles/Accountant/GapAc/pending_gap_ac/pending_gap_screen_ac.dart';
 import '../roles/Accountant/PaymentsAc/expenditure_payment_ac/expenditure_payment_screen_ac.dart';
@@ -603,6 +604,27 @@ final GoRouter router = GoRouter(
         return CreateInvoiceScreenAc();
       },
     ),
+
+
+    GoRoute(
+      name: 'acInvoiceEdit',
+      path: '/ac_Invoice_Edit_screen',
+      builder: (context, state) {
+        return InvoiceEditScreenAc();
+      },
+    ),
+
+
+
+
+
+
+
+
+
+
+
+
 
     GoRoute(
       path: '/ac-Pending-Estimate-Viewest',
