@@ -29,6 +29,7 @@ import '../roles/Accountant/GapAc/pending_gap_ac/pending_for_estimate_ac/pending
 import '../roles/Accountant/GapAc/pending_gap_ac/pending_for_invoice/create_invoice_screen_ac.dart';
 import '../roles/Accountant/GapAc/pending_gap_ac/pending_for_invoice/invoice_edit_screen_ac.dart';
 import '../roles/Accountant/GapAc/pending_gap_ac/pending_for_invoice/pending_for_invoice_screen_ac.dart';
+import '../roles/Accountant/GapAc/pending_gap_ac/pending_for_invoiceVerify_ac/pending_for_invoiceVerify_screen_ac.dart';
 import '../roles/Accountant/GapAc/pending_gap_ac/pending_gap_screen_ac.dart';
 import '../roles/Accountant/PaymentsAc/expenditure_payment_ac/expenditure_payment_screen_ac.dart';
 import '../roles/Accountant/PaymentsAc/expenditure_payment_ac/expenditure_payment_view_screen_ac.dart';
@@ -566,6 +567,15 @@ final GoRouter router = GoRouter(
     ),
 
     GoRoute(
+      path: '/ac-Pending-For-Invoiceverify',
+      name: 'acPendingForInvoiceverify',
+      builder: (context, state) {
+        final status = state.extra as String;
+        return PendingForInvoiceverifyScreenAc(status: status);
+      },
+    ),
+
+    GoRoute(
       name: 'acViewestView',
       path: '/ac_Viewest_View_screen',
       builder: (context, state) {
@@ -605,7 +615,6 @@ final GoRouter router = GoRouter(
       },
     ),
 
-
     GoRoute(
       name: 'acInvoiceEdit',
       path: '/ac_Invoice_Edit_screen',
@@ -613,18 +622,6 @@ final GoRouter router = GoRouter(
         return const InvoiceEditScreenAc(status: "pending");
       },
     ),
-
-
-
-
-
-
-
-
-
-
-
-
 
     GoRoute(
       path: '/ac-Pending-Estimate-Viewest',

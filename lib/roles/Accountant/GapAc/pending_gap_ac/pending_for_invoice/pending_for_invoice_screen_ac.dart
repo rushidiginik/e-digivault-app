@@ -179,7 +179,6 @@ class _PendingForInvoiceScreenAcState extends State<PendingForInvoiceScreenAc> {
 
           const SizedBox(height: 12),
 
-          /// ===== WHITE CARD (ONLY BELOW PART) =====
           Container(
             padding: const EdgeInsets.fromLTRB(14, 10, 14, 6),
             decoration: BoxDecoration(
@@ -193,7 +192,8 @@ class _PendingForInvoiceScreenAcState extends State<PendingForInvoiceScreenAc> {
                 ),
               ],
             ),
-            child: Column(
+            child:
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 /// ACTION ROW
