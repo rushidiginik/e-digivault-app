@@ -622,20 +622,36 @@ class _PendingForInvoiceverifyScreenAcState
       context: context,
       barrierDismissible: false,
       builder: (ctx) {
-        dialogContext = ctx; //  dialog ka actual context
+        dialogContext = ctx;
         return Dialog(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(24),
+            borderRadius: BorderRadius.circular(18),
           ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 36),
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.78,
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Image.asset(ImageConst.verifyDonePNG, width: 60, height: 60),
+                Container(
+                  width: 60,
+                  height: 60,
+                  decoration: const BoxDecoration(
+                    color: Color(0xFFC0E1C7),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Center(
+                    child: SvgPicture.asset(
+                      ImageConst.successgreenicon,
+                      width: 16,
+                      height: 16,
+                      color: const Color(0xFF2E7D32),
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 18),
                 const Text(
-                  "Payment Sent",
+                  "Successfully Verify",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                 ),
               ],
