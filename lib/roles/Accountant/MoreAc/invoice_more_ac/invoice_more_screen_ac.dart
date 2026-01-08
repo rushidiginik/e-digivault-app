@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../core/constants/app_common_text.dart';
 import '../../../../core/constants/image_const.dart';
 import '../../../../core/constants/theme.dart';
@@ -78,7 +79,9 @@ class _InvoiceMoreScreenAcState extends State<InvoiceMoreScreenAc> {
               borderRadius: BorderRadius.circular(9),
             ),
           ),
-          onPressed: () {},
+          onPressed: () {
+            context.pushNamed('acCreateInvoice');
+          },
           child: Text(
             "Create Inovice",
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -150,14 +153,10 @@ class _InvoiceMoreScreenAcState extends State<InvoiceMoreScreenAc> {
             imageUrl: ImageConst.invoicePNG,
             label: "Invoice #${index + 1}",
             onTap: () {
-              // Navigator.push(
-              //  context,
-              // MaterialPageRoute(
-              //   builder: (context) {
-              //     return InvoiceDetailsScreen(status: options[selectedIndex]);
-              //   },
-              // ),
-              // );
+              context.pushNamed(
+                'acInvoiceMoreView',
+                extra: {'status': options[selectedIndex].toLowerCase()},
+              );
             },
           );
         },

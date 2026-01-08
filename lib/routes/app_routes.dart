@@ -31,7 +31,9 @@ import '../roles/Accountant/GapAc/pending_gap_ac/pending_for_invoice/invoice_edi
 import '../roles/Accountant/GapAc/pending_gap_ac/pending_for_invoice/pending_for_invoice_screen_ac.dart';
 import '../roles/Accountant/GapAc/pending_gap_ac/pending_for_invoiceVerify_ac/pending_for_invoiceVerify_screen_ac.dart';
 import '../roles/Accountant/GapAc/pending_gap_ac/pending_gap_screen_ac.dart';
+import '../roles/Accountant/MoreAc/invoice_more_ac/invoice_edit_more_screen_ac.dart';
 import '../roles/Accountant/MoreAc/invoice_more_ac/invoice_more_screen_ac.dart';
+import '../roles/Accountant/MoreAc/invoice_more_ac/invoice_more_view_ac.dart';
 import '../roles/Accountant/PaymentsAc/expenditure_payment_ac/expenditure_payment_screen_ac.dart';
 import '../roles/Accountant/PaymentsAc/expenditure_payment_ac/expenditure_payment_view_screen_ac.dart';
 import '../roles/Accountant/PaymentsAc/request_payment_ac/request_payment_screen_ac.dart';
@@ -624,6 +626,27 @@ final GoRouter router = GoRouter(
       },
     ),
 
+
+
+    GoRoute(
+      name: 'acInvoiceEditMore',
+      path: '/ac_Invoice_Edit_More_screen',
+      builder: (context, state) {
+        return const InvoiceEditMoreScreenAc(status: "pending");
+      },
+    ),
+
+
+
+
+
+
+
+
+
+
+
+
     GoRoute(
       path: '/ac-Pending-Estimate-Viewest',
       name: 'acPendingEstimateViewest',
@@ -836,15 +859,18 @@ final GoRouter router = GoRouter(
 
 
 
+
+
+
+
+
+
     GoRoute(
-      path: '/ac_Invoice_More_screen',
-      name: 'acInvoiceMore',
+      path: '/ac_Invoice_More_View',
+      name: 'acInvoiceMoreView',
       builder: (context, state) {
-        final extra = state.extra as Map<String, dynamic>;
-        return InvoiceMoreScreenAc(
-          icon: extra['icon'],     // Widget
-          title: extra['title'],
-        );
+        final data = state.extra as Map<String, dynamic>?;
+        return InvoiceMoreViewAc(status: data?['status']);
       },
     ),
 
@@ -854,22 +880,16 @@ final GoRouter router = GoRouter(
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    GoRoute(
+      path: '/ac_Invoice_More_screen',
+      name: 'acInvoiceMore',
+      builder: (context, state) {
+        final extra = state.extra as Map<String, dynamic>;
+        return InvoiceMoreScreenAc(
+          icon: extra['icon'], // Widget
+          title: extra['title'],
+        );
+      },
+    ),
   ],
 );
