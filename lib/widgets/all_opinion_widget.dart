@@ -11,6 +11,10 @@ class AllOpinionWidget extends StatelessWidget {
   final String title2;
   final List<String> overviewPoints;
   final List<String> legalPoints;
+  final bool showOpinionContent;
+  final bool showHeader;
+  final String? headerTitle;
+  final Widget? headerIcon;
 
   const AllOpinionWidget({
     super.key,
@@ -20,29 +24,40 @@ class AllOpinionWidget extends StatelessWidget {
     required this.title2,
     required this.overviewPoints,
     required this.legalPoints,
+    this.showOpinionContent = true,
+    this.showHeader = true,
+    this.headerTitle,
+    this.headerIcon,
   });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Row(
-            children: [
-              Image.asset(ImageConst.buildingIconPNG, width: 22),
-              const SizedBox(width: 8),
-              textSemiBold(
-                text: title2,
-                fontSize: 20,
-                fontColor: AppStyles.grey29,
-              ),
-            ],
+        if (showHeader)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              children: [
+                headerIcon ??
+                    Image.asset(ImageConst.buildingIconPNG, width: 22),
+
+                const SizedBox(width: 8),
+
+                textSemiBold(
+                  text: headerTitle ?? title2,
+                  fontSize: 20,
+                  fontColor: AppStyles.grey29,
+                ),
+              ],
+            ),
           ),
-        ),
 
         const SizedBox(height: 6),
-        const Divider(thickness: 1),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 9.0),
+          child: const Divider(thickness: 1),
+        ),
 
         /// ---------- TOOLBAR (HORIZONTAL SCROLL) ----------
         SizedBox(
@@ -93,72 +108,77 @@ class AllOpinionWidget extends StatelessWidget {
         ),
 
         /// ---------- CONTENT (VERTICAL SCROLL) ----------
-        Expanded(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Container(
+        if (showOpinionContent)
+          Expanded(
+            child: SingleChildScrollView(
               padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey.shade300),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  /// OPINION TITLE (BIG)
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey.shade300),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
-                  ),
 
-                  const SizedBox(height: 14),
+                    const SizedBox(height: 14),
 
-                  Text(
-                    "Client: $clientName",
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                    Text(
+                      "Client: $clientName",
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 4),
 
-                  Text(
-                    "Document : $documentName",
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                    const SizedBox(height: 4),
+
+                    Text(
+                      "Document : $documentName",
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
 
-                  const SizedBox(height: 20),
+                    const SizedBox(height: 20),
 
-                  /// OVERVIEW
-                  const Text(
-                    "Overview",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-                  ),
-                  const SizedBox(height: 10),
+                    const Text(
+                      "Overview",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
 
-                  _bulletList(overviewPoints),
+                    _bulletList(overviewPoints),
 
-                  const SizedBox(height: 20),
+                    const SizedBox(height: 20),
 
-                  /// LEGAL
-                  const Text(
-                    "Legal",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-                  ),
-                  const SizedBox(height: 10),
+                    const Text(
+                      "Legal",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
 
-                  _bulletList(legalPoints),
-                ],
+                    _bulletList(legalPoints),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
       ],
     );
   }

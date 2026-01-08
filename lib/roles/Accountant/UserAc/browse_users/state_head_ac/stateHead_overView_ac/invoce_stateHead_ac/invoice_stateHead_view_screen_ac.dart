@@ -28,7 +28,8 @@ class _InvoiceStateheadViewScreenAcState
         backgroundColor: AppStyles.whiteColor,
         appBar: CommonHeader(title: 'Invoice', showBack: true),
         body: SingleChildScrollView(
-          child: Padding(
+          child:
+          Padding(
             padding: const EdgeInsets.all(12.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,60 +113,6 @@ class _InvoiceStateheadViewScreenAcState
                   ],
                 ),
               ),
-              // GestureDetector(
-              //   onTap: () {},
-              //   child: Container(
-              //     padding: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-              //     decoration: BoxDecoration(
-              //       borderRadius: BorderRadius.circular(8),
-              //       color: AppStyles.lightGreenDA,
-              //     ),
-              //     child: Center(
-              //       child: textSemiBold(
-              //         text: "send".tr(),
-              //         fontSize: 14,
-              //         fontColor: AppStyles.green2E,
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              // GestureDetector(
-              //   onTap: () {},
-              //   child: Container(
-              //     padding: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-              //     decoration: BoxDecoration(
-              //       borderRadius: BorderRadius.circular(8),
-              //       color: AppStyles.lightBlueEB,
-              //     ),
-              //     child: Padding(
-              //       padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              //       child: Center(
-              //         child: textSemiBold(
-              //           text: "modify".tr(),
-              //           fontSize: 14,
-              //           fontColor: AppStyles.blue2F,
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              // GestureDetector(
-              //   onTap: () {},
-              //   child: Container(
-              //     padding: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-              //     decoration: BoxDecoration(
-              //       borderRadius: BorderRadius.circular(8),
-              //       color: AppStyles.lightRedFD,
-              //     ),
-              //     child: Center(
-              //       child: textSemiBold(
-              //         text: "acc modify".tr(),
-              //         fontSize: 14,
-              //         fontColor: AppStyles.redColor3F,
-              //       ),
-              //     ),
-              //   ),
-              // ),
             ],
           ),
         ),

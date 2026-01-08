@@ -55,7 +55,9 @@ class _CreateInvoiceScreenAcState extends State<CreateInvoiceScreenAc> {
                     elevation: 0,
                   ),
                   onPressed: () {
-                    context.pushNamed('acInvoiceEdit');
+                    context.pushNamed('acInvoiceEdit',
+                      extra: "status",
+                    );
                   },
                   child: const Text(
                     'Verify Invoice',

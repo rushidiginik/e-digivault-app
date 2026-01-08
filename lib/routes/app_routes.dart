@@ -610,7 +610,7 @@ final GoRouter router = GoRouter(
       name: 'acInvoiceEdit',
       path: '/ac_Invoice_Edit_screen',
       builder: (context, state) {
-        return InvoiceEditScreenAc();
+        return const InvoiceEditScreenAc(status: "pending");
       },
     ),
 
