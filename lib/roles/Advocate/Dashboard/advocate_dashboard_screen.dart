@@ -1,7 +1,9 @@
 import 'package:e_digivault_org_app/core/constants/app_common_text.dart';
 import 'package:e_digivault_org_app/core/constants/image_const.dart';
 import 'package:e_digivault_org_app/core/constants/theme.dart';
+import 'package:e_digivault_org_app/roles/Advocate/AdvocateLeads/advocate_leads_screen.dart';
 import 'package:e_digivault_org_app/roles/Advocate/HomePageAdvocate/homepage_advocate.dart';
+import 'package:e_digivault_org_app/roles/common/settings/common_settings/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,11 +21,11 @@ class _AdvocateDashboardScreenState extends State<AdvocateDashboardScreen> {
   int _selectedIndex = 0;
 
   final List<String> _titles = [
-    "home",
-    "client",
-    "lead",
-    "reports",
-    "settings",
+    "Home",
+    "Client",
+    "Lead",
+    "Reports",
+    "Settings",
   ];
 
   // Icons for navigation
@@ -42,10 +44,10 @@ class _AdvocateDashboardScreenState extends State<AdvocateDashboardScreen> {
     super.initState();
     _screens = const [
       HomePageAdvocate(),
-      // AdvocateClientScreen(),
-      // AdvocateLeadScreen(),
-      // AdvocateReportsScreen(),
-      // SettingScreen(),
+      AdvocateLeadsScreen(),
+      AdvocateLeadsScreen(),
+      AdvocateLeadsScreen(),
+      SettingScreen(),
     ];
   }
 
