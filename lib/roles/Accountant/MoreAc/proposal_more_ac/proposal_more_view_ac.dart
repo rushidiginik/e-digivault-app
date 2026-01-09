@@ -1,22 +1,20 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
-import '../../../../../../../core/constants/app_common_text.dart';
-import '../../../../../../../core/constants/theme.dart';
-import '../../../../../../../widgets/common_header.dart';
+import 'package:go_router/go_router.dart';
+import '../../../../core/constants/app_common_text.dart';
+import '../../../../core/constants/theme.dart';
+import '../../../../widgets/common_header.dart';
 
-class InvoiceStateheadViewScreenAc extends StatefulWidget {
+class ProposalMoreViewAc extends StatefulWidget {
   final String? status;
 
-  const InvoiceStateheadViewScreenAc({super.key, this.status});
+  const ProposalMoreViewAc({super.key, this.status});
 
   @override
-  State<InvoiceStateheadViewScreenAc> createState() =>
-      _InvoiceStateheadViewScreenAcState();
+  State<ProposalMoreViewAc> createState() => _ProposalMoreViewAcState();
 }
 
-class _InvoiceStateheadViewScreenAcState
-    extends State<InvoiceStateheadViewScreenAc> {
+class _ProposalMoreViewAcState extends State<ProposalMoreViewAc> {
   late Size size;
 
   @override
@@ -26,61 +24,28 @@ class _InvoiceStateheadViewScreenAcState
       top: false,
       child: Scaffold(
         backgroundColor: AppStyles.whiteColor,
-        appBar: CommonHeader(title: 'Invoice', showBack: true),
+
+        appBar: CommonHeader(title: 'Client ID', showBack: true),
+
         body: SingleChildScrollView(
-          child:
-          Padding(
+          child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Header Section
-                widget.status == "pending"
-                    ? SizedBox()
-                    : Padding(
-                        padding: const EdgeInsets.only(left: 10.0, bottom: 12),
-                        child: Column(
-                          children: [
-                            SizedBox(height: 10),
-                            Divider(
-                              height: 5,
-                              color: AppStyles.greyDE,
-                              thickness: 1,
-                            ),
-                            SizedBox(height: 10),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.receipt_long,
-                                  size: 20,
-                                  color: AppStyles.primaryColor,
-                                ),
-                                SizedBox(width: 8),
-                                textSemiBold(
-                                  text: "Invoice".tr(),
-                                  fontSize: 16,
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 10),
-                            Divider(
-                              height: 5,
-                              color: AppStyles.greyDE,
-                              thickness: 2,
-                            ),
-                          ],
-                        ),
-                      ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _topHeaderByStatus(),
 
-                SizedBox(height: 1.h),
-                widget.status == "pending" ? _headerSection() : SizedBox(),
-                _bodyTopSection(),
-                _bodyCompanyDetailSection(),
-                _bodyBillToSection(),
-                _bodyServiceSection(),
-                _bodyDateSection(title: "date_space", value: " 16-08-2025"),
-                _bodyDateSection(title: "total_space", value: " 250A/-"),
+                    _bodyTopSection(),
+                    _bodyCompanyDetailSection(),
+                    _bodyBillToSection(),
+                    _bodyServiceSection(),
+                    _bodyDateSection(title: "date_space", value: " 16-08-2025"),
+                    _bodyDateSection(title: "total_space", value: " 250A/-"),
+                  ],
+                ),
               ],
             ),
           ),
@@ -89,35 +54,59 @@ class _InvoiceStateheadViewScreenAcState
     );
   }
 
-  Widget _headerSection() {
+  Widget _topHeaderByStatus() {
     return Column(
       children: [
-        Divider(height: 5, color: AppStyles.greyDE),
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0),
+          padding: const EdgeInsets.only(left: 10, bottom: 10),
           child: Row(
-            spacing: 4,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.receipt_long,
-                      size: 20,
-                      color: AppStyles.primaryColor,
-                    ),
-                    SizedBox(width: 8),
-                    textSemiBold(text: "invoice".tr(), fontSize: 16),
-                  ],
-                ),
-              ),
+              Icon(Icons.receipt_long, size: 20, color: AppStyles.primaryColor),
+              SizedBox(width: 8),
+              textSemiBold(text: "Proposal".tr(), fontSize: 16),
+
+              Spacer(),
+
+              if (widget.status == "rejected") _modifyButton(),
             ],
           ),
         ),
-        Divider(height: 5, color: AppStyles.greyDE),
+        SizedBox(height: 3),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: Divider(color: AppStyles.greyDE),
+        ),
+        SizedBox(height: 10),
+
+        /// Status Button
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: _statusButton(widget.status ?? ""),
+        ),
       ],
+    );
+  }
+
+  Widget _modifyButton() {
+    return GestureDetector(
+      onTap: () {
+        context.pushNamed(
+          'acProposalEditMore',
+          extra: {'status': widget.status},
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+        decoration: BoxDecoration(
+          color: AppStyles.lightBlueEB,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: textSemiBold(
+          text: "modify".tr(),
+          fontSize: 14,
+          fontColor: AppStyles.blue2F,
+        ),
+      ),
     );
   }
 
@@ -139,9 +128,9 @@ class _InvoiceStateheadViewScreenAcState
                 SizedBox(width: 10),
                 Container(
                   color: AppStyles.darkBlue24,
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 3),
+                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 2),
                   child: textRegular(
-                    text: "Inv #1".tr(),
+                    text: "Est number".tr(),
                     fontSize: 12,
                     fontColor: Colors.white,
                   ),
@@ -221,7 +210,7 @@ class _InvoiceStateheadViewScreenAcState
           children: [
             Row(
               children: [
-                textBold(text: "bill_to".tr(), fontSize: 18),
+                textBold(text: "bill_to_label".tr(), fontSize: 18),
                 textBold(
                   text: " Jack Ryan",
                   fontSize: 18,
@@ -285,6 +274,64 @@ class _InvoiceStateheadViewScreenAcState
     );
   }
 
+  Widget _statusButton(String status) {
+    Color bgColor;
+    Color textColor;
+    String label;
+    IconData? icon;
+
+    switch (status) {
+      case "approved":
+        bgColor = AppStyles.greenCC;
+        textColor = AppStyles.green59;
+        label = "Approved";
+        icon = null;
+        break;
+
+      case "pending":
+        bgColor = const Color(0x21FF6919);
+        textColor = const Color(0xFFFF6919);
+        label = "Pending";
+        icon = null;
+        break;
+
+      case "rejected":
+        bgColor = AppStyles.redD9;
+        textColor = AppStyles.redColor3F;
+        label = "Rejected Remark";
+        break;
+
+      default:
+        bgColor = AppStyles.greyDE;
+        textColor = Colors.black;
+        label = status;
+    }
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(vertical: 14),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(70),
+        color: bgColor,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (icon != null) ...[
+            Icon(icon, size: 18, color: textColor),
+            SizedBox(width: 6),
+          ],
+          textRegular(
+            text: label,
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+            fontColor: textColor,
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _bodyDateSection({required String title, required String value}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12.0),
@@ -323,7 +370,7 @@ class DigiVawltLogo extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          'e-DigiVault',
+          'DigiVawlt',
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.w700,

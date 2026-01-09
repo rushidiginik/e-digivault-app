@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../../core/constants/image_const.dart';
 
 class MoreScreenAc extends StatefulWidget {
@@ -23,7 +22,6 @@ class _MoreScreenAcState extends State<MoreScreenAc> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /// 🔹 HEADER
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
               child: Row(
@@ -66,25 +64,65 @@ class _MoreScreenAcState extends State<MoreScreenAc> {
               ),
               'View Estimate Request',
               () {
-                Navigator.pop(context);
+                context.pushNamed(
+                  'acViewEstimaterequestMore',
+                  extra: {
+                    'status': 'Pending', // ya Approved / Rejected
+                  },
+                );
               },
             ),
 
             _menuItem(
-              SvgPicture.asset(ImageConst.moreinvoiceicon, color: Colors.white),
+              SvgPicture.asset(ImageConst.invoiceicon, color: Colors.white),
               'Invoice',
               () {
-                Navigator.pop(context);
+                context.pushNamed(
+                  'acInvoiceMore',
+                  extra: {
+                    'icon': SvgPicture.asset(
+                      ImageConst.invoiceicon,
+                      width: 20,
+                      height: 20,
+                      colorFilter: const ColorFilter.mode(
+                        Colors.white, // visible on blue
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                    'title': 'Invoice',
+                  },
+                );
               },
             ),
+
+
+
+
+
 
             _menuItem(
               SvgPicture.asset(ImageConst.moreestiicon, color: Colors.white),
               'Estimate',
               () {
-                Navigator.pop(context);
+                context.pushNamed(
+                  'acEstimateMore',
+                  extra: {
+                    'icon': SvgPicture.asset(
+                      ImageConst.invoiceicon,
+                      width: 20,
+                      height: 20,
+                      colorFilter: const ColorFilter.mode(
+                        Colors.white, // visible on blue
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                    'title': 'Estimate',
+                  },
+                );
               },
             ),
+
+
 
             _menuItem(
               SvgPicture.asset(
@@ -93,9 +131,26 @@ class _MoreScreenAcState extends State<MoreScreenAc> {
               ),
               'Proposal',
               () {
-                Navigator.pop(context);
+                context.pushNamed(
+                  'acProposalMore',
+                  extra: {
+                    'icon': SvgPicture.asset(
+                      ImageConst.invoiceicon,
+                      width: 20,
+                      height: 20,
+                      colorFilter: const ColorFilter.mode(
+                        Colors.white, // visible on blue
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                    'title': 'Proposal',
+                  },
+                );
               },
             ),
+
+
+
 
             _menuItem(
               SvgPicture.asset(ImageConst.settingsicon, color: Colors.white),
@@ -143,7 +198,6 @@ class _MoreScreenAcState extends State<MoreScreenAc> {
     );
   }
 
-  /// 🔹 MENU ITEM
   Widget _menuItem(Widget icon, String title, VoidCallback onTap) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
@@ -159,11 +213,7 @@ class _MoreScreenAcState extends State<MoreScreenAc> {
           padding: const EdgeInsets.symmetric(horizontal: 14),
           child: Row(
             children: [
-              SizedBox(
-                width: 20,
-                height: 20,
-                child: icon, // 👈 yahin tumhara PNG / SVG aayega
-              ),
+              SizedBox(width: 20, height: 20, child: icon),
               const SizedBox(width: 12),
               Text(
                 title,

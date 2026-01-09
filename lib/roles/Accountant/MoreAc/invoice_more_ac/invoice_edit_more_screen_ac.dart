@@ -1,123 +1,137 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:sizer/sizer.dart';
-import '../../../../../../../core/constants/app_common_text.dart';
-import '../../../../../../../core/constants/theme.dart';
-import '../../../../../../../widgets/common_header.dart';
 
-class InvoiceStateheadViewScreenAc extends StatefulWidget {
+import '../../../../../core/constants/app_common_text.dart';
+import '../../../../../core/constants/image_const.dart';
+import '../../../../../core/constants/theme.dart';
+import '../../../../../widgets/all_opinion_widget.dart';
+import '../../../../../widgets/common_app_bar_widget.dart';
+
+class InvoiceEditMoreScreenAc extends StatefulWidget {
   final String? status;
 
-  const InvoiceStateheadViewScreenAc({super.key, this.status});
+  const InvoiceEditMoreScreenAc({super.key, this.status});
 
   @override
-  State<InvoiceStateheadViewScreenAc> createState() =>
-      _InvoiceStateheadViewScreenAcState();
+  State<InvoiceEditMoreScreenAc> createState() =>
+      _InvoiceEditMoreScreenAcState();
 }
 
-class _InvoiceStateheadViewScreenAcState
-    extends State<InvoiceStateheadViewScreenAc> {
+class _InvoiceEditMoreScreenAcState extends State<InvoiceEditMoreScreenAc> {
   late Size size;
+
+  bool isManuallyApproved = false;
+
+  void _showApproveSuccessDialog(BuildContext context) {
+    late BuildContext dialogContext;
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) {
+        dialogContext = ctx;
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18),
+          ),
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.78,
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: 60,
+                  height: 60,
+                  decoration: const BoxDecoration(
+                    color: Color(0xFFC0E1C7),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Center(
+                    child: SvgPicture.asset(
+                      ImageConst.successgreenicon,
+                      width: 16,
+                      height: 16,
+                      color: const Color(0xFF2E7D32),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 18),
+                const Text(
+                  "Successfully Approved",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+
+    Future.delayed(const Duration(seconds: 1), () {
+      if (!mounted) return;
+
+      Navigator.of(context, rootNavigator: true).pop();
+
+      setState(() {
+        isManuallyApproved = true;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
-    return SafeArea(
-      top: false,
-      child: Scaffold(
-        backgroundColor: AppStyles.whiteColor,
-        appBar: CommonHeader(title: 'Invoice', showBack: true),
-        body: SingleChildScrollView(
-          child:
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Header Section
-                widget.status == "pending"
-                    ? SizedBox()
-                    : Padding(
-                        padding: const EdgeInsets.only(left: 10.0, bottom: 12),
-                        child: Column(
-                          children: [
-                            SizedBox(height: 10),
-                            Divider(
-                              height: 5,
-                              color: AppStyles.greyDE,
-                              thickness: 1,
-                            ),
-                            SizedBox(height: 10),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.receipt_long,
-                                  size: 20,
-                                  color: AppStyles.primaryColor,
-                                ),
-                                SizedBox(width: 8),
-                                textSemiBold(
-                                  text: "Invoice".tr(),
-                                  fontSize: 16,
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 10),
-                            Divider(
-                              height: 5,
-                              color: AppStyles.greyDE,
-                              thickness: 2,
-                            ),
-                          ],
-                        ),
-                      ),
-
-                SizedBox(height: 1.h),
-                widget.status == "pending" ? _headerSection() : SizedBox(),
-                _bodyTopSection(),
-                _bodyCompanyDetailSection(),
-                _bodyBillToSection(),
-                _bodyServiceSection(),
-                _bodyDateSection(title: "date_space", value: " 16-08-2025"),
-                _bodyDateSection(title: "total_space", value: " 250A/-"),
-              ],
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: CommonAppBarWidget(title: ""),
+      body: Column(
+        children: [
+          AllOpinionWidget(
+            clientName: "Rajesh Kumar",
+            documentName: "E-Katha",
+            title2: "Opinion",
+            title: "Opinion",
+            overviewPoints: [],
+            legalPoints: [],
+            showOpinionContent: false,
+            headerTitle: "Invoice",
+            headerIcon: SvgPicture.asset(
+              ImageConst.proposalsicon, // apna svg path
+              width: 22,
+              height: 22,
+              colorFilter: const ColorFilter.mode(
+                AppStyles.primaryColor,
+                BlendMode.srcIn,
+              ),
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _headerSection() {
-    return Column(
-      children: [
-        Divider(height: 5, color: AppStyles.greyDE),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0),
-          child: Row(
-            spacing: 4,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: Row(
+          Expanded(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(
-                      Icons.receipt_long,
-                      size: 20,
-                      color: AppStyles.primaryColor,
-                    ),
-                    SizedBox(width: 8),
-                    textSemiBold(text: "invoice".tr(), fontSize: 16),
+                    SizedBox(height: 1.h),
+                    _bodyTopSection(),
+                    _bodyCompanyDetailSection(),
+                    _bodyBillToSection(),
+                    _bodyServiceSection(),
+                    _bodyDateSection(title: "date_space", value: " 16-08-2025"),
+                    _bodyDateSection(title: "total_space", value: " 250A/-"),
+
+
+                    const SizedBox(height: 90),
                   ],
                 ),
               ),
-            ],
+            ),
           ),
-        ),
-        Divider(height: 5, color: AppStyles.greyDE),
-      ],
+        ],
+      ),
     );
   }
 
@@ -141,7 +155,7 @@ class _InvoiceStateheadViewScreenAcState
                   color: AppStyles.darkBlue24,
                   padding: EdgeInsets.symmetric(horizontal: 12, vertical: 3),
                   child: textRegular(
-                    text: "Inv #1".tr(),
+                    text: "Inv #1".tr,
                     fontSize: 12,
                     fontColor: Colors.white,
                   ),
@@ -150,13 +164,13 @@ class _InvoiceStateheadViewScreenAcState
             ),
             SizedBox(height: 6),
             textRegular(
-              text: "${"bill_date_label".tr()} 12-07-2025",
+              text: "${"bill_date_label".tr} 12-07-2025",
               fontSize: 14,
               fontColor: AppStyles.grey66,
             ),
             SizedBox(height: 6),
             textRegular(
-              text: "${"due_date_label".tr()} 30-10-2025",
+              text: "${"due_date_label".tr} 30-10-2025",
               fontSize: 14,
               fontColor: AppStyles.grey66,
             ),
@@ -187,17 +201,17 @@ class _InvoiceStateheadViewScreenAcState
             ),
             SizedBox(height: 2),
             textRegular(
-              text: "${"company_phone".tr()}+12345678888",
+              text: "${"company_phone".tr}+12345678888",
               fontSize: 14,
             ),
             SizedBox(height: 2),
             textRegular(
-              text: "${"company_email".tr()}info@demo.company",
+              text: "${"company_email".tr}info@demo.company",
               fontSize: 14,
             ),
             SizedBox(height: 2),
             textRegular(
-              text: "${"company_website".tr()}http://www.democompany.com",
+              text: "${"company_website".tr}http://www.democompany.com",
               fontSize: 14,
             ),
           ],
@@ -221,7 +235,7 @@ class _InvoiceStateheadViewScreenAcState
           children: [
             Row(
               children: [
-                textBold(text: "bill_to".tr(), fontSize: 18),
+                textBold(text: "bill_to".tr, fontSize: 18),
                 textBold(
                   text: " Jack Ryan",
                   fontSize: 18,
@@ -253,7 +267,7 @@ class _InvoiceStateheadViewScreenAcState
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            textBold(text: "service".tr(), fontSize: 18),
+            textBold(text: "service".tr, fontSize: 18),
             ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
@@ -297,7 +311,7 @@ class _InvoiceStateheadViewScreenAcState
         ),
         child: Row(
           children: [
-            textBold(text: title.tr(), fontSize: 18),
+            textBold(text: title.tr, fontSize: 18),
             textBold(
               text: value,
               fontSize: 18,

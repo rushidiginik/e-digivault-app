@@ -9,16 +9,16 @@ import '../../../../../../../core/constants/theme.dart';
 import '../../../../../../../widgets/common_header.dart';
 import '../../../../../../../widgets/common_search_bar_widget.dart';
 
-class PendingEstimateViewestScreenAc extends StatefulWidget {
-  const PendingEstimateViewestScreenAc({super.key});
+class PendingEstimateViewopinionScreenAc extends StatefulWidget {
+  const PendingEstimateViewopinionScreenAc({super.key});
 
   @override
-  State<PendingEstimateViewestScreenAc> createState() =>
-      _PendingEstimateViewestScreenAcState();
+  State<PendingEstimateViewopinionScreenAc> createState() =>
+      _PendingEstimateViewopinionScreenAcState();
 }
 
-class _PendingEstimateViewestScreenAcState
-    extends State<PendingEstimateViewestScreenAc> {
+class _PendingEstimateViewopinionScreenAcState
+    extends State<PendingEstimateViewopinionScreenAc> {
   late Size size;
   final TextEditingController controller = TextEditingController();
   final ScrollController scrollController = ScrollController();
@@ -50,7 +50,7 @@ class _PendingEstimateViewestScreenAcState
       top: false,
       child: Scaffold(
         backgroundColor: AppStyles.whiteColor,
-        appBar: CommonHeader(title: 'Property', showBack: true),
+        appBar: CommonHeader(title: 'Opinion', showBack: true),
         body: CustomScrollView(
           controller: scrollController,
           slivers: [
@@ -83,6 +83,13 @@ class _PendingEstimateViewestScreenAcState
               ),
               const SizedBox(width: 8),
               textSemiBold(text: "Service List Table".tr(), fontSize: 16),
+              const SizedBox(width: 90),
+              _linkText(
+                "View opinion",
+                onTap: () {
+                  context.pushNamed('acOpinionView');
+                },
+              ),
             ],
           ),
         ),
@@ -144,7 +151,7 @@ class _PendingEstimateViewestScreenAcState
                     child: row["viewOpinion"] == "View"
                         ? GestureDetector(
                             onTap: () {
-                              context.pushNamed('acViewestView');
+                              context.pushNamed('acOpinionView');
                             },
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
@@ -172,6 +179,33 @@ class _PendingEstimateViewestScreenAcState
               ],
             );
           }).toList(),
+        ),
+      ),
+    );
+  }
+
+  Widget _linkText(String text, {required VoidCallback onTap}) {
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 2), // underline niche aayegi
+        child: Container(
+          decoration: const BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color: Color(0xFF0052CC), // blue underline
+                width: 1.2, // thickness
+              ),
+            ),
+          ),
+          child: Text(
+            text,
+            style: const TextStyle(
+              fontSize: 16,
+              color: Color(0xFF0052CC),
+              fontWeight: FontWeight.w600,
+            ),
+          ),
         ),
       ),
     );
