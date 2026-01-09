@@ -121,23 +121,26 @@ class AuthController extends GetxController {
         router.go('/bd_dashboard_screen');
         break;
       case UserRole.stateHead:
-        // Get.offAllNamed(NavigatorConst.stateHeadDashboard);
+        router.go('/state_head_dashboard_screen');
         break;
       case UserRole.regionalManager:
-        // Get.offAllNamed(NavigatorConst.regionalManagerDashboard);
+        router.go('/regional_manager_dashboard_screen');
+
         break;
       case UserRole.incharge:
-        // Get.offAllNamed(NavigatorConst.inchargeDashboard);
+        router.go('/incharge_dashboard_screen');
+
         break;
       case UserRole.marketReaserchAnalyst:
         router.go('/home_page_mra_screen');
         break;
       case UserRole.advocate:
-        // Get.offAllNamed(NavigatorConst.legalHeadDashboard);
+        router.go('/advocate_dashboard_screen');
+
         break;
       case UserRole.accountant:
         router.go('/ac_dashboard_screen');
-        // Get.offAllNamed(NavigatorConst.accountsDashboard);
+
         break;
     }
   }

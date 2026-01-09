@@ -1,19 +1,23 @@
 import 'package:e_digivault_org_app/core/constants/app_common_text.dart';
 import 'package:e_digivault_org_app/core/constants/image_const.dart';
 import 'package:e_digivault_org_app/core/constants/theme.dart';
+import 'package:e_digivault_org_app/roles/BD/Lead/viewleads/controller/view_leads_controller.dart';
+import 'package:e_digivault_org_app/roles/BD/Lead/viewleads/model/leads_details_response.dart';
 import 'package:e_digivault_org_app/utils/alert_utils.dart';
 import 'package:e_digivault_org_app/widgets/common_divider.dart';
 import 'package:e_digivault_org_app/widgets/common_header.dart';
-import 'package:e_digivault_org_app/widgets/success_popup.dart';
+import 'package:e_digivault_org_app/widgets/loading_widget.dart';
 import 'package:e_digivault_org_app/widgets/text_form_field_widget/text_container_const2.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
 
 class ViewLeadDetailsScreen extends StatefulWidget {
   final bool isPending;
+  final String? leadId;
 
-  const ViewLeadDetailsScreen({super.key, this.isPending = false});
+  const ViewLeadDetailsScreen({super.key, this.isPending = false, this.leadId});
 
   @override
   State<ViewLeadDetailsScreen> createState() => _ViewLeadDetailsScreenState();
@@ -22,10 +26,40 @@ class ViewLeadDetailsScreen extends StatefulWidget {
 class _ViewLeadDetailsScreenState extends State<ViewLeadDetailsScreen> {
   late Size size;
   final ScrollController scrollController = ScrollController();
+  late final ViewLeadsController leadsController;
 
   int selectedIndex = 0;
 
   final List<String> options = ["Individual", "Organisation", "Service"];
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Get existing controller
+    if (Get.isRegistered<ViewLeadsController>()) {
+      leadsController = Get.find<ViewLeadsController>();
+    } else {
+      leadsController = Get.put(ViewLeadsController());
+    }
+
+    // Fetch lead details
+    if (widget.leadId != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        leadsController.fetchLeadDetails(widget.leadId!);
+      });
+    }
+  }
+
+  String _formatDate(String? dateString) {
+    if (dateString == null) return 'N/A';
+    try {
+      final date = DateTime.parse(dateString);
+      return DateFormat('dd-MM-yyyy').format(date);
+    } catch (e) {
+      return 'N/A';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,35 +67,93 @@ class _ViewLeadDetailsScreenState extends State<ViewLeadDetailsScreen> {
     return Scaffold(
       backgroundColor: AppStyles.whiteColor,
       appBar: CommonHeader(title: "Lead", showBack: true),
-      body: CustomScrollView(
-        controller: scrollController,
-        slivers: [
-          SliverToBoxAdapter(child: _overviewSection()),
+      body: Obx(() {
+        // Show loading
+        if (leadsController.isLoadingDetails.value) {
+          return Center(child: CircularLoader());
+        }
 
-          // Show Approve/Reject buttons only if isPending is true
-          if (widget.isPending)
-            SliverToBoxAdapter(child: _approveRejectButtons()),
+        // Show error
+        if (leadsController.errorMessage.value != null) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.error_outline, size: 48, color: Colors.red),
+                SizedBox(height: 16),
+                Text(
+                  leadsController.errorMessage.value!,
+                  style: TextStyle(color: Colors.red),
+                ),
+                SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () {
+                    if (widget.leadId != null) {
+                      leadsController.fetchLeadDetails(widget.leadId!);
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppStyles.primaryColor,
+                    foregroundColor: Colors.white,
+                  ),
+                  child: Text('Retry'),
+                ),
+              ],
+            ),
+          );
+        }
 
-          // Show radio buttons if isPending, otherwise show tab controller
-          SliverToBoxAdapter(
-            child: widget.isPending
-                ? _radioButtonSection()
-                : _tabControllerSection(),
-          ),
+        // Show data
+        final leadData = leadsController.leadDetails.value;
+        if (leadData == null) {
+          return Center(child: Text('No lead details available'));
+        }
 
-          SliverToBoxAdapter(
-            child: [
-              _personalDetailsSection(),
-              _organisationSection(),
-              _serviceSection(),
-            ][selectedIndex],
-          ),
-        ],
-      ),
+        return CustomScrollView(
+          controller: scrollController,
+          slivers: [
+            SliverToBoxAdapter(child: _overviewSection(leadData)),
+
+            // Show Approve/Reject buttons only if isPending is true
+            if (widget.isPending)
+              SliverToBoxAdapter(child: _approveRejectButtons()),
+
+            // Show radio buttons if isPending, otherwise show tab controller
+            SliverToBoxAdapter(
+              child: widget.isPending
+                  ? _radioButtonSection()
+                  : _tabControllerSection(),
+            ),
+
+            SliverToBoxAdapter(
+              child: [
+                _personalDetailsSection(leadData),
+                _organisationSection(leadData),
+                _serviceSection(leadData),
+              ][selectedIndex],
+            ),
+          ],
+        );
+      }),
     );
   }
 
-  Widget _overviewSection() {
+  Widget _overviewSection(leadData) {
+    final personalDetails = leadData.personalDetails;
+    final organization = leadData.organization;
+
+    // Get name (prioritize personal details, then organization)
+    final name = leadsController.getValueOrNA(
+      personalDetails?.name ??
+          organization?.nameOfOwner ??
+          organization?.orgName,
+    );
+    final phone = leadsController.getValueOrNA(personalDetails?.phone);
+    final email = leadsController.getValueOrNA(personalDetails?.email);
+    final createdDate = _formatDate(leadData.createdAt);
+    final leadId = leadsController.getValueOrNA(leadData.leadId);
+    final status = leadsController.getValueOrNA(leadData.processStatus);
+
     return Padding(
       padding: const EdgeInsets.only(top: 14, left: 16, right: 16, bottom: 12),
       child: Column(
@@ -75,13 +167,27 @@ class _ViewLeadDetailsScreenState extends State<ViewLeadDetailsScreen> {
           const SizedBox(height: 12),
           CommonDivider(),
           const SizedBox(height: 10),
-          _leadCardWidget(),
+          _leadCardWidget(
+            name: name,
+            phone: phone,
+            email: email,
+            createdDate: createdDate,
+            leadId: leadId,
+            status: status,
+          ),
         ],
       ),
     );
   }
 
-  static Widget _leadCardWidget() {
+  Widget _leadCardWidget({
+    required String name,
+    required String phone,
+    required String email,
+    required String createdDate,
+    required String leadId,
+    required String status,
+  }) {
     return Container(
       decoration: BoxDecoration(
         color: AppStyles.darkBlue03,
@@ -124,13 +230,13 @@ class _ViewLeadDetailsScreenState extends State<ViewLeadDetailsScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 textExtraBold(
-                  text: "Rajesh Kumar",
+                  text: name,
                   fontSize: 14,
                   fontColor: AppStyles.whiteColor,
                 ),
                 const SizedBox(height: 7),
                 textSemiBold(
-                  text: "Phone No: 89XXXXXXX78",
+                  text: "Phone No: $phone",
                   fontSize: 14.sp,
                   fontColor: AppStyles.whiteColor,
                 ),
@@ -144,7 +250,7 @@ class _ViewLeadDetailsScreenState extends State<ViewLeadDetailsScreen> {
                     ),
                     Flexible(
                       child: textRegular(
-                        text: "Rajeshn@gmail.com",
+                        text: email,
                         fontSize: 14.sp,
                         fontColor: Color(0xffA6E07A),
                       ),
@@ -153,19 +259,13 @@ class _ViewLeadDetailsScreenState extends State<ViewLeadDetailsScreen> {
                 ),
                 const SizedBox(height: 6),
                 textMedium(
-                  text: "Created Date : 28-05-2025",
+                  text: "Created Date: $createdDate",
                   fontSize: 14.sp,
                   fontColor: AppStyles.whiteColor,
                 ),
                 const SizedBox(height: 6),
                 textMedium(
-                  text: "Lead ID : LD-784512",
-                  fontSize: 14.sp,
-                  fontColor: AppStyles.whiteColor,
-                ),
-                const SizedBox(height: 6),
-                textMedium(
-                  text: "Lead By : Kiran @ CP-435689",
+                  text: "Lead ID: $leadId",
                   fontSize: 14.sp,
                   fontColor: AppStyles.whiteColor,
                 ),
@@ -173,12 +273,12 @@ class _ViewLeadDetailsScreenState extends State<ViewLeadDetailsScreen> {
                 Row(
                   children: [
                     textMedium(
-                      text: "Lead Status : ",
+                      text: "Lead Status: ",
                       fontSize: 14.sp,
                       fontColor: AppStyles.whiteColor,
                     ),
                     textMedium(
-                      text: "Processing",
+                      text: status,
                       fontSize: 14.sp,
                       fontColor: AppStyles.green00,
                     ),
@@ -202,16 +302,12 @@ class _ViewLeadDetailsScreenState extends State<ViewLeadDetailsScreen> {
             width: 144,
             child: ElevatedButton(
               onPressed: () {
-                /// SHOW SUCCESS DIALOG USING
                 AlertUtils.showSuccessDialog(
                   context: context,
                   title: "Approved",
-                  message: "Your file E-katha has been successfully Approved.",
+                  message: "The lead has been successfully approved.",
                   autoCloseSeconds: 2,
-                  onDismiss: () {
-                    // Optional: Add any action after dialog dismisses
-                    // e.g., navigate back or refresh data
-                  },
+                  onDismiss: () {},
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -234,15 +330,13 @@ class _ViewLeadDetailsScreenState extends State<ViewLeadDetailsScreen> {
             width: 144,
             child: ElevatedButton(
               onPressed: () {
-                ///  SHOW REJECT REMARK DIALOG
                 AlertUtils.showRejectDialog(
                   context: context,
                   onReject: () {
-                    // When reject button is clicked, show rejected confirmation
                     AlertUtils.showRejectedDialog(
                       context: context,
                       title: "Rejected",
-                      message: "Your file E-katha has been Rejected.",
+                      message: "The lead has been rejected.",
                       onDismiss: () {},
                     );
                   },
@@ -268,31 +362,6 @@ class _ViewLeadDetailsScreenState extends State<ViewLeadDetailsScreen> {
     );
   }
 
-  void _showRejectDialog() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text("Reject Lead"),
-        content: Text("Are you sure you want to reject this lead?"),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text("Cancel"),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              // Handle rejection logic here
-              Navigator.pop(context);
-              // Show success message or navigate back
-            },
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-            child: Text("Reject"),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _radioButtonSection() {
     return Padding(
       padding: const EdgeInsets.only(top: 24, left: 20, right: 20, bottom: 24),
@@ -311,7 +380,6 @@ class _ViewLeadDetailsScreenState extends State<ViewLeadDetailsScreen> {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                /// Radio circle
                 Container(
                   width: 16,
                   height: 16,
@@ -335,10 +403,7 @@ class _ViewLeadDetailsScreenState extends State<ViewLeadDetailsScreen> {
                         )
                       : null,
                 ),
-
                 const SizedBox(width: 8),
-
-                /// Label
                 textRegular(
                   text: options[index],
                   fontSize: 16.sp,
@@ -366,7 +431,7 @@ class _ViewLeadDetailsScreenState extends State<ViewLeadDetailsScreen> {
             mainAxisSize: MainAxisSize.min,
             children: List.generate(options.length * 2 - 1, (index) {
               if (index.isOdd) {
-                return const SizedBox(width: 14); // spacing
+                return const SizedBox(width: 14);
               }
 
               final itemIndex = index ~/ 2;
@@ -405,7 +470,9 @@ class _ViewLeadDetailsScreenState extends State<ViewLeadDetailsScreen> {
     );
   }
 
-  Widget _personalDetailsSection() {
+  Widget _personalDetailsSection(leadData) {
+    final details = leadData.personalDetails;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
@@ -417,35 +484,60 @@ class _ViewLeadDetailsScreenState extends State<ViewLeadDetailsScreen> {
             fontColor: AppStyles.grey66,
           ),
           Divider(color: AppStyles.greyDE),
-          TextContainerConst2(labelTitle: "Full Name", value: "Rajesh Kumar"),
+          TextContainerConst2(
+            labelTitle: "Full Name",
+            value: leadsController.getValueOrNA(details?.name),
+          ),
           TextContainerConst2(
             labelTitle: "Email",
-            value: "rajeshkumar@gmail.com",
+            value: leadsController.getValueOrNA(details?.email),
           ),
-          TextContainerConst2(labelTitle: "Phone No", value: "+91 94xxxxxx23"),
+          TextContainerConst2(
+            labelTitle: "Phone No",
+            value: leadsController.getValueOrNA(details?.phone),
+          ),
           TextContainerConst2(
             labelTitle: "WhatsApp No",
-            value: "+91 94xxxxxx23",
+            value: leadsController.getValueOrNA(details?.whatsappNumber),
           ),
           TextContainerConst2(
             labelTitle: "Address",
-            value:
-                "34, TechPark Lane, Koramangala, Bangalore, Karnataka - 560034",
+            value: leadsController.getValueOrNA(details?.address),
           ),
-          TextContainerConst2(labelTitle: "State", value: "Karnataka"),
-          TextContainerConst2(labelTitle: "District", value: "Bengaluru Urban"),
-          TextContainerConst2(labelTitle: "Taluk", value: "Bengaluru North"),
-          TextContainerConst2(labelTitle: "City", value: "Bengaluru"),
-          TextContainerConst2(labelTitle: "Pincode", value: "560034"),
-          TextContainerConst2(labelTitle: "Aadhaar No", value: "94xxxxxx23"),
-          TextContainerConst2(labelTitle: "PAN No", value: "OHAPS5722P"),
+          TextContainerConst2(
+            labelTitle: "State",
+            value: leadsController.getValueOrNA(details?.state),
+          ),
+          TextContainerConst2(
+            labelTitle: "District",
+            value: leadsController.getValueOrNA(details?.district),
+          ),
+          TextContainerConst2(
+            labelTitle: "City",
+            value: leadsController.getValueOrNA(details?.city),
+          ),
+          TextContainerConst2(
+            labelTitle: "Pincode",
+            value: leadsController.getValueOrNA(details?.pincode),
+          ),
+          TextContainerConst2(
+            labelTitle: "Aadhaar No",
+            value: leadsController.getValueOrNA(details?.adharNumber),
+          ),
+          TextContainerConst2(
+            labelTitle: "PAN No",
+            value: leadsController.getValueOrNA(details?.panNumber),
+          ),
           const SizedBox(height: 20),
         ],
       ),
     );
   }
 
-  Widget _organisationSection() {
+  Widget _organisationSection(leadData) {
+    final org = leadData.organization;
+    final establishmentDate = _formatDate(org?.dateOfEstablishment);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
@@ -459,28 +551,27 @@ class _ViewLeadDetailsScreenState extends State<ViewLeadDetailsScreen> {
           Divider(color: AppStyles.greyDE),
           TextContainerConst2(
             labelTitle: "Organization Name",
-            value: "Citrine Solutions Pvt. Ltd",
+            value: leadsController.getValueOrNA(org?.orgName),
           ),
           TextContainerConst2(
             labelTitle: "Registered Office Address",
-            value:
-                "34, TechPark Lane, Koramangala, Bangalore, Karnataka - 560034",
+            value: leadsController.getValueOrNA(org?.registeredAddress),
           ),
           TextContainerConst2(
             labelTitle: "Date Of Establishment",
-            value: "12 March 2017",
+            value: establishmentDate,
           ),
           TextContainerConst2(
             labelTitle: "Type Of Organisation",
-            value: "Private Limited Company",
+            value: leadsController.getValueOrNA(org?.typeOfOrganization),
           ),
           TextContainerConst2(
             labelTitle: "Name Of The Owner",
-            value: "Rajesh Kumar",
+            value: leadsController.getValueOrNA(org?.nameOfOwner),
           ),
           TextContainerConst2(
             labelTitle: "Ownership Status",
-            value: "Individual Business",
+            value: leadsController.getValueOrNA(org?.ownershipStatus),
           ),
           const SizedBox(height: 20),
         ],
@@ -488,7 +579,10 @@ class _ViewLeadDetailsScreenState extends State<ViewLeadDetailsScreen> {
     );
   }
 
-  Widget _serviceSection() {
+  Widget _serviceSection(leadData) {
+    final services = leadData.serviceDetails?.selectedServices ?? [];
+    final createdDate = _formatDate(leadData.createdAt);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 22),
       child: Container(
@@ -509,7 +603,6 @@ class _ViewLeadDetailsScreenState extends State<ViewLeadDetailsScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              /// Service Request Date Row
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -522,14 +615,11 @@ class _ViewLeadDetailsScreenState extends State<ViewLeadDetailsScreen> {
                   ),
                   Expanded(
                     flex: 3,
-                    child: textBold(text: "24-05-25", fontSize: 14.sp),
+                    child: textBold(text: createdDate, fontSize: 14.sp),
                   ),
                 ],
               ),
-
               const SizedBox(height: 20),
-
-              /// Service Row
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -539,16 +629,22 @@ class _ViewLeadDetailsScreenState extends State<ViewLeadDetailsScreen> {
                   ),
                   Expanded(
                     flex: 3,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        textBold(text: "E-Katha", fontSize: 14.sp),
-                        const SizedBox(height: 12),
-                        textBold(text: "Katha Extract", fontSize: 14.sp),
-                        const SizedBox(height: 12),
-                        textBold(text: "Katha Mutation", fontSize: 14.sp),
-                      ],
-                    ),
+                    child: services.isEmpty
+                        ? textBold(text: "N/A", fontSize: 14.sp)
+                        : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: services
+                                .map(
+                                  (service) => Padding(
+                                    padding: const EdgeInsets.only(bottom: 12),
+                                    child: textBold(
+                                      text: service,
+                                      fontSize: 14.sp,
+                                    ),
+                                  ),
+                                )
+                                .toList(),
+                          ),
                   ),
                 ],
               ),

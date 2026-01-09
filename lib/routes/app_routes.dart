@@ -1,11 +1,18 @@
+import 'package:e_digivault_org_app/roles/Advocate/Dashboard/advocate_dashboard_screen.dart';
+import 'package:e_digivault_org_app/roles/BD/Client/client_screen_bd.dart';
 import 'package:e_digivault_org_app/roles/BD/Dashboard/bd_dashboard_screen.dart';
+import 'package:e_digivault_org_app/roles/BD/HomePageBD/home_page_screen_bd.dart';
 import 'package:e_digivault_org_app/roles/BD/HomePageBD/liveTracking/live_tracking_screen_bd.dart';
 import 'package:e_digivault_org_app/roles/BD/HomePageBD/serviceDocuments/service_doc_screen_bd.dart';
 import 'package:e_digivault_org_app/roles/BD/HomePageBD/videoPromo/video_promo_screen_bd.dart';
+import 'package:e_digivault_org_app/roles/BD/Lead/lead_screen_bd.dart';
 import 'package:e_digivault_org_app/roles/BD/Lead/viewleads/view_lead_details_screen.dart';
+import 'package:e_digivault_org_app/roles/Incharge/Dashboard/incharge_dashboard_screen.dart';
 import 'package:e_digivault_org_app/roles/MRA/dashboard/mra_dashboard_screen.dart';
 import 'package:e_digivault_org_app/roles/MRA/lead/add_lead_mra/add_leads_screen_mra.dart';
 import 'package:e_digivault_org_app/roles/MRA/lead/lead_detail_mra/lead_detail_screen.dart';
+import 'package:e_digivault_org_app/roles/RegionalManager/Dashboard/regional_dashboard.dart';
+import 'package:e_digivault_org_app/roles/StateHead/Dashboard/state_head_dashboard.dart';
 import 'package:e_digivault_org_app/roles/common/login/login_screen.dart';
 import 'package:e_digivault_org_app/roles/common/onboarding/onboarding_screen.dart';
 import 'package:e_digivault_org_app/roles/common/settings/common_settings/contact_support_screen.dart';
@@ -138,11 +145,68 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(path: '/login_screen', builder: (context, state) => LoginScreen()),
 
+    // State Head Role Routes
+    GoRoute(
+      path: '/state_head_dashboard_screen',
+      builder: (context, state) => StateHeadDashboardScreen(),
+    ),
+
+    // Regional Manager Role Routes
+    GoRoute(
+      path: '/regional_manager_dashboard_screen',
+      builder: (context, state) => RegionalHeadDashboardScreen(),
+    ),
+
+    // Incharge Role Routes
+    GoRoute(
+      path: '/incharge_dashboard_screen',
+      builder: (context, state) => InchargeDashboardScreen(),
+    ),
+
+    // Advocate Role Routes
+    GoRoute(
+      path: '/advocate_dashboard_screen',
+      builder: (context, state) => AdvocateDashboardScreen(),
+    ),
+
     // BD Role:....
     GoRoute(
       path: '/bd_dashboard_screen',
       builder: (context, state) => DashboardBDScreen(),
     ),
+    GoRoute(
+      path: '/bd_brochure_screen',
+      builder: (context, state) => BrochureScreen(),
+    ),
+
+    GoRoute(
+      path: '/bd_ratechart_screen',
+      builder: (context, state) => RateChartScreen(),
+    ),
+
+    GoRoute(
+      path: '/bd_ratechart_timeline_screen',
+      builder: (context, state) => RateChartTimeLineScreen(),
+    ),
+    GoRoute(
+      path: '/bd_servicedocuments_screen',
+      builder: (context, state) => ServiceDocumentsScreen(),
+    ),
+    GoRoute(
+      path: '/bd_dashboard_screen',
+      builder: (context, state) => DashboardBDScreen(),
+    ),
+    GoRoute(
+      path: '/bd_home_screen',
+      builder: (context, state) => HomePageBDScreen(),
+    ),
+    GoRoute(
+      path: '/bd_client_screen',
+      builder: (context, state) => ClientScreen(),
+    ),
+
+    GoRoute(path: '/bd_lead_screen', builder: (context, state) => LeadScreen()),
+
     GoRoute(
       path: '/bd_brochure_screen',
       builder: (context, state) => BrochureScreen(),
@@ -227,7 +291,8 @@ final GoRouter router = GoRouter(
       builder: (context, state) {
         final extra = state.extra as Map<String, dynamic>?;
         final isPending = extra?['isPending'] ?? false;
-        return ViewLeadDetailsScreen(isPending: isPending);
+        final leadId = extra?['leadId'] as String?;
+        return ViewLeadDetailsScreen(isPending: isPending, leadId: leadId);
       },
     ),
     //........
