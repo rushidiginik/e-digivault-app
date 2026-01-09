@@ -1,46 +1,51 @@
 import 'package:e_digivault_org_app/core/constants/app_common_text.dart';
-import 'package:e_digivault_org_app/core/constants/theme.dart';
 import 'package:e_digivault_org_app/core/constants/image_const.dart';
-import 'package:e_digivault_org_app/roles/BD/Client/client_screen_bd.dart';
-import 'package:e_digivault_org_app/roles/BD/HomePageBD/home_page_screen_bd.dart';
-import 'package:e_digivault_org_app/roles/BD/Lead/lead_screen_bd.dart';
+import 'package:e_digivault_org_app/core/constants/theme.dart';
+import 'package:e_digivault_org_app/roles/Advocate/HomePageAdvocate/homepage_advocate.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../common/settings/common_settings/settings/settings_screen.dart';
-
-class DashboardBDScreen extends StatefulWidget {
-  const DashboardBDScreen({super.key});
+class AdvocateDashboardScreen extends StatefulWidget {
+  const AdvocateDashboardScreen({super.key});
 
   @override
-  State<DashboardBDScreen> createState() => _DashboardBDScreenState();
+  State<AdvocateDashboardScreen> createState() =>
+      _AdvocateDashboardScreenState();
 }
 
-class _DashboardBDScreenState extends State<DashboardBDScreen> {
+class _AdvocateDashboardScreenState extends State<AdvocateDashboardScreen> {
   late Size size;
   int _selectedIndex = 0;
 
-  final List<String> _titles = ["home", "client", "lead", "Setting"];
+  final List<String> _titles = [
+    "home",
+    "client",
+    "lead",
+    "reports",
+    "settings",
+  ];
 
-  // SVG icons similar to CD dashboard
+  // Icons for navigation
   final List<Widget> _navIcons = [
     SvgPicture.asset(ImageConst.homeicon, height: 24, width: 24),
     SvgPicture.asset(ImageConst.clienticon, height: 24, width: 24),
     SvgPicture.asset(ImageConst.leadsicon, height: 24, width: 24),
+    Icon(Icons.assessment_outlined, size: 24), // Reports icon
     SvgPicture.asset(ImageConst.settingsicon, height: 24, width: 24),
   ];
 
-  // Add screens for all navigation items
   late final List<Widget> _screens;
 
   @override
   void initState() {
     super.initState();
-    _screens = [
-      HomePageBDScreen(),
-      ClientScreen(),
-      LeadScreen(),
-      SettingScreen(),
+    _screens = const [
+      HomePageAdvocate(),
+      // AdvocateClientScreen(),
+      // AdvocateLeadScreen(),
+      // AdvocateReportsScreen(),
+      // SettingScreen(),
     ];
   }
 
@@ -76,6 +81,7 @@ class _DashboardBDScreenState extends State<DashboardBDScreen> {
                   return Expanded(
                     child: GestureDetector(
                       onTap: () {
+                        HapticFeedback.lightImpact();
                         setState(() {
                           _selectedIndex = index;
                         });
@@ -83,15 +89,25 @@ class _DashboardBDScreenState extends State<DashboardBDScreen> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          ColorFiltered(
-                            colorFilter: ColorFilter.mode(
-                              isSelected
+                          // Handle both SVG and Icon widgets
+                          if (_navIcons[index] is Icon)
+                            Icon(
+                              (_navIcons[index] as Icon).icon,
+                              size: 24,
+                              color: isSelected
                                   ? AppStyles.primaryColor
                                   : AppStyles.textBlack,
-                              BlendMode.srcIn,
+                            )
+                          else
+                            ColorFiltered(
+                              colorFilter: ColorFilter.mode(
+                                isSelected
+                                    ? AppStyles.primaryColor
+                                    : AppStyles.textBlack,
+                                BlendMode.srcIn,
+                              ),
+                              child: _navIcons[index],
                             ),
-                            child: _navIcons[index],
-                          ),
                           const SizedBox(height: 4),
                           textMedium(
                             text: _titles[index],

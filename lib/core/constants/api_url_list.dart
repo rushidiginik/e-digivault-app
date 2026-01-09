@@ -82,4 +82,16 @@ class ApiUrlList {
       "${AppConstants.baseUrl}brochure/getAllBrochures";
   static String getAllPromoVideos =
       "${AppConstants.baseUrl}promoVideo/getAllPromoVideos";
+
+  // Leads APIs
+  static String getApprovedLeads =
+      "${AppConstants.baseUrl}employees/businessDev/leads/approved";
+
+  static String getPendingLeads =
+      "${AppConstants.baseUrl}employees/businessDev/leads/pending";
+
+  static String getRejectedLeads =
+      "${AppConstants.baseUrl}employees/businessDev/leads/rejected";
+
+  static String getLeadById = "${AppConstants.baseUrl}employees/lead/";
 }

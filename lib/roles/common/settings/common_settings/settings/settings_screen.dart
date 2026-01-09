@@ -57,7 +57,7 @@ class _SettingScreenState extends State<SettingScreen> {
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBarMra(),
+      // bottomNavigationBar: BottomNavigationBarMra(),
       backgroundColor: AppStyles.whiteColor,
       body: SingleChildScrollView(
         child: Column(
