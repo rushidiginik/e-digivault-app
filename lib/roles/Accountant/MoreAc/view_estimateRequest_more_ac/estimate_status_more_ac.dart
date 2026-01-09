@@ -3,7 +3,9 @@ import '../../../../../../../core/constants/theme.dart';
 import '../../../../../../../widgets/common_header.dart';
 
 class EstimateStatusMoreAc extends StatefulWidget {
-  const EstimateStatusMoreAc({super.key});
+  final String? status;
+
+  const EstimateStatusMoreAc({super.key, this.status});
 
   @override
   State<EstimateStatusMoreAc> createState() => _EstimateStatusMoreAcState();
@@ -19,10 +21,39 @@ class _EstimateStatusMoreAcState extends State<EstimateStatusMoreAc> {
       child: Scaffold(
         backgroundColor: AppStyles.whiteColor,
         appBar: CommonHeader(title: 'Estimate Status', showBack: true),
+
         body: SingleChildScrollView(
           child: Column(
             children: [
-              const SizedBox(height: 30),
+              if (widget.status != null) ...[
+                SizedBox(height: 18,),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    decoration: BoxDecoration(
+                      color: widget.status == "Approved"
+                          ? const Color(0xFFDFF7D8) // light green
+                          : const Color(0xFFFADCDC), // light red
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(
+                      widget.status!,
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: widget.status == "Approved"
+                            ? const Color(0xFF2E7D32)
+                            : const Color(0xFFC62828),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+
+              const SizedBox(height: 18),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(

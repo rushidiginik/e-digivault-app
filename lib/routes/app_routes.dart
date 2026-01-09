@@ -624,9 +624,11 @@ final GoRouter router = GoRouter(
       name: 'acEstimateStatusMore',
       path: '/ac_EstimateStatus_More_screen',
       builder: (context, state) {
-        return EstimateStatusMoreAc();
+        final status = state.extra as String?;
+        return EstimateStatusMoreAc(status: status);
       },
     ),
+
 
 
 
