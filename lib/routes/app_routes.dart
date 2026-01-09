@@ -40,6 +40,7 @@ import '../roles/Accountant/MoreAc/invoice_more_ac/invoice_more_view_ac.dart';
 import '../roles/Accountant/MoreAc/proposal_more_ac/proposal_edit_more_screen_ac.dart';
 import '../roles/Accountant/MoreAc/proposal_more_ac/proposal_more_screen_ac.dart';
 import '../roles/Accountant/MoreAc/proposal_more_ac/proposal_more_view_ac.dart';
+import '../roles/Accountant/MoreAc/view_estimateRequest_more_ac/estimate_status_more_ac.dart';
 import '../roles/Accountant/MoreAc/view_estimateRequest_more_ac/view_estimateRequest_more_screen_ac.dart';
 import '../roles/Accountant/PaymentsAc/expenditure_payment_ac/expenditure_payment_screen_ac.dart';
 import '../roles/Accountant/PaymentsAc/expenditure_payment_ac/expenditure_payment_view_screen_ac.dart';
@@ -616,6 +617,54 @@ final GoRouter router = GoRouter(
         return ViewestViewScreenAc();
       },
     ),
+
+
+
+    GoRoute(
+      name: 'acEstimateStatusMore',
+      path: '/ac_EstimateStatus_More_screen',
+      builder: (context, state) {
+        return EstimateStatusMoreAc();
+      },
+    ),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     GoRoute(
       name: 'acPendingEstimateViewopinion',

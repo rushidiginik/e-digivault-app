@@ -139,26 +139,20 @@ class _ViewEstimaterequestMoreScreenAcState
                                   extra: "Pending",
                                 );
                                 break;
-                              case "PENDING_INVOICE_VERIFY":
-                                context.pushNamed(
-                                  'acPendingForInvoiceverify',
-                                  extra: "Pending",
-                                );
-                                break;
                               default:
                                 context.pushNamed(
-                                  'acRequestView',
+                                  'acPendingForInvoice',
                                   extra: "Pending",
                                 );
                             }
                           } else if (selectedTabIndex == 1) {
                             context.pushNamed(
-                              'acGapDpApproved',
+                              'acEstimateStatusMore',
                               extra: "Approved",
                             );
                           } else if (selectedTabIndex == 2) {
                             context.pushNamed(
-                              'acGapDpRejected',
+                              'acEstimateStatusMore',
                               extra: "Rejected",
                             );
                           }
