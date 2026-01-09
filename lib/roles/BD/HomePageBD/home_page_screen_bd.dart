@@ -2,6 +2,7 @@ import 'package:e_digivault_org_app/core/constants/app_common_text.dart';
 import 'package:e_digivault_org_app/core/constants/image_const.dart';
 import 'package:e_digivault_org_app/core/constants/theme.dart';
 import 'package:e_digivault_org_app/routes/app_routes.dart';
+import 'package:e_digivault_org_app/widgets/bottom_navigation_bar_bd.dart';
 import 'package:e_digivault_org_app/widgets/button_widget.dart';
 import 'package:e_digivault_org_app/widgets/common_header.dart';
 import 'package:flutter/material.dart';

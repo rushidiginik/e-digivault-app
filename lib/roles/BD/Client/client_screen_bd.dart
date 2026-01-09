@@ -1,6 +1,7 @@
 import 'package:e_digivault_org_app/core/constants/app_common_text.dart';
 import 'package:e_digivault_org_app/core/constants/image_const.dart';
 import 'package:e_digivault_org_app/core/constants/theme.dart';
+import 'package:e_digivault_org_app/widgets/bottom_navigation_bar_bd.dart';
 import 'package:e_digivault_org_app/widgets/common_app_bar_widget.dart';
 import 'package:e_digivault_org_app/widgets/header_action/header_action.dart';
 import 'package:sizer/sizer.dart';
@@ -81,6 +82,7 @@ class _ClientScreenState extends State<ClientScreen> {
           ),
         ],
       ),
+
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(left: 16, right: 16),

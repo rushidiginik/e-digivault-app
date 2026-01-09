@@ -35,7 +35,7 @@ enum UserRole {
       case 'mra':
         return UserRole.marketReaserchAnalyst;
 
-      case 'legalHead':
+      case 'legalhead':
         return UserRole.advocate;
 
       case 'accountant':

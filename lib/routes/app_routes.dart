@@ -1,11 +1,18 @@
+import 'package:e_digivault_org_app/roles/Advocate/Dashboard/advocate_dashboard_screen.dart';
+import 'package:e_digivault_org_app/roles/BD/Client/client_screen_bd.dart';
 import 'package:e_digivault_org_app/roles/BD/Dashboard/bd_dashboard_screen.dart';
+import 'package:e_digivault_org_app/roles/BD/HomePageBD/home_page_screen_bd.dart';
 import 'package:e_digivault_org_app/roles/BD/HomePageBD/liveTracking/live_tracking_screen_bd.dart';
 import 'package:e_digivault_org_app/roles/BD/HomePageBD/serviceDocuments/service_doc_screen_bd.dart';
 import 'package:e_digivault_org_app/roles/BD/HomePageBD/videoPromo/video_promo_screen_bd.dart';
+import 'package:e_digivault_org_app/roles/BD/Lead/lead_screen_bd.dart';
 import 'package:e_digivault_org_app/roles/BD/Lead/viewleads/view_lead_details_screen.dart';
+import 'package:e_digivault_org_app/roles/Incharge/Dashboard/incharge_dashboard_screen.dart';
 import 'package:e_digivault_org_app/roles/MRA/dashboard/mra_dashboard_screen.dart';
 import 'package:e_digivault_org_app/roles/MRA/lead/add_lead_mra/add_leads_screen_mra.dart';
 import 'package:e_digivault_org_app/roles/MRA/lead/lead_detail_mra/lead_detail_screen.dart';
+import 'package:e_digivault_org_app/roles/RegionalManager/Dashboard/regional_dashboard.dart';
+import 'package:e_digivault_org_app/roles/StateHead/Dashboard/state_head_dashboard.dart';
 import 'package:e_digivault_org_app/roles/common/login/login_screen.dart';
 import 'package:e_digivault_org_app/roles/common/onboarding/onboarding_screen.dart';
 import 'package:e_digivault_org_app/roles/common/settings/common_settings/contact_support_screen.dart';
@@ -102,27 +109,92 @@ import '../roles/BD/Lead/viewleads/view_leads_screen_bd.dart';
 final GoRouter router = GoRouter(
   initialLocation: '/splash_screen',
   routes: [
-    GoRoute(path: '/splash_screen', builder: (context, state) => SplashScreen()),
-    GoRoute(path: '/digivault_text_screen', builder: (context, state) => DigiVaultTextScreen()),
-    GoRoute(path: '/sub_text_screen', builder: (context, state) => SubTextScreen()),
-    GoRoute(path: '/onboarding_screen', builder: (context, state) => OnboardingScreen()),
+    GoRoute(
+      path: '/splash_screen',
+      builder: (context, state) => SplashScreen(),
+    ),
+    GoRoute(
+      path: '/digivault_text_screen',
+      builder: (context, state) => DigiVaultTextScreen(),
+    ),
+    GoRoute(
+      path: '/sub_text_screen',
+      builder: (context, state) => SubTextScreen(),
+    ),
+    GoRoute(
+      path: '/onboarding_screen',
+      builder: (context, state) => OnboardingScreen(),
+    ),
     GoRoute(path: '/login_screen', builder: (context, state) => LoginScreen()),
 
+    // State Head Role Routes
+    GoRoute(
+      path: '/state_head_dashboard_screen',
+      builder: (context, state) => StateHeadDashboardScreen(),
+    ),
+
+    // Regional Manager Role Routes
+    GoRoute(
+      path: '/regional_manager_dashboard_screen',
+      builder: (context, state) => RegionalHeadDashboardScreen(),
+    ),
+
+    // Incharge Role Routes
+    GoRoute(
+      path: '/incharge_dashboard_screen',
+      builder: (context, state) => InchargeDashboardScreen(),
+    ),
+
+    // Advocate Role Routes
+    GoRoute(
+      path: '/advocate_dashboard_screen',
+      builder: (context, state) => AdvocateDashboardScreen(),
+    ),
+
     // BD Role:....
-    GoRoute(path: '/bd_dashboard_screen', builder: (context, state) => DashboardBDScreen()),
-    GoRoute(path: '/bd_brochure_screen', builder: (context, state) => BrochureScreen()),
+    GoRoute(
+      path: '/bd_dashboard_screen',
+      builder: (context, state) => DashboardBDScreen(),
+    ),
+    GoRoute(
+      path: '/bd_home_screen',
+      builder: (context, state) => HomePageBDScreen(),
+    ),
+    GoRoute(
+      path: '/bd_client_screen',
+      builder: (context, state) => ClientScreen(),
+    ),
 
-    GoRoute(path: '/bd_ratechart_screen', builder: (context, state) => RateChartScreen()),
+    GoRoute(path: '/bd_lead_screen', builder: (context, state) => LeadScreen()),
 
-    GoRoute(path: '/bd_ratechart_timeline_screen', builder: (context, state) => RateChartTimeLineScreen()),
-    GoRoute(path: '/bd_servicedocuments_screen', builder: (context, state) => ServiceDocumentsScreen()),
+    GoRoute(
+      path: '/bd_brochure_screen',
+      builder: (context, state) => BrochureScreen(),
+    ),
+
+    GoRoute(
+      path: '/bd_ratechart_screen',
+      builder: (context, state) => RateChartScreen(),
+    ),
+
+    GoRoute(
+      path: '/bd_ratechart_timeline_screen',
+      builder: (context, state) => RateChartTimeLineScreen(),
+    ),
+    GoRoute(
+      path: '/bd_servicedocuments_screen',
+      builder: (context, state) => ServiceDocumentsScreen(),
+    ),
     GoRoute(
       path: '/bd_subservice_screen',
       name: 'bdSubService',
       builder: (context, state) {
         final data = state.extra as Map<String, dynamic>;
 
-        return SubServiceScreen(mainServiceName: data['mainServiceName'] as String, mainServiceId: data['mainServiceId'] as String);
+        return SubServiceScreen(
+          mainServiceName: data['mainServiceName'] as String,
+          mainServiceId: data['mainServiceId'] as String,
+        );
       },
     ),
 
@@ -132,48 +204,101 @@ final GoRouter router = GoRouter(
       builder: (context, state) {
         final data = state.extra as Map<String, String>;
 
-        return DocumentListScreen(mainServiceName: data['mainServiceName']!, subServiceName: data['subServiceName']!, subServiceId: data['subServiceId']!);
+        return DocumentListScreen(
+          mainServiceName: data['mainServiceName']!,
+          subServiceName: data['subServiceName']!,
+          subServiceId: data['subServiceId']!,
+        );
       },
     ),
-    GoRoute(path: '/bd_videopromo_screen', builder: (context, state) => VideoPlayerScreen()),
+    GoRoute(
+      path: '/bd_videopromo_screen',
+      builder: (context, state) => VideoPlayerScreen(),
+    ),
 
-    GoRoute(path: '/bd_livetracking_screen', builder: (context, state) => LiveTrackingScreen()),
+    GoRoute(
+      path: '/bd_livetracking_screen',
+      builder: (context, state) => LiveTrackingScreen(),
+    ),
 
     GoRoute(
       path: '/bd_livetracking_actions_screen',
       name: 'bdLiveTrackingActions',
       builder: (context, state) {
         final data = state.extra as Map<String, String>;
-        return LiveTrackingActionsScreen(title: data['title']!, status: data['status']!);
+        return LiveTrackingActionsScreen(
+          title: data['title']!,
+          status: data['status']!,
+        );
       },
     ),
-    GoRoute(path: '/add_leads_screen_bd', builder: (context, state) => DashboardBDScreen()),
+    GoRoute(
+      path: '/add_leads_screen_bd',
+      builder: (context, state) => DashboardBDScreen(),
+    ),
 
-    GoRoute(path: '/add_leads_screen_bd', builder: (context, state) => DashboardBDScreen()),
-    GoRoute(path: '/view_leads_screen', builder: (context, state) => ViewLeadsScreen()),
+    GoRoute(
+      path: '/add_leads_screen_bd',
+      builder: (context, state) => DashboardBDScreen(),
+    ),
+    GoRoute(
+      path: '/view_leads_screen',
+      builder: (context, state) => ViewLeadsScreen(),
+    ),
 
     GoRoute(
       path: '/view_leads_details_screen',
       builder: (context, state) {
         final extra = state.extra as Map<String, dynamic>?;
         final isPending = extra?['isPending'] ?? false;
-        return ViewLeadDetailsScreen(isPending: isPending);
+        final leadId = extra?['leadId'] as String?;
+        return ViewLeadDetailsScreen(isPending: isPending, leadId: leadId);
       },
     ),
     //........
-    GoRoute(path: '/home_page_mra_screen', builder: (context, state) => MraDashboardScreen()),
-    GoRoute(path: '/add_leads_screen_mra', builder: (context, state) => AddLeadsScreenMra()),
+    GoRoute(
+      path: '/home_page_mra_screen',
+      builder: (context, state) => MraDashboardScreen(),
+    ),
+    GoRoute(
+      path: '/add_leads_screen_mra',
+      builder: (context, state) => AddLeadsScreenMra(),
+    ),
 
-    GoRoute(path: '/lead_detail_screen_mra', builder: (context, state) => LeadDetailScreenMra()),
-    GoRoute(path: '/settings_screen', builder: (context, state) => SettingScreen()),
+    GoRoute(
+      path: '/lead_detail_screen_mra',
+      builder: (context, state) => LeadDetailScreenMra(),
+    ),
+    GoRoute(
+      path: '/settings_screen',
+      builder: (context, state) => SettingScreen(),
+    ),
 
     // Settings Sub-screens
-    GoRoute(path: '/notification_setting_screen', builder: (context, state) => NotificationSettingScreen()),
-    GoRoute(path: '/language_preference_screen', builder: (context, state) => LanguagePreferenceScreen()),
-    GoRoute(path: '/privacy_setting_screen', builder: (context, state) => PrivacySettingScreen()),
-    GoRoute(path: '/contact_support_screen', builder: (context, state) => ContactSupportScreen()),
-    GoRoute(path: '/faq_help_screen', builder: (context, state) => FaqHelpScreen()),
-    GoRoute(path: '/user_manual_screen', builder: (context, state) => UserManualScreen()),
+    GoRoute(
+      path: '/notification_setting_screen',
+      builder: (context, state) => NotificationSettingScreen(),
+    ),
+    GoRoute(
+      path: '/language_preference_screen',
+      builder: (context, state) => LanguagePreferenceScreen(),
+    ),
+    GoRoute(
+      path: '/privacy_setting_screen',
+      builder: (context, state) => PrivacySettingScreen(),
+    ),
+    GoRoute(
+      path: '/contact_support_screen',
+      builder: (context, state) => ContactSupportScreen(),
+    ),
+    GoRoute(
+      path: '/faq_help_screen',
+      builder: (context, state) => FaqHelpScreen(),
+    ),
+    GoRoute(
+      path: '/user_manual_screen',
+      builder: (context, state) => UserManualScreen(),
+    ),
 
     GoRoute(
       path: '/user_manual_doc',
@@ -185,21 +310,68 @@ final GoRouter router = GoRouter(
     ),
 
     //////////////////////////////////////  accountant //////////////////////////////////////
-    GoRoute(path: '/ac_dashboard_screen', builder: (context, state) => AcDashboardScreen()),
-    GoRoute(path: '/ac_client_screen', name: 'acClient', builder: (context, state) => ClientScreenAc()),
-    GoRoute(path: '/ac_stateHead_screen', name: 'acStateHead', builder: (context, state) => StateHeadScreenAc()),
-    GoRoute(path: '/ac_regionalHead_screen', name: 'acRegionalHead', builder: (context, state) => RegionalHeadScreenAc()),
-    GoRoute(path: '/ac_incharge_screen', name: 'acIncharge', builder: (context, state) => InchargeScreenAc()),
-    GoRoute(path: '/ac_mra_screen', name: 'acMra', builder: (context, state) => MraScreenAc()),
-    GoRoute(path: '/ac_deliveryPartner_screen', name: 'acDeliveryPartner', builder: (context, state) => DeliveryPartnerScreenAc()),
-    GoRoute(path: '/ac_business_screen', name: 'acBusiness', builder: (context, state) => BusinessScreenAc()),
-    GoRoute(path: '/ac_overview_screen', name: 'acOverview', builder: (context, state) => OverviewScreenAc()),
+    GoRoute(
+      path: '/ac_dashboard_screen',
+      builder: (context, state) => AcDashboardScreen(),
+    ),
+    GoRoute(
+      path: '/ac_client_screen',
+      name: 'acClient',
+      builder: (context, state) => ClientScreenAc(),
+    ),
+    GoRoute(
+      path: '/ac_stateHead_screen',
+      name: 'acStateHead',
+      builder: (context, state) => StateHeadScreenAc(),
+    ),
+    GoRoute(
+      path: '/ac_regionalHead_screen',
+      name: 'acRegionalHead',
+      builder: (context, state) => RegionalHeadScreenAc(),
+    ),
+    GoRoute(
+      path: '/ac_incharge_screen',
+      name: 'acIncharge',
+      builder: (context, state) => InchargeScreenAc(),
+    ),
+    GoRoute(
+      path: '/ac_mra_screen',
+      name: 'acMra',
+      builder: (context, state) => MraScreenAc(),
+    ),
+    GoRoute(
+      path: '/ac_deliveryPartner_screen',
+      name: 'acDeliveryPartner',
+      builder: (context, state) => DeliveryPartnerScreenAc(),
+    ),
+    GoRoute(
+      path: '/ac_business_screen',
+      name: 'acBusiness',
+      builder: (context, state) => BusinessScreenAc(),
+    ),
+    GoRoute(
+      path: '/ac_overview_screen',
+      name: 'acOverview',
+      builder: (context, state) => OverviewScreenAc(),
+    ),
 
-    GoRoute(path: '/ac_StateHead_Overview_screen', name: 'acStateHeadOverview', builder: (context, state) => StateheadOverviewScreenAc()),
+    GoRoute(
+      path: '/ac_StateHead_Overview_screen',
+      name: 'acStateHeadOverview',
+      builder: (context, state) => StateheadOverviewScreenAc(),
+    ),
 
-    GoRoute(path: '/ac_RegionalHead_Overview_screen', name: 'acRegionalHeadOverview', builder: (context, state) => RegionalheadOverviewScreenAc()),
+    GoRoute(
+      path: '/ac_RegionalHead_Overview_screen',
+      name: 'acRegionalHeadOverview',
+      builder: (context, state) => RegionalheadOverviewScreenAc(),
+    ),
 
-    GoRoute(path: '/ac_Incharge_Overview_screen', name: 'acInchargeOverview', builder: (context, state) => InchargeOverviewScreenAc()),
+    GoRoute(
+      path: '/ac_Incharge_Overview_screen',
+      name: 'acInchargeOverview',
+      builder: (context, state) => InchargeOverviewScreenAc(),
+    ),
 
     GoRoute(
       path: '/ac_Mra_Overview_screen',
@@ -421,9 +593,7 @@ final GoRouter router = GoRouter(
       },
     ),
 
-
-
-     GoRoute(
+    GoRoute(
       name: 'acPendingForEstimate',
       path: '/ac_Pending_ForEstimate_screen',
       builder: (context, state) {
@@ -432,28 +602,11 @@ final GoRouter router = GoRouter(
       },
     ),
 
-
-
-
-
-
-
-
-
-
-
-
-
     GoRoute(
       path: '/ac-Pending-Estimate-Viewest',
       name: 'acPendingEstimateViewest',
       builder: (context, state) => PendingEstimateViewestScreenAc(),
     ),
-
-
-
-
-
 
     GoRoute(
       path: '/ac-Expenditure-Incharge-view',
@@ -658,15 +811,5 @@ final GoRouter router = GoRouter(
       name: 'acExpenditureRegionalheadView',
       builder: (context, state) => ExpenditureRegionalheadViewScreenAc(),
     ),
-
-
-
-
-
-
-
-
-
-
   ],
 );
