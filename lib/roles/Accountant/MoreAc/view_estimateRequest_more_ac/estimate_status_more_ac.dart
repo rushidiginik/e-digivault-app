@@ -26,7 +26,7 @@ class _EstimateStatusMoreAcState extends State<EstimateStatusMoreAc> {
           child: Column(
             children: [
               if (widget.status != null) ...[
-                SizedBox(height: 18,),
+                SizedBox(height: 18),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Container(
@@ -196,6 +196,63 @@ class _EstimateStatusMoreAcState extends State<EstimateStatusMoreAc> {
               const SizedBox(height: 20),
               if (selectedTab == 0) _flowView(),
               if (selectedTab == 1) _tableView(),
+
+              if (widget.status == "Rejected") ...[
+                const SizedBox(height: 9),
+
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 16),
+                    // right gap as needed
+                    child: SizedBox(
+                      height: 48,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // View Remark action
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF0052CC),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(24),
+                          ),
+                          elevation: 0,
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min, // 🔥 IMPORTANT
+                          children: [
+                            Container(
+                              width: 38,
+                              height: 38,
+                              decoration: const BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.remove_red_eye_outlined,
+                                color: Color(0xFF0052CC),
+                                size: 28,
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            const Text(
+                              "View Remark",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 30),
+              ],
             ],
           ),
         ),
