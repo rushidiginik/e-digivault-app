@@ -1,3 +1,6 @@
+import 'package:e_digivault_org_app/roles/Advocate/AdvocateLeads/addleads/add_newleads_screen.dart';
+import 'package:e_digivault_org_app/roles/Advocate/AdvocateLeads/leadsReport/lead_report_details_screen.dart';
+import 'package:e_digivault_org_app/roles/Advocate/AdvocateLeads/leadsReport/lead_report_screen.dart';
 import 'package:e_digivault_org_app/roles/Advocate/Dashboard/advocate_dashboard_screen.dart';
 import 'package:e_digivault_org_app/roles/BD/Client/client_screen_bd.dart';
 import 'package:e_digivault_org_app/roles/BD/Dashboard/bd_dashboard_screen.dart';
@@ -167,6 +170,24 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/advocate_dashboard_screen',
       builder: (context, state) => AdvocateDashboardScreen(),
+    ),
+    GoRoute(
+      path: '/lead_addnew_screen',
+      builder: (context, state) => AddNewLeadScreen(),
+    ),
+
+    GoRoute(
+      path: '/lead_report_screen',
+      builder: (context, state) => LeadReportScreen(),
+    ),
+    GoRoute(
+      path: '/leads_report_details_screen',
+      builder: (context, state) {
+        final extra = state.extra as Map<String, dynamic>?;
+        final isPending = extra?['isPending'] ?? false;
+        final leadId = extra?['leadId'] as String?;
+        return LeadReportDetailsScreen(isPending: isPending, leadId: leadId);
+      },
     ),
 
     // BD Role:....

@@ -1,3 +1,4 @@
+import 'package:e_digivault_org_app/widgets/common_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:sizer/sizer.dart';
@@ -32,7 +33,10 @@ class _HomePageAdvocateState extends State<HomePageAdvocate> {
               SizedBox(height: 16),
               _projectSection(),
               SizedBox(height: 16),
+              CommonDivider(),
+              SizedBox(height: 16),
               _leadConversionStatusSection(),
+              SizedBox(height: 26),
             ],
           ),
         ),
@@ -61,7 +65,7 @@ class _HomePageAdvocateState extends State<HomePageAdvocate> {
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -149,16 +153,15 @@ class _HomePageAdvocateState extends State<HomePageAdvocate> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  textRegular(
+                  textSemiBold(
                     text: "Total",
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
                   ),
-                  textRegular(
+                  textMedium(
                     text: "420",
-                    fontSize: 18,
+                    fontSize: 14,
                     fontColor: AppStyles.pinkF2,
-                    fontWeight: FontWeight.w600,
                   ),
                 ],
               ),
@@ -166,11 +169,7 @@ class _HomePageAdvocateState extends State<HomePageAdvocate> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                textRegular(
-                  text: "Task",
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
+                textMedium(text: "Task", fontSize: 16),
                 SizedBox(height: 1.h),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -251,7 +250,7 @@ class _HomePageAdvocateState extends State<HomePageAdvocate> {
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -293,13 +292,13 @@ class _HomePageAdvocateState extends State<HomePageAdvocate> {
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             textMedium(
               text: "Lead Conversion Status",
-              fontSize: 16,
+              fontSize: 14,
               fontColor: AppStyles.textBlack15,
             ),
             const SizedBox(height: 16),
@@ -342,7 +341,7 @@ class _HomePageAdvocateState extends State<HomePageAdvocate> {
     return Column(
       children: [
         CircularPercentIndicator(
-          radius: 35.0,
+          radius: 30.0,
           lineWidth: 9.0,
           percent: percent,
           backgroundColor: backgroundColor,
@@ -368,7 +367,7 @@ class _HomePageAdvocateState extends State<HomePageAdvocate> {
         ),
         SizedBox(height: 4),
         SizedBox(
-          height: 34,
+          height: 24,
           child: textRegular(
             text: label,
             fontSize: 12,
@@ -400,12 +399,13 @@ class _HomePageAdvocateState extends State<HomePageAdvocate> {
                 text: "$label - ",
                 fontSize: 14,
                 fontColor: AppStyles.grey,
-                fontWeight: FontWeight.w300,
+                fontWeight: FontWeight.w400,
               ),
               textRegular(
                 text: value,
                 fontSize: 14,
                 fontColor: AppStyles.textBlack,
+                fontWeight: FontWeight.w300,
               ),
             ],
           ),
@@ -427,7 +427,7 @@ class _HomePageAdvocateState extends State<HomePageAdvocate> {
         return Stack(
           children: [
             Container(
-              height: 10,
+              height: 12,
               width: width,
               decoration: BoxDecoration(
                 color: backgroundColor,
@@ -435,7 +435,7 @@ class _HomePageAdvocateState extends State<HomePageAdvocate> {
               ),
             ),
             Container(
-              height: 10,
+              height: 12,
               width: fillWidth,
               decoration: BoxDecoration(
                 color: fillColor,
@@ -454,49 +454,59 @@ class _HomePageAdvocateState extends State<HomePageAdvocate> {
     int maxValue,
     Color color,
   ) {
-    final progress = (value / maxValue).clamp(0.0, 1.0);
+    final double progress = (value / maxValue).clamp(0.0, 1.0);
 
     return Row(
       children: [
         SizedBox(
-          width: 90,
+          width: 65,
           child: textRegular(
             text: title,
-            fontSize: 14,
+            fontSize: 12,
             fontWeight: FontWeight.w400,
           ),
         ),
         Expanded(
           child: Stack(
+            alignment: Alignment.centerLeft,
             children: [
+              // Background bar
               Container(
-                height: 8,
+                height: 6,
                 decoration: BoxDecoration(
                   color: AppStyles.greyD9,
-                  borderRadius: BorderRadius.circular(4),
+                  borderRadius: BorderRadius.circular(0),
                 ),
               ),
+
+              // Progress bar + end indicator
               FractionallySizedBox(
                 widthFactor: progress,
-                child: Container(
-                  height: 8,
-                  decoration: BoxDecoration(
-                    color: color,
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                ),
-              ),
-              // End marker
-              Positioned(
-                left: (progress * MediaQuery.of(context).size.width * 0.5) - 3,
-                top: -2.5,
-                child: Container(
-                  width: 6,
-                  height: 13,
-                  decoration: BoxDecoration(
-                    color: color,
-                    borderRadius: BorderRadius.circular(1),
-                  ),
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  alignment: Alignment.centerRight,
+                  children: [
+                    Container(
+                      height: 6,
+                      decoration: BoxDecoration(
+                        color: color,
+                        borderRadius: BorderRadius.circular(0),
+                      ),
+                    ),
+
+                    // End marker (exactly like image)
+                    Positioned(
+                      right: -3,
+                      child: Container(
+                        width: 6,
+                        height: 14,
+                        decoration: BoxDecoration(
+                          color: color,
+                          borderRadius: BorderRadius.circular(1),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -504,10 +514,10 @@ class _HomePageAdvocateState extends State<HomePageAdvocate> {
         ),
         const SizedBox(width: 12),
         SizedBox(
-          width: 40,
-          child: textMedium(
+          width: 30,
+          child: textRegular(
             text: value.toString(),
-            fontSize: 13,
+            fontSize: 12,
             fontColor: AppStyles.textBlack,
           ),
         ),
@@ -530,7 +540,7 @@ class _HomePageAdvocateState extends State<HomePageAdvocate> {
           width: 80,
           child: textRegular(
             text: label,
-            fontSize: 14,
+            fontSize: 12,
             fontWeight: FontWeight.w400,
           ),
         ),
@@ -538,28 +548,30 @@ class _HomePageAdvocateState extends State<HomePageAdvocate> {
           child: Stack(
             children: [
               Container(
-                height: 8,
+                height: 14,
+                width: 146,
                 decoration: BoxDecoration(
                   color: lightColor,
-                  borderRadius: BorderRadius.circular(4),
+                  borderRadius: BorderRadius.circular(50),
                 ),
               ),
               FractionallySizedBox(
                 widthFactor: progress,
                 child: Container(
-                  height: 8,
+                  height: 14,
+                  width: 146,
                   decoration: BoxDecoration(
                     color: color,
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: BorderRadius.circular(50),
                   ),
                 ),
               ),
             ],
           ),
         ),
-        const SizedBox(width: 12),
+        const SizedBox(width: 16),
         SizedBox(
-          width: 60,
+          width: 50,
           child: textMedium(
             text: "$current/$total",
             fontSize: 14,
