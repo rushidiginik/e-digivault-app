@@ -40,6 +40,7 @@ import '../roles/Accountant/MoreAc/invoice_more_ac/invoice_more_view_ac.dart';
 import '../roles/Accountant/MoreAc/proposal_more_ac/proposal_edit_more_screen_ac.dart';
 import '../roles/Accountant/MoreAc/proposal_more_ac/proposal_more_screen_ac.dart';
 import '../roles/Accountant/MoreAc/proposal_more_ac/proposal_more_view_ac.dart';
+import '../roles/Accountant/MoreAc/view_estimateRequest_more_ac/view_estimateRequest_more_screen_ac.dart';
 import '../roles/Accountant/PaymentsAc/expenditure_payment_ac/expenditure_payment_screen_ac.dart';
 import '../roles/Accountant/PaymentsAc/expenditure_payment_ac/expenditure_payment_view_screen_ac.dart';
 import '../roles/Accountant/PaymentsAc/request_payment_ac/request_payment_screen_ac.dart';
@@ -549,6 +550,30 @@ final GoRouter router = GoRouter(
     ),
 
     GoRoute(
+      name: 'acViewEstimaterequestMore',
+      path: '/ac-View-Estimaterequest-More_screen',
+      builder: (context, state) {
+        final extra = state.extra as Map<String, dynamic>;
+        return ViewEstimaterequestMoreScreenAc(
+          status: extra['status'] as String?,
+        );
+      },
+    ),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    GoRoute(
       name: 'acPendingGap',
       path: '/ac-Pending-Gap-screen',
       builder: (context, state) {
@@ -632,8 +657,6 @@ final GoRouter router = GoRouter(
       },
     ),
 
-
-
     GoRoute(
       name: 'acInvoiceEditMore',
       path: '/ac_Invoice_Edit_More_screen',
@@ -642,8 +665,7 @@ final GoRouter router = GoRouter(
       },
     ),
 
-
- GoRoute(
+    GoRoute(
       name: 'acEstimateEditMore',
       path: '/ac_Estimate_Edit_More_screen',
       builder: (context, state) {
@@ -651,25 +673,13 @@ final GoRouter router = GoRouter(
       },
     ),
 
-
- GoRoute(
+    GoRoute(
       name: 'acProposalEditMore',
       path: '/ac_Proposal_Edit_More_screen',
       builder: (context, state) {
         return const ProposalEditMoreScreenAc(status: "pending");
       },
     ),
-
-
-
-
-
-
-
-
-
-
-
 
     GoRoute(
       path: '/ac-Pending-Estimate-Viewest',
@@ -881,14 +891,6 @@ final GoRouter router = GoRouter(
       builder: (context, state) => ExpenditureRegionalheadViewScreenAc(),
     ),
 
-
-
-
-
-
-
-
-
     GoRoute(
       path: '/ac_Invoice_More_View',
       name: 'acInvoiceMoreView',
@@ -907,8 +909,7 @@ final GoRouter router = GoRouter(
       },
     ),
 
-
-GoRoute(
+    GoRoute(
       path: '/ac_Proposal_More_View',
       name: 'acProposalMoreView',
       builder: (context, state) {
@@ -916,17 +917,6 @@ GoRoute(
         return ProposalMoreViewAc(status: data?['status']);
       },
     ),
-
-
-
-
-
-
-
-
-
-
-
 
     GoRoute(
       path: '/ac_Invoice_More_screen',
@@ -940,8 +930,7 @@ GoRoute(
       },
     ),
 
-
-      GoRoute(
+    GoRoute(
       path: '/ac_Estimate_More_screen',
       name: 'acEstimateMore',
       builder: (context, state) {
@@ -953,9 +942,7 @@ GoRoute(
       },
     ),
 
-
-
- GoRoute(
+    GoRoute(
       path: '/ac_Proposal_More_screen',
       name: 'acProposalMore',
       builder: (context, state) {
@@ -966,15 +953,5 @@ GoRoute(
         );
       },
     ),
-
-
-
-
-
-
-
-
-
-
   ],
 );

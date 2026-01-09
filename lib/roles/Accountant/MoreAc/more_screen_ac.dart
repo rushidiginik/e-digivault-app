@@ -64,7 +64,12 @@ class _MoreScreenAcState extends State<MoreScreenAc> {
               ),
               'View Estimate Request',
               () {
-                Navigator.pop(context);
+                context.pushNamed(
+                  'acViewEstimaterequestMore',
+                  extra: {
+                    'status': 'Pending', // ya Approved / Rejected
+                  },
+                );
               },
             ),
 
