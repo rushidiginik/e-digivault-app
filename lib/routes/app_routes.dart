@@ -31,9 +31,15 @@ import '../roles/Accountant/GapAc/pending_gap_ac/pending_for_invoice/invoice_edi
 import '../roles/Accountant/GapAc/pending_gap_ac/pending_for_invoice/pending_for_invoice_screen_ac.dart';
 import '../roles/Accountant/GapAc/pending_gap_ac/pending_for_invoiceVerify_ac/pending_for_invoiceVerify_screen_ac.dart';
 import '../roles/Accountant/GapAc/pending_gap_ac/pending_gap_screen_ac.dart';
+import '../roles/Accountant/MoreAc/estimate_more_ac/estimate_edit_more_screen_ac.dart';
+import '../roles/Accountant/MoreAc/estimate_more_ac/estimate_more_screen_ac.dart';
+import '../roles/Accountant/MoreAc/estimate_more_ac/estimate_more_view_ac.dart';
 import '../roles/Accountant/MoreAc/invoice_more_ac/invoice_edit_more_screen_ac.dart';
 import '../roles/Accountant/MoreAc/invoice_more_ac/invoice_more_screen_ac.dart';
 import '../roles/Accountant/MoreAc/invoice_more_ac/invoice_more_view_ac.dart';
+import '../roles/Accountant/MoreAc/proposal_more_ac/proposal_edit_more_screen_ac.dart';
+import '../roles/Accountant/MoreAc/proposal_more_ac/proposal_more_screen_ac.dart';
+import '../roles/Accountant/MoreAc/proposal_more_ac/proposal_more_view_ac.dart';
 import '../roles/Accountant/PaymentsAc/expenditure_payment_ac/expenditure_payment_screen_ac.dart';
 import '../roles/Accountant/PaymentsAc/expenditure_payment_ac/expenditure_payment_view_screen_ac.dart';
 import '../roles/Accountant/PaymentsAc/request_payment_ac/request_payment_screen_ac.dart';
@@ -637,6 +643,24 @@ final GoRouter router = GoRouter(
     ),
 
 
+ GoRoute(
+      name: 'acEstimateEditMore',
+      path: '/ac_Estimate_Edit_More_screen',
+      builder: (context, state) {
+        return const EstimateEditMoreScreenAc(status: "pending");
+      },
+    ),
+
+
+ GoRoute(
+      name: 'acProposalEditMore',
+      path: '/ac_Proposal_Edit_More_screen',
+      builder: (context, state) {
+        return const ProposalEditMoreScreenAc(status: "pending");
+      },
+    ),
+
+
 
 
 
@@ -874,6 +898,30 @@ final GoRouter router = GoRouter(
       },
     ),
 
+    GoRoute(
+      path: '/ac_Estimate_More_View',
+      name: 'acEstimateMoreView',
+      builder: (context, state) {
+        final data = state.extra as Map<String, dynamic>?;
+        return EstimateMoreViewAc(status: data?['status']);
+      },
+    ),
+
+
+GoRoute(
+      path: '/ac_Proposal_More_View',
+      name: 'acProposalMoreView',
+      builder: (context, state) {
+        final data = state.extra as Map<String, dynamic>?;
+        return ProposalMoreViewAc(status: data?['status']);
+      },
+    ),
+
+
+
+
+
+
 
 
 
@@ -891,5 +939,42 @@ final GoRouter router = GoRouter(
         );
       },
     ),
+
+
+      GoRoute(
+      path: '/ac_Estimate_More_screen',
+      name: 'acEstimateMore',
+      builder: (context, state) {
+        final extra = state.extra as Map<String, dynamic>;
+        return EstimateMoreScreenAc(
+          icon: extra['icon'], // Widget
+          title: extra['title'],
+        );
+      },
+    ),
+
+
+
+ GoRoute(
+      path: '/ac_Proposal_More_screen',
+      name: 'acProposalMore',
+      builder: (context, state) {
+        final extra = state.extra as Map<String, dynamic>;
+        return ProposalMoreScreenAc(
+          icon: extra['icon'], // Widget
+          title: extra['title'],
+        );
+      },
+    ),
+
+
+
+
+
+
+
+
+
+
   ],
 );

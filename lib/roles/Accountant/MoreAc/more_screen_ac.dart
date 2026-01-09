@@ -90,13 +90,34 @@ class _MoreScreenAcState extends State<MoreScreenAc> {
               },
             ),
 
+
+
+
+
+
             _menuItem(
               SvgPicture.asset(ImageConst.moreestiicon, color: Colors.white),
               'Estimate',
               () {
-                Navigator.pop(context);
+                context.pushNamed(
+                  'acEstimateMore',
+                  extra: {
+                    'icon': SvgPicture.asset(
+                      ImageConst.invoiceicon,
+                      width: 20,
+                      height: 20,
+                      colorFilter: const ColorFilter.mode(
+                        Colors.white, // visible on blue
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                    'title': 'Estimate',
+                  },
+                );
               },
             ),
+
+
 
             _menuItem(
               SvgPicture.asset(
@@ -105,9 +126,26 @@ class _MoreScreenAcState extends State<MoreScreenAc> {
               ),
               'Proposal',
               () {
-                Navigator.pop(context);
+                context.pushNamed(
+                  'acProposalMore',
+                  extra: {
+                    'icon': SvgPicture.asset(
+                      ImageConst.invoiceicon,
+                      width: 20,
+                      height: 20,
+                      colorFilter: const ColorFilter.mode(
+                        Colors.white, // visible on blue
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                    'title': 'Proposal',
+                  },
+                );
               },
             ),
+
+
+
 
             _menuItem(
               SvgPicture.asset(ImageConst.settingsicon, color: Colors.white),
