@@ -9,14 +9,10 @@ class BottomNavigationBarMra extends StatefulWidget {
 
   @override
   State<BottomNavigationBarMra> createState() => _DashboardScreenMraState();
-
 }
 
 class _DashboardScreenMraState extends State<BottomNavigationBarMra> {
   late int _selectedIndex;
-
-
-
 
   int _getIndexFromRoute(BuildContext context) {
     final location = GoRouterState.of(context).uri.toString();
@@ -28,15 +24,6 @@ class _DashboardScreenMraState extends State<BottomNavigationBarMra> {
 
     return _selectedIndex;
   }
-
-
-
-
-
-
-
-
-
 
   @override
   void initState() {
@@ -113,7 +100,8 @@ class _DashboardScreenMraState extends State<BottomNavigationBarMra> {
             ],
           ),
           child: BottomNavigationBar(
-            currentIndex: widget.forceSelectedIndex ?? _getIndexFromRoute(context),
+            currentIndex:
+                widget.forceSelectedIndex ?? _getIndexFromRoute(context),
             type: BottomNavigationBarType.fixed,
             backgroundColor: Colors.transparent,
             // IMPORTANT

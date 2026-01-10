@@ -110,14 +110,14 @@ class _PaymentsScreenMraState extends State<PaymentsScreenMra> {
                 svgPath: ImageConst.requesticone,
                 label: "Request",
                 onTap: () {
-                  context.pushNamed('acRequestPayment');
+                  context.pushNamed('mraRequestPayment');
                 },
               ),
               _browseItem(
                 svgPath: ImageConst.expenditureicon,
                 label: "Expenditure",
                 onTap: () {
-                  context.pushNamed('acExpenditurePayment');
+                  // context.pushNamed('acExpenditurePayment');
                 },
               ),
               _browseItem(

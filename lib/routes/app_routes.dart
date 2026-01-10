@@ -127,6 +127,8 @@ import '../roles/BD/HomePageBD/serviceDocuments/document_list_screen_bd.dart';
 import '../roles/BD/HomePageBD/serviceDocuments/sub_service_screen_bd.dart';
 import '../roles/BD/Lead/viewleads/view_leads_screen_bd.dart';
 import '../roles/MRA/payments_mra/payments_screen_mra.dart';
+import '../roles/MRA/payments_mra/request_payment_mra/request_payment_screen_mra.dart';
+import '../roles/MRA/payments_mra/request_payment_mra/request_payment_view_screen_mra.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: '/splash_screen',
@@ -671,6 +673,15 @@ final GoRouter router = GoRouter(
     ),
 
     GoRoute(
+      name: 'mraRequestPaymentView',
+      path: '/mra-Request-Payment-View_screen',
+      builder: (context, state) {
+        final status = state.extra as String;
+        return RequestPaymentViewScreenMra(status: status);
+      },
+    ),
+
+    GoRoute(
       name: 'acPendingForEstimate',
       path: '/ac_Pending_ForEstimate_screen',
       builder: (context, state) {
@@ -785,6 +796,12 @@ final GoRouter router = GoRouter(
       path: '/ac-Request-Payment-Screen',
       name: 'acRequestPayment',
       builder: (context, state) => RequestPaymentScreenAc(),
+    ),
+
+    GoRoute(
+      path: '/mra-Request-Payment-Screen',
+      name: 'mraRequestPayment',
+      builder: (context, state) => RequestPaymentScreenMra(),
     ),
 
     GoRoute(
