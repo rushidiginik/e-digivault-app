@@ -194,11 +194,11 @@ class AuthController extends GetxController {
         final data = response.data!;
         final employee = data.employee;
 
-        // ✅ Store tokens
+        //  Store tokens
         await AppStorage.setAuthToken(data.accessToken);
         await AppStorage.setRefreshToken(data.refreshToken);
 
-        // ✅ Store user info
+        //  Store user info
         await AppStorage.setUserId(employee.id);
         await AppStorage.setPhoneNumber(employee.phone);
         await AppStorage.setRole(employee.role);

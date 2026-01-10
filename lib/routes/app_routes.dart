@@ -126,6 +126,7 @@ import '../roles/BD/HomePageBD/rateChart/rate_chart_time_line_screen.dart';
 import '../roles/BD/HomePageBD/serviceDocuments/document_list_screen_bd.dart';
 import '../roles/BD/HomePageBD/serviceDocuments/sub_service_screen_bd.dart';
 import '../roles/BD/Lead/viewleads/view_leads_screen_bd.dart';
+import '../roles/MRA/payments_mra/payments_screen_mra.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: '/splash_screen',
@@ -329,6 +330,10 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/lead_detail_screen_mra',
       builder: (context, state) => LeadDetailScreenMra(),
+    ),
+    GoRoute(
+      path: '/payments_screen_mra',
+      builder: (context, state) => PaymentsScreenMra(),
     ),
     GoRoute(
       path: '/settings_screen',
@@ -647,19 +652,6 @@ final GoRouter router = GoRouter(
       },
     ),
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     GoRoute(
       name: 'acPendingGap',
       path: '/ac-Pending-Gap-screen',
@@ -704,8 +696,6 @@ final GoRouter router = GoRouter(
       },
     ),
 
-
-
     GoRoute(
       name: 'acEstimateStatusMore',
       path: '/ac_EstimateStatus_More_screen',
@@ -714,45 +704,6 @@ final GoRouter router = GoRouter(
         return EstimateStatusMoreAc(status: status);
       },
     ),
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     GoRoute(
       name: 'acPendingEstimateViewopinion',
